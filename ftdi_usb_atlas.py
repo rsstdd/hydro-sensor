@@ -21,7 +21,7 @@ class AtlasDevice(Device):
           use the ezo line separator "\r"
         """
         lsl = len('\r')
-        lines_buff = []
+        line_buffer = []
         while True:
             next_char = self.read(1)
             if next_char == '' or (size > 0 and len(line_buffer) > size):
@@ -131,4 +131,12 @@ def read_sensors():
 
 sensors = OrderedDict([("atlas_sensor_ph", {"sensor_type": "atlas_scientific_ph", "name": "ph", "is_connected": True, "is_ref": False, "serial_number": 'DJ00RUFM', "accuracy": 2})])
 
-read_sensors()
+while True:  # Repeat the code indefinitely
+
+    if loops == 300:
+        loops = 0
+
+        read_sensors()
+
+    loops += 1
+    time.sleep(1)
