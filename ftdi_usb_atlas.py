@@ -42,9 +42,9 @@ class AtlasDevice(Device):
                     self.flush_input()
                 lines.append(line)
                 return lines
-            except FtdiError:
-                print "Failed to read from the sensor."
-                return ''
+        except FtdiError:
+            print "Failed to read from the sensor."
+            return ''
 
     def send_cmd(self, cmd):
         """
