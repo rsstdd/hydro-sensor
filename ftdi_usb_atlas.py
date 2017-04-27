@@ -31,7 +31,8 @@ class AtlasDevice(Device):
 
     def read_lines(self):
         """
-        Taken from ftdi lib to work with modified readline function
+        Taken from ftdi lib to work with
+        modified readline function
         """
         lines = []
         try:
