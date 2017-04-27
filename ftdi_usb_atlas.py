@@ -129,10 +129,9 @@ def read_sensors():
         #     if value["is_ref"] is True:
         #         ref_temp = sensor_reading
 
-        if:
-            dev = AtlasDevice(value["serial_number"])
-            # Set reference temperature value on the sensor
-            dev.send_cmd("T," + str(ref_temp))
+        dev = AtlasDevice(value["serial_number"])
+        # Set reference temperature value on the sensor
+        dev.send_cmd("T," + str(ref_temp))
 
 # Get the readings from any Atlas Scientific Elec Conductivity sensors
 
