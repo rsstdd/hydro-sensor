@@ -22,7 +22,7 @@ class AtlasDevice(Device):
             while True:
                 next_char = self.read(1)
                 if next_char == '' or (size > 0 and len(line_buffer) > size):
-                break
+                    break
                     line_buffer.append(next_char)
                     if (len(line_buffer) >= lsl and
                             line_buffer[-lsl:] == list('\r')):
