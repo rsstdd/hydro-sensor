@@ -130,6 +130,7 @@ def read_sensors():
     return
 
 sensors = OrderedDict([("atlas_sensor_ph", {"sensor_type": "atlas_scientific_ph", "name": "ph", "is_connected": True, "is_ref": False, "serial_number": 'DJ00RUFM', "accuracy": 2})])
+loops = 0
 
 while True:  # Repeat the code indefinitely
 
