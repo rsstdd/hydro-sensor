@@ -17,17 +17,16 @@ class AtlasDevice(Device):
           use the ezo line separator "\r"
         """
         lsl = len('\r')
-        lines = []
-        try:
-            while True:
-                next_char = self.read(1)
-                if next_char == '' or (size > 0 and len(line_buffer) > size):
-                    break
-                    line_buffer.append(next_char)
-                    if (len(line_buffer) >= lsl and
-                            line_buffer[-lsl:] == list('\r')):
-                        break
-            return ''.join(line_buffer)
+        lines_buff = []
+        while True:
+            next_char = self.read(1)
+            if next_char == '' or (size > 0 and len(line_buffer) > size):
+                break
+            line_buffer.append(next_char)
+            if (len(line_buffer) >= lsl and
+                    line_buffer[-lsl:] == list('\r')):
+                break
+        return ''.join(line_buffer)
 
     def read_lines(self):
         """
