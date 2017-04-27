@@ -118,18 +118,18 @@ def read_sensors():
     for key, value in sensors.items():
     # Get the readings from any Atlas Scientific temperature sensors to use as ref_temp
 
-        print(sensors.items())
+        print" %d %d "(key, value)
 
-        if value["sensor_type"] == "atlas_scientific_temp":
-            dev = AtlasDevice(value["serial_number"])
-            dev.send_cmd("R")
-            sensor_reading = round(float(dev.read_line()),
-                            value["accuracy"])
-            all_curr_readings.append([value["name"], sensor_reading])
-            if value["is_ref"] is True:
-                ref_temp = sensor_reading
+        # if value["sensor_type"] == "atlas_scientific_temp":
+        #     dev = AtlasDevice(value["serial_number"])
+        #     dev.send_cmd("R")
+        #     sensor_reading = round(float(dev.read_line()),
+        #                     value["accuracy"])
+        #     all_curr_readings.append([value["name"], sensor_reading])
+        #     if value["is_ref"] is True:
+        #         ref_temp = sensor_reading
 
-        else:
+        if:
             dev = AtlasDevice(value["serial_number"])
             # Set reference temperature value on the sensor
             dev.send_cmd("T," + str(ref_temp))
