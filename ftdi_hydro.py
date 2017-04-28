@@ -97,7 +97,7 @@ if __name__ == '__main__':
             lines = dev.read_lines()
             for i in range(len(lines)):
                 if lines[i] != u'*OK\r':
-                    print "pH:  %s " % lines[i]
+                    print( "pH: ", lines[i])
             time.sleep(10000)
     except KeyboardInterrupt:
         print("Polling stopped")
