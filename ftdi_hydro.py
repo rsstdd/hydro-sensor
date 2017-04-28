@@ -23,7 +23,6 @@ class AtlasDevice(Device):
         lsl = len('\r')
         line_buffer = []
         while True:
-
             # read bytes until Carriage Return is received.
             next_char = self.read(1)
             if next_char == '' or (size > 0 and len(line_buffer) > size):
@@ -78,9 +77,10 @@ def log_sensor_readings(all_curr_readings):
                 for i in range(len(lines)):
                     # print lines[i]
                     if lines[i][0] != '*':
-                        print "Response: ", lines[i]
-        # catches the ctrl-c command, which breaks the loop above
-        except KeyboardInterrupt:
+                        print "Response: " , lines[i]
+                time.sleep(delaytime)
+
+        except KeyboardInterrupt: # catches the ctrl-c command, which breaks the loop above
             print("Continuous polling stopped")
 
         else:
@@ -103,15 +103,16 @@ def read_sensors():
     all_curr_readings = []
     ref_temp = 25
 
-    print (sensors.items())
+    # Get the readings from any Atlas Scientific temperature sensors to use as ref_temp
 
-    for key, value in sensors.items():
-        print key, value
-        # Get the readings from any Atlas Scientific temperature sensors to use as ref_temp
-        dev = AtlasDevice(value["DJ00RUFM"])
-        dev.send_cmd("R")
-        sensor_reading = dev.read_line()
-        all_curr_readings.append([value["atlas_scientific_ph"], sensor_reading])
+    dev = AtlasDevice(value["DJ00RUFM"])
+
+    print dev
+
+    dev.send_cmd("R")
+    sensor_reading = dev.read_line()
+
+    all_curr_readings.append([value[DJ00RUFM], sensor_reading)
 
     log_sensor_readings(all_curr_readings)
 
@@ -121,15 +122,11 @@ sensors = OrderedDict([("atlas_sensor_ph", {"sensor_type": "atlas_scientific_ph"
 
 loops = 0
 
-while True:  # Repeat the code indefinitely
+while True:
 
     if loops == 300:
         loops = 0
 
         read_sensors()
 
-        print loops
-        print sensors
-
     loops += 1
-    time.sleep(1)
