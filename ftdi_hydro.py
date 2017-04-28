@@ -75,6 +75,7 @@ def get_ftdi_device_list():
         dev_info = map(lambda x: x.decode('latin1'), device)
         vendor, product, serial = dev_info
         dev_list.append(serial)
+    print dev_list
     return dev_list
 
 def log_sensor_readings(all_curr_readings):
@@ -132,7 +133,6 @@ loops = 0
 dev = AtlasDevice('DJ00RUFM')
 
 print dev
-print dev_list
 
 while True:
 
