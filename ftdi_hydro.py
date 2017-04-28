@@ -129,16 +129,29 @@ def read_sensors():
 
 sensors = OrderedDict([("atlas_sensor_ph", {"sensor_type": "atlas_scientific_ph", "name": "ph", "is_connected": True, "is_ref": False, "serial_number": 'DJ00RUFM', "accuracy": 2})])
 
-loops = 0
-
-while True:
-
-    if loops == 300:
-        loops = 0
-
-        get_ftdi_device_list()
-        read_sensors()
+# loops = 0
 
 
-    loops += 1
-    time.sleep(.500)
+if __name__ == '__main__':
+    devices = get_ftdi_device_list()
+    cnt_all = len(devices)
+
+    for i in range(cnt_all):
+        print  "\nIndex: ", i, " Serial: ", devices[i]
+    print "==================================="
+
+
+    index = 0
+
+    while True:
+        index = raw_input("Please select a device index: ")
+
+        if loops == 300:
+            loops = 0
+
+            get_ftdi_device_list()
+            read_sensors()
+
+
+        loops += 1
+        time.sleep(.500)
