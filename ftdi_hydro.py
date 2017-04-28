@@ -90,7 +90,6 @@ def log_sensor_readings(all_curr_readings):
                     # print lines[i]
                     if lines[i][0] != '*':
                         print "Response: " , lines[i]
-                time.sleep(delaytime)
 
         except KeyboardInterrupt: # catches the ctrl-c command, which breaks the loop above
             print("Continuous polling stopped")
@@ -103,7 +102,6 @@ def log_sensor_readings(all_curr_readings):
                     print lines[i]
             else:
                 dev.send_cmd(input_val)
-                time.sleep(1.3)
                 lines = dev.read_lines()
                 for i in range(len(lines)):
                     print lines[i]
@@ -119,7 +117,7 @@ def read_sensors():
 
     dev = AtlasDevice('DJ00RUFM')
 
-    print "dev %s" % dev
+    print "device from read_Sensors %s" % dev
 
     dev.send_cmd("R")
 
@@ -138,7 +136,6 @@ loops = 0
 dev = AtlasDevice('DJ00RUFM')
 
 print dev
-
 
 while True:
 
