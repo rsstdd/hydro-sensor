@@ -115,6 +115,8 @@ def read_sensors():
     sensor_reading = dev.read_line()
     all_curr_readings.append(sensor_reading)
     log_sensor_readings(all_curr_readings)
+
+    print all_curr_readings
     return
 
 sensors = OrderedDict([("atlas_sensor_ph", {"sensor_type": "atlas_scientific_ph", "name": "ph", "is_connected": True, "is_ref": False, "serial_number": 'DJ00RUFM', "accuracy": 2})])
