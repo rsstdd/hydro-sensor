@@ -107,51 +107,28 @@ def log_sensor_readings(all_curr_readings):
 
 def read_sensors():
     """ Should read the sensors """
-
     all_curr_readings = []
     ref_temp = 25
 
     # Get the readings from any Atlas Scientific temperature sensors to use as ref_temp
-
-    dev = AtlasDevice('DJ00RUFM')
-
-    print "device from read_Sensors %s" % dev
-
     dev.send_cmd("R")
-
     sensor_reading = dev.read_line()
-
     all_curr_readings.append(['DJ00RUFM', sensor_reading])
-
     log_sensor_readings(all_curr_readings)
-
     return
 
 sensors = OrderedDict([("atlas_sensor_ph", {"sensor_type": "atlas_scientific_ph", "name": "ph", "is_connected": True, "is_ref": False, "serial_number": 'DJ00RUFM', "accuracy": 2})])
 
-# loops = 0
-
-
 if __name__ == '__main__':
-    devices = get_ftdi_device_list()
-    cnt_all = len(devices)
-
-    for i in range(cnt_all):
-        print  "\nIndex: ", i, " Serial: ", devices[i]
-        dev = AtlasDevice(devices[i])
-    print "==================================="
-
-    time.sleep(1)
-    dev.flush()
-
+    dev = AtlasDevice('DJ00RUFM')
     index = 0
     loops = 0
 
     while True:
-        index = raw_input("Please select a device index: ")
 
         if loops == 300:
             loops = 0
+
             read_sensors()
 
         loops += 1
