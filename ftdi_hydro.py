@@ -87,19 +87,19 @@ if __name__ == '__main__':
 
     try:
         while True:
-            for i in range(len(cnt_all))
+            for i in devices
+                print devices
                 dev = AtlasDevice(devices[int(index)])
                 dev.send_cmd("C,0") # turn off continuous mode
                 time.sleep(1)
                 dev.flush()
 
-                while 1:
-                    dev.send_cmd("R")
-                    lines = dev.read_lines()
-                    for i in range(len(5)):
-                        if lines[i] != u'*OK\r':
-                            print("pH: ", lines[i])
-                    time.sleep(1000)
+                dev.send_cmd("R")
+                lines = dev.read_lines()
+                for i in range(len(5)):
+                    if lines[i] != u'*OK\r':
+                        print("pH: ", lines[i])
+                time.sleep(1000)
 
     except KeyboardInterrupt:
         print("Continuous polling stopped")
