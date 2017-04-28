@@ -83,7 +83,6 @@ def get_ftdi_device_list():
 
 def log_sensor_readings(all_curr_readings):
     for readings in all_curr_readings:
-
         try:
             while True:
                 dev.send_cmd("R")
@@ -124,14 +123,12 @@ def read_sensors():
     print "dev %s" % dev
 
     dev.send_cmd("R")
+
     sensor_reading = dev.read_line()
 
-    # all_curr_readings.append([value['DJ00RUFM'], sensor_reading)
     all_curr_readings.append(['DJ00RUFM', sensor_reading])
 
-    print all_curr_readings
-
-    # log_sensor_readings(all_curr_readings)
+    log_sensor_readings(all_curr_readings)
 
     return
 
