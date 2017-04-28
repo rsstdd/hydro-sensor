@@ -128,10 +128,4 @@ if __name__ == '__main__':
 
     while True:
 
-        if loops == 300:
-            loops = 0
-
-            read_sensors()
-
-        loops += 1
-        time.sleep(.500)
+        read_sensors()
