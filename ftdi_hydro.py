@@ -82,6 +82,7 @@ def log_sensor_readings(all_curr_readings):
     for readings in all_curr_readings:
         try:
             while True:
+                dev.send_cmd("R")
                 lines = dev.read_lines()
                 for i in range(len(lines)):
                     # print lines[i]
