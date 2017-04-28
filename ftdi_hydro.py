@@ -23,6 +23,8 @@ class AtlasDevice(Device):
         lsl = len('\r')
         line_buffer = []
         while True:
+
+            # read bytes until Carriage Return is received.
             next_char = self.read(1)
             if next_char == '' or (size > 0 and len(line_buffer) > size):
                 break
