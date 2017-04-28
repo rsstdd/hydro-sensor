@@ -63,7 +63,7 @@ class AtlasDevice(Device):
             self.write(buf)
             return True
         except FtdiError:
-                print "Failed to send command to the sensor."
+                print "Send Command:  Failed to send command to the sensor."
                 return False
 
 def get_ftdi_device_list():
@@ -145,3 +145,4 @@ while True:
         read_sensors()
 
     loops += 1
+    time.sleep(1) # not sure if we need this
