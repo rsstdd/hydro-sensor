@@ -113,7 +113,7 @@ def read_sensors():
     # Get the readings from any Atlas Scientific temperature sensors to use as ref_temp
     dev.send_cmd("R")
     sensor_reading = dev.read_line()
-    all_curr_readings.append(sensor_reading])
+    all_curr_readings.append(sensor_reading)
     log_sensor_readings(all_curr_readings)
     return
 
