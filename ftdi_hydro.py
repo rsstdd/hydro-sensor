@@ -138,6 +138,7 @@ if __name__ == '__main__':
 
     for i in range(cnt_all):
         print  "\nIndex: ", i, " Serial: ", devices[i]
+        dev = AtlasDevice(devices[i])
     print "==================================="
 
     time.sleep(1)
