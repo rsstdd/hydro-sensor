@@ -139,7 +139,9 @@ while True:
     if loops == 300:
         loops = 0
 
+        get_ftdi_device_list()
         read_sensors()
+
 
     loops += 1
     time.sleep(.500)
