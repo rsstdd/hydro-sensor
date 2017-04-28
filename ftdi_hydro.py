@@ -130,10 +130,6 @@ sensors = OrderedDict([("atlas_sensor_ph", {"sensor_type": "atlas_scientific_ph"
 
 loops = 0
 
-dev = AtlasDevice('DJ00RUFM')
-
-print dev
-
 while True:
 
     if loops == 300:
