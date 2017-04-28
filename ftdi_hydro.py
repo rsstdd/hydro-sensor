@@ -124,6 +124,8 @@ if __name__ == '__main__':
     index = 0
     loops = 0
 
+    print dev
+
     while True:
 
         if loops == 300:
