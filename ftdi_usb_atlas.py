@@ -95,6 +95,7 @@ def log_sensor_readings(all_curr_readings):
                 for i in range(len(lines)):
                     print lines[i]
 
+
 def read_sensors():
     """ Should read the sensors """
     print "in read_sensors"
@@ -103,7 +104,7 @@ def read_sensors():
     ref_temp = 25
 
     for key, value in sensors.items():
-    # Get the readings from any Atlas Scientific temperature sensors to use as ref_temp
+        # Get the readings from any Atlas Scientific temperature sensors to use as ref_temp
 
         dev = AtlasDevice(value["serial_number"])
         dev.send_cmd("T," + str(ref_temp))
@@ -114,7 +115,7 @@ def read_sensors():
             dev = AtlasDevice(value["serial_number"])
             dev.send_cmd("R")
             sensor_reading = (round(((float(dev.read_line())) *
-                          value["ppm_multiplier"]), value["accuracy"]))
+                              value["ppm_multiplier"]), value["accuracy"]))
 
 # Get the readings from any other Atlas Scientific sensors
 
@@ -122,7 +123,7 @@ def read_sensors():
             dev = AtlasDevice(value["serial_number"])
             dev.send_cmd("R")
             sensor_reading = round(float(dev.read_line()),
-                            value["accuracy"])
+                                   value["accuracy"])
             all_curr_readings.append([value["name"], sensor_reading])
 
     log_sensor_readings(all_curr_readings)
