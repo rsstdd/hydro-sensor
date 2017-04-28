@@ -12,4 +12,4 @@ import requests
 
 import ftdi_hydro
 
-print ftdi_hydro.get_ftdi_device_list()
+print ftdi_hydro.get_sensor_data()
