@@ -98,14 +98,13 @@ def log_sensor_readings(all_curr_readings):
 
 def read_sensors():
     """ Should read the sensors """
-    print "in read_sensors"
 
     all_curr_readings = []
     ref_temp = 25
 
     for key, value in sensors.items():
         # Get the readings from any Atlas Scientific temperature sensors to use as ref_temp
-
+        print " %s " % key
         dev = AtlasDevice(value["serial_number"])
         dev.send_cmd("T," + str(ref_temp))
 
@@ -140,5 +139,7 @@ while True:  # Repeat the code indefinitely
 
         read_sensors()
 
+        print "%s" % loops
+
     loops += 1
-    time.sleep(1)
+    # time.sleep(1)
