@@ -105,7 +105,7 @@ def read_sensors():
 
     # Get the readings from any Atlas Scientific temperature sensors to use as ref_temp
 
-    dev = AtlasDevice(value["DJ00RUFM"])
+    dev = AtlasDevice("DJ00RUFM")
 
     print dev
 
