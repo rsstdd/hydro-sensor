@@ -85,7 +85,6 @@ def log_sensor_readings(all_curr_readings):
     for readings in all_curr_readings:
         try:
             while True:
-                dev.send_cmd("R")
                 lines = dev.read_lines()
                 for i in range(len(lines)):
                     # print lines[i]
@@ -135,6 +134,11 @@ def read_sensors():
 sensors = OrderedDict([("atlas_sensor_ph", {"sensor_type": "atlas_scientific_ph", "name": "ph", "is_connected": True, "is_ref": False, "serial_number": 'DJ00RUFM', "accuracy": 2})])
 
 loops = 0
+
+dev = AtlasDevice('DJ00RUFM')
+
+print dev
+
 
 while True:
 
