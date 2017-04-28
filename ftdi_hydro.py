@@ -87,7 +87,7 @@ if __name__ == '__main__':
 
     try:
         while True:
-            for i in range(len(devices))
+            for i in range(len(cnt_all))
                 print devices
                 dev = AtlasDevice(devices[int(index)])
                 dev.send_cmd("C,0") # turn off continuous mode
