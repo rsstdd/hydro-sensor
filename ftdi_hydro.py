@@ -55,15 +55,13 @@ class AtlasDevice(Device):
         """
         Send command to the Atlas Sensor.
         Carriage Return at the end of the command ends statement.
-        :param cmd:
-        :return:
         """
         buf = cmd + "\r"
         try:
             self.write(buf)
             return True
         except FtdiError:
-                print "Send Command:  Failed to send command to the sensor."
+                print "Send Command FtdiErr: Failed to send command to the sensor."
                 return False
 
 def get_ftdi_device_list():
@@ -74,9 +72,7 @@ def get_ftdi_device_list():
     dev_list = []
 
     for device in Driver().list_devices():
-        # list_devices returns bytes rather than strings
         dev_info = map(lambda x: x.decode('latin1'), device)
-        # device must always be this triple
         vendor, product, serial = dev_info
         dev_list.append(serial)
     return dev_list
@@ -135,7 +131,8 @@ loops = 0
 
 dev = AtlasDevice('DJ00RUFM')
 
-print dev.read_sensors
+print dev
+print dev_list
 
 while True:
 
