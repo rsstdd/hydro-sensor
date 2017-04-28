@@ -97,6 +97,6 @@ if __name__ == '__main__':
             for i in range(len(lines)):
                 if lines[i] != u'*OK\r':
                     print("pH: ", lines[i])
-            time.sleep(1)
+            time.sleep(1000)
     except KeyboardInterrupt:
         print("Continuous polling stopped")
