@@ -148,12 +148,10 @@ if __name__ == '__main__':
 
     while True:
         index = raw_input("Please select a device index: ")
-0
+
         if loops == 300:
             loops = 0
-
             read_sensors()
-
 
         loops += 1
         time.sleep(.500)
