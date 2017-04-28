@@ -23,11 +23,10 @@ class AtlasDevice(Device):
         lsl = len('\r')
         line_buffer = []
         while True:
-            # read bytes until Carriage Return is received.
             next_char = self.read(1)
             if next_char == '' or (size > 0 and len(line_buffer) > size):
                 break
-            line_buffer.append(next_char)
+                line_buffer.append(next_char)
             if (len(line_buffer) >= lsl and
                     line_buffer[-lsl:] == list('\r')):
                 break
@@ -47,6 +46,7 @@ class AtlasDevice(Device):
                     self.flush_input()
                 lines.append(line)
                 return lines
+
         except FtdiError:
             print "Failed to read from the sensor."
             return ''
@@ -61,8 +61,8 @@ class AtlasDevice(Device):
             self.write(buf)
             return True
         except FtdiError:
-                print "Send Command FtdiErr: Failed to send command to the sensor."
-                return False
+            print "Send Command FtdiErr: Failed to send command to the sensor."
+            return False
 
 def get_ftdi_device_list():
     """
@@ -113,7 +113,7 @@ def read_sensors():
     # Get the readings from any Atlas Scientific temperature sensors to use as ref_temp
     dev.send_cmd("R")
     sensor_reading = dev.read_line()
-    all_curr_readings.append(['DJ00RUFM', sensor_reading])
+    all_curr_readings.append(sensor_reading])
     log_sensor_readings(all_curr_readings)
     return
 
@@ -123,8 +123,6 @@ if __name__ == '__main__':
     dev = AtlasDevice('DJ00RUFM')
     index = 0
     loops = 0
-
-    print dev
 
     while True:
 
