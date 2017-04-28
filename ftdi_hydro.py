@@ -107,8 +107,6 @@ def read_sensors():
 
     dev = AtlasDevice("DJ00RUFM")
 
-    print dev
-
     dev.send_cmd("R")
     sensor_reading = dev.read_line()
 
