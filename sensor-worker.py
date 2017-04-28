@@ -12,6 +12,4 @@ import requests
 
 import ftdi_hydro
 
-content = dir(ftdi_hydro)
-
-print content
+print ftdi_hydro.get_ftdi_device_list()
