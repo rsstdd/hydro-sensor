@@ -112,7 +112,9 @@ def read_sensors():
     dev.send_cmd("R")
     sensor_reading = dev.read_line()
 
-    all_curr_readings.append([value['DJ00RUFM'], sensor_reading)
+    # all_curr_readings.append([value['DJ00RUFM'], sensor_reading)
+    all_curr_readings.append([value["name"], sensor_reading])
+
 
     log_sensor_readings(all_curr_readings)
 
