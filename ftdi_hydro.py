@@ -93,7 +93,8 @@ if __name__ == '__main__':
     while 1:
         dev.send_cmd("R")
         lines = dev.read_lines()
+
         for i in range(len(lines)):
             if lines[i] != u'*OK\r':
                 print("pH: ", lines[i])
-        time.sleep(10000)
+        time.sleep(100)
