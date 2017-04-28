@@ -14,23 +14,47 @@ class AtlasDevice(Device):
 
     def __init__(self, sn):
         Device.__init__(self, mode='t', device_id=sn)
+    #
+    # def read_line(self):
+    #     """
+    #       taken from the ftdi library and modified to
+    #       use the ezo line separator "\r"
+    #     """
+    #     lsl = len('\r')
+    #     line_buffer = []
+    #     while True:
+    #         next_char = self.read(1)
+    #         if next_char == '' or (size > 0 and len(line_buffer) > size):
+    #             break
+    #         line_buffer.append(next_char)
+    #         if (len(line_buffer) >= lsl and
+    #                 line_buffer[-lsl:] == list('\r')):
+    #             break
+    #     return ''.join(line_buffer)
 
     def read_line(self):
         """
-          taken from the ftdi library and modified to
-          use the ezo line separator "\r"
+        Read the response from the Atlas Sensor
+        :return:
         """
-        lsl = len('\r')
         line_buffer = []
-        while True:
-            next_char = self.read(1)
-            if next_char == '' or (size > 0 and len(line_buffer) > size):
-                break
-            line_buffer.append(next_char)
-            if (len(line_buffer) >= lsl and
-                    line_buffer[-lsl:] == list('\r')):
-                break
-        return ''.join(line_buffer)
+        try:
+            start_time = time.time()
+            while True:
+
+                # read bytes until Carriage Return is received.
+                next_char = self.read(1)    # read one byte
+                if next_char == "\r":  # response of sensor always ends with CR.
+                    break
+                line_buffer.append(next_char)
+
+                if time.time() - start_time > 1.0:  # timeout
+                    line_buffer = ''
+                    break
+            return ''.join(line_buffer)
+
+        except FtdiError:
+            return ''
 
     def read_lines(self):
         """
