@@ -145,4 +145,4 @@ while True:
         read_sensors()
 
     loops += 1
-    time.sleep(1) # not sure if we need this
+    time.sleep(.500)
