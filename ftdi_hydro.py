@@ -91,10 +91,13 @@ if __name__ == '__main__':
     dev.send_cmd("C,0") # turn off continuous mode
     time.sleep(1)
     dev.flush()
-    while 1:
-        dev.send_cmd("R")
-        lines = dev.read_lines()
-        for i in range(len(lines)):
-            if lines[i] != u'*OK\r':
-                print "pH: " % lines[i]
-        time.sleep(10000)
+    try:
+        while 1:
+            dev.send_cmd("R")
+            lines = dev.read_lines()
+            for i in range(len(lines)):
+                if lines[i] != u'*OK\r':
+                    print "pH:  %s " % lines[i]
+            time.sleep(10000)
+    except KeyboardInterrupt:
+        print("Polling stopped")
