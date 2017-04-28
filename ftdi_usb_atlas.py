@@ -113,8 +113,10 @@ def read_sensors():
         if value["sensor_type"] == "atlas_scientific_ph":
             dev = AtlasDevice(value["serial_number"])
             dev.send_cmd("R")
-            sensor_reading = (round(((float(dev.read_line())) *
-                              value["ppm_multiplier"]), value["accuracy"]))
+            sensor_reading = dev.read_line()
+
+            # (round(((float(dev.read_line())) *
+                            #   value["ppm_multiplier"]), value["accuracy"]))
 
 # Get the readings from any other Atlas Scientific sensors
 
