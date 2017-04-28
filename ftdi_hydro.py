@@ -121,9 +121,9 @@ def read_sensors():
 
     dev = AtlasDevice('DJ00RUFM')
 
-    print dev
+    print "dev %s" % dev
 
-    # dev.send_cmd("R")
+    dev.send_cmd("R")
     sensor_reading = dev.read_line()
 
     # all_curr_readings.append([value['DJ00RUFM'], sensor_reading)
