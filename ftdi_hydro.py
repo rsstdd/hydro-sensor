@@ -135,7 +135,7 @@ loops = 0
 
 dev = AtlasDevice('DJ00RUFM')
 
-print dev
+print dev.read_sensors
 
 while True:
 
