@@ -140,16 +140,18 @@ if __name__ == '__main__':
         print  "\nIndex: ", i, " Serial: ", devices[i]
     print "==================================="
 
+    time.sleep(1)
+    dev.flush()
 
     index = 0
+    loops = 0
 
     while True:
         index = raw_input("Please select a device index: ")
-
+0
         if loops == 300:
             loops = 0
 
-            get_ftdi_device_list()
             read_sensors()
 
 
