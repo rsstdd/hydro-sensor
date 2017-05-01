@@ -45,9 +45,6 @@ def log_sensor_readings(all_curr_readings):
 
     # Create a timestamp and store all readings on the MySQL database
 
-    last_timestamp = curs.fetchone()
-    last_timestamp = last_timestamp[0].strftime('%Y-%m-%d %H:%M:%S')
-
     for readings in all_curr_readings:
         try:
             print readings
