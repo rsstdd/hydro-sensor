@@ -4,15 +4,27 @@
 import os, sys
 import numpy
 import json
-# import gdrive_util as gu
-# from pydrive.auth import GoogleAuth
-# from pydrive.drive import GoogleDrive
-# import pymongo
 from datetime import datetime, timedelta
 import ftdi_hydro
 
 while 1:
-    sensor-data=ftdi_hydro.get_sensor_data()
+    hydroData=ftdi_hydro.get_sensor_data()()
 
-    for item in sensorData:
-        print item
+    print hydroData
+
+    # for item in sensorData:
+    #     print item
+
+
+    #
+    # timestamp = datetime.datetime.now()
+    #
+    # jsonPackage={
+    # 'sensor_num': sensor_num,
+    # 'hostname' : gethostname(),
+    # 'timestamp': timestamp,
+    # 'hydro_temp': '',
+    # 'hydro_ec': '',
+    # 'hydro_ph': '',
+    # 'hydro_flow': ''
+    #  }

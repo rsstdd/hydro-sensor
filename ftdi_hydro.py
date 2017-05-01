@@ -100,7 +100,7 @@ def read_sensors():
                     all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
 
     print len(all_curr_readings)
-    
+
     log_sensor_readings(all_curr_readings)
 
     return
@@ -139,13 +139,15 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "accuracy": 0,
                             "ppm_multiplier": 0.67})])  # Convert EC to PPM
 
-loops = 0
-
-while True:  # Repeat the code indefinitely
-
-    if loops == 300:
-        loops = 0
-
-        read_sensors()
-
-    loops += 1
+# loops = 0
+#
+# while True:  # Repeat the code indefinitely
+#
+#     if loops == 300:
+#         loops = 0
+#
+#         read_sensors()
+#
+#     loops += 1
+def get_sensor_data():
+    read_sensors()
