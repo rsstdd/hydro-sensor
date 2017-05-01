@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import time
 from collections import OrderedDict
 from pylibftdi.device import Device
 from pylibftdi.driver import FtdiError
