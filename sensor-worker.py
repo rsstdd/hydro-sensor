@@ -11,10 +11,8 @@ hydroData=ftdi_hydro.get_reading()
 
 if hydroData is not None:
     print(hydroData[0])
-    for item in hydroData:
-        print(item)
-else:
-    print "err"
+    print(hydroData[1])
+    print(hydroData[2])
 
     #
     # timestamp = datetime.datetime.now()
