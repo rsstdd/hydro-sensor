@@ -10,9 +10,10 @@ import ftdi_hydro
 hydroData=ftdi_hydro.get_reading()
 
 if hydroData is not None:
-    print(hydroData[0])
-    print(hydroData[1])
-    print(hydroData[2])
+    print atlas_scientific_temp
+    print atlas_scientific_flo
+    print atlas_scientific_ec
+    print atlas_scientific_ph
 
     #
     # timestamp = datetime.datetime.now()
