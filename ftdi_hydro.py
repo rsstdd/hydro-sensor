@@ -73,7 +73,8 @@ def read_sensors():
                 dev = AtlasDevice(value["serial_number"])
                 dev.send_cmd("R")
                 sensor_reading=dev.read_line()
-                all_curr_readings.append({value["name"], value["serial_number"], value["sensor_type"], sensor_reading})
+                atlas_scientific_temp = set([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
+                all_curr_readings.append(atlas_scientific_temp)
                 if value["is_ref"] is True:
                     ref_temp = sensor_reading
 
@@ -89,7 +90,15 @@ def read_sensors():
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
-                    all_curr_readings.append({value["name"], value["serial_number"], value["sensor_type"], sensor_reading})
+                    atlas_scientific_ec = set([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
+                    all_curr_readings.append(atlas_scientific_ec)
+
+                if value["sensor_type"] == "atlas_scientific_ph":
+                    dev = AtlasDevice(value["serial_number"])
+                    dev.send_cmd("R")
+                    sensor_reading=dev.read_line()
+                    atlas_scientific_ph = set([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
+                    all_curr_readings.append(atlas_scientific_ph)
 
 
     # Get the readings from any other Atlas Scientific sensors
@@ -98,7 +107,8 @@ def read_sensors():
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
-                    all_curr_readings.append({value["name"], value["serial_number"], value["sensor_type"], sensor_reading})
+                    atlas_scientific_flo = set([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
+                    all_curr_readings.append(atlas_scientific_flo)
 
 
     log_sensor_readings(all_curr_readings)
