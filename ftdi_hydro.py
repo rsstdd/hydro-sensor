@@ -99,14 +99,13 @@ def read_sensors():
                     all_curr_readings.append({'name': value["name"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
 
 
-    # Get the readings from any other Atlas Scientific sensors
-
-                else:
+                if value["sensor_type"] == "atlas_scientific_flo":
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
-                    atlas_scientific_flo = Set([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
+                    atlas_scientific_ph = Set([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
                     all_curr_readings.append({'name': value["name"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
+
 
 
     log_sensor_readings(all_curr_readings)
