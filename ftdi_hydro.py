@@ -99,9 +99,10 @@ def read_sensors():
                     sensor_reading=dev.read_line()
                     all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
 
+    print len(all_curr_readings)
+    
     log_sensor_readings(all_curr_readings)
 
-    print len(all_curr_readings)
     return
 
 
