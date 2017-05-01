@@ -61,6 +61,7 @@ def read_sensors():
 
             elif value["sensor_type"] == "atlas_scientific_temp":
                 dev = AtlasDevice(value["serial_number"])
+                print dev
                 dev.send_cmd("R")
                 sensor_reading = round(float(dev.read_line()),
                                 value["accuracy"])
