@@ -78,6 +78,7 @@ def read_sensors():
                                 # value["accuracy"])
                 sensor_reading=dev.read_line()
                 all_curr_readings.append([value["name"], sensor_reading])
+                all_curr_readings.append(['----------'])
                 if value["is_ref"] is True:
                     ref_temp = sensor_reading
 
@@ -95,6 +96,7 @@ def read_sensors():
                     #               value["ppm_multiplier"]), value["accuracy"]))
                     sensor_reading=dev.read_line()
                     all_curr_readings.append([value["name"], sensor_reading])
+                    all_curr_readings.append(['----------'])
 
 
     # Get the readings from any other Atlas Scientific sensors
@@ -106,6 +108,7 @@ def read_sensors():
                     #                 value["accuracy"])
                     sensor_reading=dev.read_line()
                     all_curr_readings.append([value["name"], sensor_reading])
+                    all_curr_readings.append(['----------'])
 
     log_sensor_readings(all_curr_readings)
 
