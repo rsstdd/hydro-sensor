@@ -67,18 +67,11 @@ def read_sensors():
 
     for key, value in sensors.items():
         if value["is_connected"] is True:
-            # if value["sensor_type"] == "1_wire_temp":
-            #     sensor_reading = (round(float(read_1_wire_temp(key)),
-            #                      value["accuracy"]))
-            #     all_curr_readings.append([value["name"], sensor_reading])
-            #     if value["is_ref"] is True:
-            #         ref_temp = sensor_reading
 
     # Get the readings from any Atlas Scientific temperature sensors
 
             if value["sensor_type"] == "atlas_scientific_temp":
                 dev = AtlasDevice(value["serial_number"])
-                print "dev %s" % dev
                 dev.send_cmd("R")
                 # sensor_reading = round(float(dev.read_line()),
                                 # value["accuracy"])
@@ -100,6 +93,8 @@ def read_sensors():
                     # sensor_reading = (round(((float(dev.read_line())) *
                     #               value["ppm_multiplier"]), value["accuracy"]))
                     sensor_reading=dev.read_line()
+                    all_curr_readings.append([value["name"], sensor_reading])
+
 
     # Get the readings from any other Atlas Scientific sensors
 
