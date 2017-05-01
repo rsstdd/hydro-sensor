@@ -150,14 +150,14 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 def get_reading():
     read_sensors()
 
-
-loops = 0
-
-while True:  # Repeat the code indefinitely
-
-    if loops == 300:
-        loops = 0
-
-        read_sensors()
-
-    loops += 1
+# 
+# loops = 0
+#
+# while True:  # Repeat the code indefinitely
+#
+#     if loops == 300:
+#         loops = 0
+#
+#         read_sensors()
+#
+#     loops += 1
