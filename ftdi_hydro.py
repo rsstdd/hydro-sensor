@@ -101,7 +101,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "name": "temp",
                             "is_connected": True,
                             "is_ref": True,
-                            "serial_number": 'DJ00RROZR',  # Enter Serial Number
+                            "serial_number": 'DJ00RVZR',  # Enter Serial Number
                             "accuracy": 1}),
 
                        ("atlas_sensor_2", {  # FLOW
@@ -117,7 +117,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "name": "ph",
                             "is_connected": True,
                             "is_ref": False,
-                            "serial_number": 'DJ00R0V8',  # Enter Serial Number
+                            "serial_number": 'DJ00RUV8',  # Enter Serial Number
                             "accuracy": 0}),
 
                        ("atlas_sensor_4", {  # Atlas Scientific EC Sensor
@@ -125,7 +125,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "name": "ec",
                             "is_connected": True,
                             "is_ref": False,
-                            "serial_number": 'DJ00RRV96',  # Enter Serial Number
+                            "serial_number": 'DJ00RU96',  # Enter Serial Number
                             "accuracy": 0,
                             "ppm_multiplier": 0.67})])  # Convert EC to PPM
 
