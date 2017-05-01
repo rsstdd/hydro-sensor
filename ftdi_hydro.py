@@ -9,10 +9,8 @@ import sys
 import time
 from collections import OrderedDict
 
-# sleep(10)
 
 class AtlasDevice(Device):
-
 
     def __init__(self, sn):
         Device.__init__(self, mode='t', device_id=sn)
@@ -49,45 +47,6 @@ class AtlasDevice(Device):
         except FtdiError:
             print ("Failed to send command to the sensor.")
             return False
-
-
-# def get_ftdi_device_list():
-#     """
-#     return a list of lines, each a colon-separated
-#     vendor:product:serial summary of detected devices
-#     """
-#     dev_list = []
-#
-#     for device in Driver().list_devices():
-#         # list_devices returns bytes rather than strings
-#         dev_info = map(lambda x: x.decode('latin1'), device)
-#         # device must always be this triple
-#         vendor, product, serial = dev_info
-#         dev_list.append(serial)
-#     return dev_list
-
-
-def log_sensor_readings(all_curr_readings):
-
-    # Create a timestamp and store all readings on the MySQL database
-
-    conn, curs = open_database_connection()
-
-    curs.execute("INSERT INTO sensors (timestamp) VALUES(now());")
-    curs.execute("SELECT MAX(timestamp) FROM sensors")
-    last_timestamp = curs.fetchone()
-    last_timestamp = last_timestamp[0].strftime('%Y-%m-%d %H:%M:%S')
-
-    for readings in all_curr_readings:
-        try:
-            curs.execute(("UPDATE sensors SET {} = {} WHERE timestamp = '{}'")
-                        .format(readings[0], readings[1], last_timestamp))
-        except:
-            pass
-
-    close_database_connection(conn, curs)
-
-    return
 
 
 def read_sensors():
@@ -135,7 +94,7 @@ return
 
 sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "sensor_type": "atlas_scientific_temp",
-                            "name": "atlas_temp",
+                            "name": "temp",
                             "is_connected": True,
                             "is_ref": True,
                             "serial_number": 'DJ00RROZR',  # Enter Serial Number
@@ -143,15 +102,15 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
                        ("atlas_sensor_2", {  # FLOW
                             "sensor_type": "atlas_scientific_flo",
-                            "name": "ph",
+                            "name": "flow",
                             "is_connected": True,
                             "is_ref": False,
                             "serial_number": '',  # Enter Serial Number
                             "accuracy": 2}),
 
-                       ("atlas_sensor_3", {  # pH/ORP Atlas Scientific Sensor
+                       ("atlas_sensor_3", {  # pH Atlas Scientific Sensor
                             "sensor_type": "atlas_scientific_ph",
-                            "name": "orp",
+                            "name": "ph",
                             "is_connected": True,
                             "is_ref": False,
                             "serial_number": 'DJ00R0V8',  # Enter Serial Number
@@ -162,7 +121,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "name": "ec",
                             "is_connected": True,
                             "is_ref": False,
-                            "serial_number": 1,  # Enter Serial Number
+                            "serial_number": 'DJ00RRV96',  # Enter Serial Number
                             "accuracy": 0,
                             "ppm_multiplier": 0.67})])  # Convert EC to PPM
 
