@@ -7,10 +7,11 @@ import json
 from datetime import datetime, timedelta
 import ftdi_hydro
 
-while 1:
     hydroData=ftdi_hydro.get_sensor_data()
-
     print hydroData
+
+while 1:
+
 
     # for item in sensorData:
     #     print item
