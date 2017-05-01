@@ -15,7 +15,7 @@ class AtlasDevice(Device):
         line_buffer = []
         try:
             start_time = time.time()
-            while True:
+            # while True:
 
                 # read bytes until Carriage Return is received.
                 next_char = self.read(1)    # read one byte
@@ -64,8 +64,6 @@ def read_sensors():
 
     all_curr_readings = []
     ref_temp = 25
-
-    print sensors.items()
 
     for key, value in sensors.items():
         if value["is_connected"] is True:
