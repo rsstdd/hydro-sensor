@@ -48,11 +48,13 @@ class AtlasDevice(Device):
 
 def log_sensor_readings(all_curr_readings):
 
-    return all_curr_readings
-
+        print atlas_scientific_temp
+        print atlas_scientific_flo
+        print atlas_scientific_ec
+        print atlas_scientific_ph
     # for readings in all_curr_readings:
     #     try:
-    #         print readings
+    #         return readings
     #     except:
     #         pass
 
