@@ -138,7 +138,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "accuracy": 0,
                             "ppm_multiplier": 0.67})])  # Convert EC to PPM
 
-def small_loop:
+def small_loop():
     loops = 0
     while loops < 3:  # Repeat the code indefinitely
 
