@@ -9,8 +9,6 @@ import ftdi_hydro
 
 hydroData=ftdi_hydro.get_reading()
 
-print hydroData
-
 if hydroData is not None:
     print '---------------------------'
     print hydroData[0].sensor_reading

@@ -150,6 +150,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
 def get_reading():
     read_sensors()
+    return 
 
 #
 # loops = 0
