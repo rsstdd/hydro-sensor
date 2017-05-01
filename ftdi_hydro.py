@@ -76,7 +76,6 @@ def read_sensors():
                 all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
                 if value["is_ref"] is True:
                     ref_temp = sensor_reading
-            dev.send_cmd("\r")
 
 
             else:
