@@ -80,16 +80,18 @@ def read_sensors():
                 if value["sensor_type"] == "atlas_scientific_ec":
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
-                    sensor_reading = (round(((float(dev.read_line())) *
-                                  value["ppm_multiplier"]), value["accuracy"]))
+                    # sensor_reading = (round(((float(dev.read_line())) *
+                    #               value["ppm_multiplier"]), value["accuracy"]))
+                    sensor_reading=dev.read_line()
 
     # Get the readings from any other Atlas Scientific sensors
 
                 else:
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
-                    sensor_reading = round(float(dev.read_line()),
-                                    value["accuracy"])
+                    # sensor_reading = round(float(dev.read_line()),
+                    #                 value["accuracy"])
+                    sensor_reading=dev.read_line()
                     all_curr_readings.append([value["name"], sensor_reading])
 
     log_sensor_readings(all_curr_readings)
