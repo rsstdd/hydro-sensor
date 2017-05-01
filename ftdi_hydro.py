@@ -159,4 +159,3 @@ while True:  # Repeat the code indefinitely
         read_sensors()
 
     loops += 1
-    time.sleep(1)
