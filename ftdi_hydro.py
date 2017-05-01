@@ -1,13 +1,8 @@
-import string
-import pylibftdi
+#!/usr/bin/env python
+
+from collections import OrderedDict
 from pylibftdi.device import Device
 from pylibftdi.driver import FtdiError
-from pylibftdi import Driver
-import os
-import time
-import sys
-import time
-from collections import OrderedDict
 
 
 class AtlasDevice(Device):
@@ -58,12 +53,23 @@ def read_sensors():
 
     for key, value in sensors.items():
         if value["is_connected"] is True:
-            if value["sensor_type"] == "atlas_scientific_temp":
-                sensor_reading = (round(float(dev.read_line()),
+            if value["sensor_type"] == "1_wire_temp":
+                sensor_reading = (round(float(read_1_wire_temp(key)),
+                                 value["accuracy"]))
+                all_curr_readings.append([value["name"], sensor_reading])
+                if value["is_ref"] is True:
+                    ref_temp = sensor_reading
+
+    # Get the readings from any Atlas Scientific temperature sensors
+
+            elif value["sensor_type"] == "atlas_scientific_temp":
+                dev = AtlasDevice(value["serial_number"])
+                dev.send_cmd("R")
+                sensor_reading = round(float(dev.read_line()),
                                 value["accuracy"])
                 all_curr_readings.append([value["name"], sensor_reading])
                 if value["is_ref"] is True:
-                    ref_temp=sensor_reading
+                    ref_temp = sensor_reading
 
             else:
                 dev = AtlasDevice(value["serial_number"])
@@ -89,7 +95,7 @@ def read_sensors():
 
     log_sensor_readings(all_curr_readings)
 
-return
+    return
 
 
 sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
@@ -105,7 +111,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "name": "flow",
                             "is_connected": True,
                             "is_ref": False,
-                            "serial_number": '',  # Enter Serial Number
+                            "serial_number": 'DJ00RB93',  # Enter Serial Number
                             "accuracy": 2}),
 
                        ("atlas_sensor_3", {  # pH Atlas Scientific Sensor
