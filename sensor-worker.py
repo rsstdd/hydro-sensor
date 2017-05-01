@@ -15,15 +15,17 @@ if hydroData is not None:
     print hydroData[1].sensor_reading
     print hydroData[2].sensor_reading
     print '---------------------------'
-
-    timestamp = datetime.datetime.now()
-
-    jsonPackage={
-    'sensor_num': sensor_num,
-    'hostname' : gethostname(),
-    'timestamp': timestamp,
-    'hydro_temp': '',
-    'hydro_ec': '',
-    'hydro_ph': '',
-    'hydro_flow': ''
-     }
+else:
+    print "None error"
+    #
+    # timestamp = datetime.datetime.now()
+    #
+    # jsonPackage={
+    # 'sensor_num': sensor_num,
+    # 'hostname' : gethostname(),
+    # 'timestamp': timestamp,
+    # 'hydro_temp': '',
+    # 'hydro_ec': '',
+    # 'hydro_ph': '',
+    # 'hydro_flow': ''
+    #  }
