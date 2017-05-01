@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 import ftdi_hydro
 
 while 1:
-    hydroData=ftdi_hydro.get_sensor_data()()
+    hydroData=ftdi_hydro.get_sensor_data()
 
     print hydroData
 
