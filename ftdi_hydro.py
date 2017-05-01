@@ -51,7 +51,11 @@ def log_sensor_readings(all_curr_readings):
 
     for readings in all_curr_readings:
         try:
-            print readings.pop(1), readings.pop(2), readings.pop(3)
+            print "----------"
+            print readings[0]
+            print "----------"
+            print readings.pop(0), readings.pop(1), readings.pop(2), readings.pop(3)
+            print "----------"
         except:
             pass
 
@@ -73,7 +77,7 @@ def read_sensors():
                 dev = AtlasDevice(value["serial_number"])
                 dev.send_cmd("R")
                 sensor_reading=dev.read_line()
-                all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
+                all_curr_readings.append({value["name"], value["serial_number"], value["sensor_type"], sensor_reading})
                 if value["is_ref"] is True:
                     ref_temp = sensor_reading
 
@@ -96,11 +100,10 @@ def read_sensors():
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
-                    all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
+                    all_curr_readings.append({value["name"], value["serial_number"], value["sensor_type"], sensor_reading})
 
     print all_curr_readings
 
-    log_sensor_readings(all_curr_readings)
 
 
     return
