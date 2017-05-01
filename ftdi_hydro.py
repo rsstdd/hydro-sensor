@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import time
 from collections import OrderedDict
 from pylibftdi.device import Device
 from pylibftdi.driver import FtdiError
@@ -73,10 +72,10 @@ def read_sensors():
             if value["sensor_type"] == "atlas_scientific_temp":
                 dev = AtlasDevice(value["serial_number"])
                 dev.send_cmd("R")
-                # sensor_reading = round(float(dev.read_line()),
-                                # value["accuracy"])
-                sensor_reading=dev.read_line()
-                all_curr_readings.append([value["name"], sensor_reading])
+                sensor_reading = round(float(dev.read_line()),
+                                value["accuracy"])
+                # sensor_reading=dev.read_line()
+                all_curr_readings.append([value["name"],  value["serial_number"], sensor_reading])
                 if value["is_ref"] is True:
                     ref_temp = sensor_reading
 
@@ -90,10 +89,10 @@ def read_sensors():
                 if value["sensor_type"] == "atlas_scientific_ec":
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
-                    # sensor_reading = (round(((float(dev.read_line())) *
-                    #               value["ppm_multiplier"]), value["accuracy"]))
-                    sensor_reading=dev.read_line()
-                    all_curr_readings.append([value["name"], sensor_reading])
+                    sensor_reading = (round(((float(dev.read_line())) *
+                                  value["ppm_multiplier"]), value["accuracy"]))
+                    # sensor_reading=dev.read_line()
+                    all_curr_readings.append([value["name"], value["serial_number"], sensor_reading])
 
 
     # Get the readings from any other Atlas Scientific sensors
@@ -103,7 +102,7 @@ def read_sensors():
                     dev.send_cmd("R")
                     # sensor_reading = round(float(dev.read_line()),
                     #                 value["accuracy"])
-                    sensor_reading=dev.read_line()
+                    # sensor_reading=dev.read_line()
                     all_curr_readings.append([value["name"], sensor_reading])
 
     log_sensor_readings(all_curr_readings)
@@ -142,15 +141,15 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "is_ref": False,
                             "serial_number": 'DJ00RU96',  # Enter Serial Number
                             "accuracy": 0,
-                            "ppm_multiplier": 0.67})])  # Convert EC to PPM
+                            "ppm_multiplier": 0.00})])  # Convert EC to PPM
 
-loops = 0
+# loops = 0
 
 while True:  # Repeat the code indefinitely
 
-    if loops == 300:
-        loops = 0
+    # if loops == 300:
+    #     loops = 0
 
         read_sensors()
 
-    loops += 1
+    # loops += 1
