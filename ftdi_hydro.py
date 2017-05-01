@@ -14,19 +14,17 @@ class AtlasDevice(Device):
         """
         line_buffer = []
         try:
-            i=0
             start_time = time.time()
-            while i < 1:
+        # while True:
 
-                # read bytes until Carriage Return is received.
-                next_char = self.read(1)    # read one byte
-                if next_char == "\r":  # response of sensor always ends with CR.
-                    break
-                line_buffer.append(next_char)
-                if time.time() - start_time > 1.0:  # timeout
-                    line_buffer = ''
-                    break
-            i += 1
+            # read bytes until Carriage Return is received.
+            next_char = self.read(1)    # read one byte
+            if next_char == "\r":  # response of sensor always ends with CR.
+                # break
+            line_buffer.append(next_char)
+            if time.time() - start_time > 1.0:  # timeout
+                line_buffer = ''
+                # break
             return ''.join(line_buffer)
 
         except FtdiError:
