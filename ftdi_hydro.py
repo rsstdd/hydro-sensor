@@ -15,7 +15,7 @@ class AtlasDevice(Device):
         line_buffer = []
         try:
             start_time = time.time()
-        # while True:
+        while True:
 
             # read bytes until Carriage Return is received.
             next_char = self.read(1)    # read one byte
