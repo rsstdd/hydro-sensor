@@ -15,16 +15,16 @@ class AtlasDevice(Device):
         line_buffer = []
         try:
             start_time = time.time()
-        while True:
+            while True:
 
-            # read bytes until Carriage Return is received.
-            next_char = self.read(1)    # read one byte
-            if next_char == "\r":  # response of sensor always ends with CR.
-                # break
-            line_buffer.append(next_char)
-            if time.time() - start_time > 1.0:  # timeout
-                line_buffer = ''
-                # break
+                # read bytes until Carriage Return is received.
+                next_char = self.read(1)    # read one byte
+                if next_char == "\r":  # response of sensor always ends with CR.
+                    break
+                line_buffer.append(next_char)
+                if time.time() - start_time > 1.0:  # timeout
+                    line_buffer = ''
+                    break
             return ''.join(line_buffer)
 
         except FtdiError:
@@ -76,7 +76,7 @@ def read_sensors():
                 all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
                 if value["is_ref"] is True:
                     ref_temp = sensor_reading
-                dev.send_cmd("\r")
+            # dev.send_cmd("\r")
 
 
             else:
@@ -91,7 +91,8 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
                     all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
-                    dev.send_cmd("\r")
+                    # dev.send_cmd("\r")
+
 
     # Get the readings from any other Atlas Scientific sensors
 
@@ -100,8 +101,8 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
                     all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
-                    dev.send_cmd("\r")
 
+    dev.send_cmd("\r")
 
     log_sensor_readings(all_curr_readings)
 
