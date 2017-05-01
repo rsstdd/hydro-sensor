@@ -12,6 +12,7 @@ hydroData=ftdi_hydro.get_reading()
 if hydroData is not None:
     for item in hydroData:
         print item
+        print ""
 else:
     print "err"
 
