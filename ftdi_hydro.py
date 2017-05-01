@@ -65,6 +65,29 @@ def get_ftdi_device_list():
     return dev_list
 
 
+def log_sensor_readings(all_curr_readings):
+
+    # Create a timestamp and store all readings on the MySQL database
+
+    conn, curs = open_database_connection()
+
+    curs.execute("INSERT INTO sensors (timestamp) VALUES(now());")
+    curs.execute("SELECT MAX(timestamp) FROM sensors")
+    last_timestamp = curs.fetchone()
+    last_timestamp = last_timestamp[0].strftime('%Y-%m-%d %H:%M:%S')
+
+    for readings in all_curr_readings:
+        try:
+            curs.execute(("UPDATE sensors SET {} = {} WHERE timestamp = '{}'")
+                        .format(readings[0], readings[1], last_timestamp))
+        except:
+            pass
+
+    close_database_connection(conn, curs)
+
+    return
+
+
 def read_sensors():
 
 all_curr_readings = []
@@ -75,18 +98,7 @@ ref_temp = 25
 for key, value in sensors.items():
     if value["is_connected"] is True:
         if value["sensor_type"] == "atlas_scientific_temp":
-            sensor_reading = (round(float(read_1_wire_temp(key)),
-                             value["accuracy"]))
-            all_curr_readings.append([value["name"], sensor_reading])
-            if value["is_ref"] is True:
-                ref_temp = sensor_reading
-
-# Get the readings from any Atlas Scientific temperature sensors
-
-        elif value["sensor_type"] == "atlas_scientific_temp":
-            dev = AtlasDevice(value["serial_number"])
-            dev.send_cmd("R")
-            sensor_reading = round(float(dev.read_line()),
+            sensor_reading = (round(float(dev.read_line()),
                             value["accuracy"])
             all_curr_readings.append([value["name"], sensor_reading])
             if value["is_ref"] is True:
