@@ -14,6 +14,7 @@ class AtlasDevice(Device):
         """
         line_buffer = []
         try:
+            i=0
             start_time = time.time()
             while i < 1:
 
