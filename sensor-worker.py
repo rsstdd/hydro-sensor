@@ -10,9 +10,6 @@ import ftdi_hydro
 hydroData=ftdi_hydro.get_sensor_data()
 print hydroData
 
-while 1:
-
-
     # for item in sensorData:
     #     print item
 
