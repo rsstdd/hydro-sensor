@@ -51,7 +51,7 @@ def log_sensor_readings(all_curr_readings):
 
     for readings in all_curr_readings:
         try:
-            return readings
+            print readings
         except:
             pass
 
