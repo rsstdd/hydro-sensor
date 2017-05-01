@@ -1,18 +1,20 @@
 import string
-
 import pylibftdi
 from pylibftdi.device import Device
 from pylibftdi.driver import FtdiError
 from pylibftdi import Driver
 import os
 import time
+import sys
+import time
+from collections import OrderedDict
 
+# sleep(10)
 
 class AtlasDevice(Device):
 
     def __init__(self, sn):
         Device.__init__(self, mode='t', device_id=sn)
-
 
     def read_line(self, size=0):
         """
@@ -30,24 +32,6 @@ class AtlasDevice(Device):
                     line_buffer[-lsl:] == list('\r')):
                 break
         return ''.join(line_buffer)
-
-    def read_lines(self):
-        """
-        also taken from ftdi lib to work with modified readline function
-        """
-        lines = []
-        try:
-            while True:
-                line = self.read_line()
-                if not line:
-                    break
-                    self.flush_input()
-                lines.append(line)
-            return lines
-
-        except FtdiError:
-            print("Failed to read from the sensor.")
-            return ''
 
     def send_cmd(self, cmd):
         """
@@ -81,25 +65,101 @@ def get_ftdi_device_list():
     return dev_list
 
 
-if __name__ == '__main__':
-    devices = get_ftdi_device_list()
-    cnt_all = len(devices)
+def read_sensors():
 
-    try:
-        while True:
-            for i in devices
-                print devices
-                dev = AtlasDevice(devices[int(index)])
-                dev.send_cmd("C,0") # turn off continuous mode
-                time.sleep(1)
-                dev.flush()
+all_curr_readings = []
+ref_temp = 25
 
+# Get the readings from any 1-Wire temperature sensors
+
+for key, value in sensors.items():
+    if value["is_connected"] is True:
+        if value["sensor_type"] == "atlas_scientific_temp":
+            sensor_reading = (round(float(read_1_wire_temp(key)),
+                             value["accuracy"]))
+            all_curr_readings.append([value["name"], sensor_reading])
+            if value["is_ref"] is True:
+                ref_temp = sensor_reading
+
+# Get the readings from any Atlas Scientific temperature sensors
+
+        elif value["sensor_type"] == "atlas_scientific_temp":
+            dev = AtlasDevice(value["serial_number"])
+            dev.send_cmd("R")
+            sensor_reading = round(float(dev.read_line()),
+                            value["accuracy"])
+            all_curr_readings.append([value["name"], sensor_reading])
+            if value["is_ref"] is True:
+                ref_temp = sensor_reading
+
+        else:
+            dev = AtlasDevice(value["serial_number"])
+            # Set reference temperature value on the sensor
+            dev.send_cmd("T," + str(ref_temp))
+
+# Get the readings from any Atlas Scientific Elec Conductivity sensors
+
+            if value["sensor_type"] == "atlas_scientific_ec":
+                dev = AtlasDevice(value["serial_number"])
                 dev.send_cmd("R")
-                lines = dev.read_lines()
-                for i in range(len(5)):
-                    if lines[i] != u'*OK\r':
-                        print("pH: ", lines[i])
-                time.sleep(1000)
+                sensor_reading = (round(((float(dev.read_line())) *
+                              value["ppm_multiplier"]), value["accuracy"]))
 
-    except KeyboardInterrupt:
-        print("Continuous polling stopped")
+# Get the readings from any other Atlas Scientific sensors
+
+            else:
+                dev = AtlasDevice(value["serial_number"])
+                dev.send_cmd("R")
+                sensor_reading = round(float(dev.read_line()),
+                                value["accuracy"])
+                all_curr_readings.append([value["name"], sensor_reading])
+
+log_sensor_readings(all_curr_readings)
+
+return
+
+
+sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
+                            "sensor_type": "atlas_scientific_temp",
+                            "name": "atlas_temp",
+                            "is_connected": True,
+                            "is_ref": True,
+                            "serial_number": 'DJ00RROZR',  # Enter Serial Number
+                            "accuracy": 1}),
+
+                       ("atlas_sensor_2", {  # FLOW
+                            "sensor_type": "atlas_scientific_flo",
+                            "name": "ph",
+                            "is_connected": True,
+                            "is_ref": False,
+                            "serial_number": '',  # Enter Serial Number
+                            "accuracy": 2}),
+
+                       ("atlas_sensor_3", {  # pH/ORP Atlas Scientific Sensor
+                            "sensor_type": "atlas_scientific_ph",
+                            "name": "orp",
+                            "is_connected": True,
+                            "is_ref": False,
+                            "serial_number": 'DJ00R0V8',  # Enter Serial Number
+                            "accuracy": 0}),
+
+                       ("atlas_sensor_4", {  # Atlas Scientific EC Sensor
+                            "sensor_type": "atlas_scientific_ec",
+                            "name": "ec",
+                            "is_connected": True,
+                            "is_ref": False,
+                            "serial_number": 1,  # Enter Serial Number
+                            "accuracy": 0,
+                            "ppm_multiplier": 0.67})])  # Convert EC to PPM
+
+loops = 0
+
+while True:  # Repeat the code indefinitely
+
+    if loops == 300:
+        loops = 0
+
+        read_sensors()
+
+    loops += 1
+    # time.sleep(1)
