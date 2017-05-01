@@ -13,6 +13,7 @@ from collections import OrderedDict
 
 class AtlasDevice(Device):
 
+
     def __init__(self, sn):
         Device.__init__(self, mode='t', device_id=sn)
 
@@ -24,6 +25,7 @@ class AtlasDevice(Device):
         lsl = len('\r')
         line_buffer = []
         while True:
+            # read bytes until Carriage Return is received.
             next_char = self.read(1)
             if next_char == '' or (size > 0 and len(line_buffer) > size):
                 break
@@ -49,20 +51,20 @@ class AtlasDevice(Device):
             return False
 
 
-def get_ftdi_device_list():
-    """
-    return a list of lines, each a colon-separated
-    vendor:product:serial summary of detected devices
-    """
-    dev_list = []
-
-    for device in Driver().list_devices():
-        # list_devices returns bytes rather than strings
-        dev_info = map(lambda x: x.decode('latin1'), device)
-        # device must always be this triple
-        vendor, product, serial = dev_info
-        dev_list.append(serial)
-    return dev_list
+# def get_ftdi_device_list():
+#     """
+#     return a list of lines, each a colon-separated
+#     vendor:product:serial summary of detected devices
+#     """
+#     dev_list = []
+#
+#     for device in Driver().list_devices():
+#         # list_devices returns bytes rather than strings
+#         dev_info = map(lambda x: x.decode('latin1'), device)
+#         # device must always be this triple
+#         vendor, product, serial = dev_info
+#         dev_list.append(serial)
+#     return dev_list
 
 
 def log_sensor_readings(all_curr_readings):
@@ -90,43 +92,43 @@ def log_sensor_readings(all_curr_readings):
 
 def read_sensors():
 
-all_curr_readings = []
-ref_temp = 25
+    all_curr_readings = []
+    ref_temp = 25
 
-# Get the readings from any 1-Wire temperature sensors
+    # Get the readings from any 1-Wire temperature sensors
 
-for key, value in sensors.items():
-    if value["is_connected"] is True:
-        if value["sensor_type"] == "atlas_scientific_temp":
-            sensor_reading = (round(float(dev.read_line()),
-                            value["accuracy"])
-            all_curr_readings.append([value["name"], sensor_reading])
-            if value["is_ref"] is True:
-                ref_temp = sensor_reading
-
-        else:
-            dev = AtlasDevice(value["serial_number"])
-            # Set reference temperature value on the sensor
-            dev.send_cmd("T," + str(ref_temp))
-
-# Get the readings from any Atlas Scientific Elec Conductivity sensors
-
-            if value["sensor_type"] == "atlas_scientific_ec":
-                dev = AtlasDevice(value["serial_number"])
-                dev.send_cmd("R")
-                sensor_reading = (round(((float(dev.read_line())) *
-                              value["ppm_multiplier"]), value["accuracy"]))
-
-# Get the readings from any other Atlas Scientific sensors
+    for key, value in sensors.items():
+        if value["is_connected"] is True:
+            if value["sensor_type"] == "atlas_scientific_temp":
+                sensor_reading = (round(float(dev.read_line()),
+                                value["accuracy"])
+                all_curr_readings.append([value["name"], sensor_reading])
+                if value["is_ref"] is True:
+                    ref_temp=sensor_reading
 
             else:
                 dev = AtlasDevice(value["serial_number"])
-                dev.send_cmd("R")
-                sensor_reading = round(float(dev.read_line()),
-                                value["accuracy"])
-                all_curr_readings.append([value["name"], sensor_reading])
+                # Set reference temperature value on the sensor
+                dev.send_cmd("T," + str(ref_temp))
 
-log_sensor_readings(all_curr_readings)
+    # Get the readings from any Atlas Scientific Elec Conductivity sensors
+
+                if value["sensor_type"] == "atlas_scientific_ec":
+                    dev = AtlasDevice(value["serial_number"])
+                    dev.send_cmd("R")
+                    sensor_reading = (round(((float(dev.read_line())) *
+                                  value["ppm_multiplier"]), value["accuracy"]))
+
+    # Get the readings from any other Atlas Scientific sensors
+
+                else:
+                    dev = AtlasDevice(value["serial_number"])
+                    dev.send_cmd("R")
+                    sensor_reading = round(float(dev.read_line()),
+                                    value["accuracy"])
+                    all_curr_readings.append([value["name"], sensor_reading])
+
+    log_sensor_readings(all_curr_readings)
 
 return
 
