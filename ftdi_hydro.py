@@ -51,8 +51,6 @@ def log_sensor_readings(all_curr_readings):
         except:
             pass
 
-    close_database_connection(conn, curs)
-
     return
 
 
