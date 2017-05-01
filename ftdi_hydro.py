@@ -50,6 +50,7 @@ def log_sensor_readings(all_curr_readings):
 
     for readings in all_curr_readings:
         try:
+            print readings
             return readings
         except:
             pass
@@ -137,15 +138,9 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "accuracy": 0,
                             "ppm_multiplier": 0.67})])  # Convert EC to PPM
 
-# loops = 0
-#
-# while True:  # Repeat the code indefinitely
-#
-#     if loops == 300:
-#         loops = 0
-#
-#         read_sensors()
-#
-#     loops += 1
-def get_sensor_data():
+loops = 0
+
+while loops < 1:
+
     read_sensors()
+    loops += 1
