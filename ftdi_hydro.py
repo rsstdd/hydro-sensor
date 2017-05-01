@@ -4,26 +4,51 @@ from collections import OrderedDict
 from pylibftdi.device import Device
 from pylibftdi.driver import FtdiError
 
+sleep(10)
 
 class AtlasDevice(Device):
 
-    def read_line(self, size=0):
+    # def read_line(self, size=0):
+    #     """
+    #     taken from the ftdi library and modified to
+    #     use the ezo line separator "\r"
+    #     """
+    #     lsl = len('\r')
+    #     line_buffer = []
+    #     while True:
+    #         # read bytes until Carriage Return is received.
+    #         next_char = self.read(1)
+    #         if next_char == '' or (size > 0 and len(line_buffer) > size):
+    #             break
+    #         line_buffer.append(next_char)
+    #         if (len(line_buffer) >= lsl and
+    #                 line_buffer[-lsl:] == list('\r')):
+    #             break
+    #     return ''.join(line_buffer)
+
+    def read_line(self):
         """
-        taken from the ftdi library and modified to
-        use the ezo line separator "\r"
+        Read the response from the Atlas Sensor
+        :return:
         """
-        lsl = len('\r')
         line_buffer = []
-        while True:
-            # read bytes until Carriage Return is received.
-            next_char = self.read(1)
-            if next_char == '' or (size > 0 and len(line_buffer) > size):
-                break
-            line_buffer.append(next_char)
-            if (len(line_buffer) >= lsl and
-                    line_buffer[-lsl:] == list('\r')):
-                break
-        return ''.join(line_buffer)
+        try:
+            start_time = time.time()
+            while True:
+
+                # read bytes until Carriage Return is received.
+                next_char = self.read(1)    # read one byte
+                if next_char == "\r":  # response of sensor always ends with CR.
+                    break
+                line_buffer.append(next_char)
+
+                if time.time() - start_time > 1.0:  # timeout
+                    line_buffer = ''
+                    break
+            return ''.join(line_buffer)
+
+        except FtdiError:
+            return ''
 
     def send_cmd(self, cmd):
         """
@@ -74,7 +99,7 @@ def read_sensors():
 
             elif value["sensor_type"] == "atlas_scientific_temp":
                 dev = AtlasDevice(value["serial_number"])
-                print dev
+                print(dev)
                 dev.send_cmd("R")
                 # sensor_reading = round(float(dev.read_line()),
                                 # value["accuracy"])
@@ -155,4 +180,4 @@ while True:  # Repeat the code indefinitely
         read_sensors()
 
     loops += 1
-    # time.sleep(1)
+    time.sleep(1)
