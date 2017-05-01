@@ -10,20 +10,18 @@ import ftdi_hydro
 hydroData=ftdi_hydro.get_reading()
 
 if hydroData is not None:
-    # print atlas_scientific_temp
-    # print atlas_scientific_flo
-    # print atlas_scientific_ec
-    # print atlas_scientific_ph
-    print hydroData
-    #
-    # timestamp = datetime.datetime.now()
-    #
-    # jsonPackage={
-    # 'sensor_num': sensor_num,
-    # 'hostname' : gethostname(),
-    # 'timestamp': timestamp,
-    # 'hydro_temp': '',
-    # 'hydro_ec': '',
-    # 'hydro_ph': '',
-    # 'hydro_flow': ''
-    #  }
+    print hydroData[0].sensor_reading
+    print hydroData[1].sensor_reading
+    print hydroData[2].sensor_reading
+
+    timestamp = datetime.datetime.now()
+
+    jsonPackage={
+    'sensor_num': sensor_num,
+    'hostname' : gethostname(),
+    'timestamp': timestamp,
+    'hydro_temp': '',
+    'hydro_ec': '',
+    'hydro_ph': '',
+    'hydro_flow': ''
+     }
