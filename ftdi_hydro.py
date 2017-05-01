@@ -5,27 +5,7 @@ from collections import OrderedDict
 from pylibftdi.device import Device
 from pylibftdi.driver import FtdiError
 
-sleep(10)
-
 class AtlasDevice(Device):
-
-    # def read_line(self, size=0):
-    #     """
-    #     taken from the ftdi library and modified to
-    #     use the ezo line separator "\r"
-    #     """
-    #     lsl = len('\r')
-    #     line_buffer = []
-    #     while True:
-    #         # read bytes until Carriage Return is received.
-    #         next_char = self.read(1)
-    #         if next_char == '' or (size > 0 and len(line_buffer) > size):
-    #             break
-    #         line_buffer.append(next_char)
-    #         if (len(line_buffer) >= lsl and
-    #                 line_buffer[-lsl:] == list('\r')):
-    #             break
-    #     return ''.join(line_buffer)
 
     def read_line(self):
         """
@@ -69,8 +49,6 @@ class AtlasDevice(Device):
 
 def log_sensor_readings(all_curr_readings):
 
-    # Create a timestamp and store all readings on the MySQL database
-
     for readings in all_curr_readings:
         try:
             print readings
@@ -89,18 +67,18 @@ def read_sensors():
 
     for key, value in sensors.items():
         if value["is_connected"] is True:
-            if value["sensor_type"] == "1_wire_temp":
-                sensor_reading = (round(float(read_1_wire_temp(key)),
-                                 value["accuracy"]))
-                all_curr_readings.append([value["name"], sensor_reading])
-                if value["is_ref"] is True:
-                    ref_temp = sensor_reading
+            # if value["sensor_type"] == "1_wire_temp":
+            #     sensor_reading = (round(float(read_1_wire_temp(key)),
+            #                      value["accuracy"]))
+            #     all_curr_readings.append([value["name"], sensor_reading])
+            #     if value["is_ref"] is True:
+            #         ref_temp = sensor_reading
 
     # Get the readings from any Atlas Scientific temperature sensors
 
-            elif value["sensor_type"] == "atlas_scientific_temp":
+            if value["sensor_type"] == "atlas_scientific_temp":
                 dev = AtlasDevice(value["serial_number"])
-                print(dev)
+                print "dev %s" % dev
                 dev.send_cmd("R")
                 # sensor_reading = round(float(dev.read_line()),
                                 # value["accuracy"])
