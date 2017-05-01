@@ -7,9 +7,6 @@ from pylibftdi.driver import FtdiError
 
 class AtlasDevice(Device):
 
-    def __init__(self, sn):
-        Device.__init__(self, mode='t', device_id=sn)
-
     def read_line(self, size=0):
         """
         taken from the ftdi library and modified to
