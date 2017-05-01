@@ -76,6 +76,8 @@ def read_sensors():
                 all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
                 if value["is_ref"] is True:
                     ref_temp = sensor_reading
+                dev.send_cmd("\r")
+
 
             else:
                 dev = AtlasDevice(value["serial_number"])
@@ -89,6 +91,7 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
                     all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
+                    dev.send_cmd("\r")
 
     # Get the readings from any other Atlas Scientific sensors
 
@@ -97,6 +100,8 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
                     all_curr_readings.append([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
+                    dev.send_cmd("\r")
+
 
     log_sensor_readings(all_curr_readings)
 
