@@ -63,8 +63,9 @@ def read_sensors():
                 dev = AtlasDevice(value["serial_number"])
                 print dev
                 dev.send_cmd("R")
-                sensor_reading = round(float(dev.read_line()),
-                                value["accuracy"])
+                # sensor_reading = round(float(dev.read_line()),
+                                # value["accuracy"])
+                sensor_reading=dev.read_line()
                 all_curr_readings.append([value["name"], sensor_reading])
                 if value["is_ref"] is True:
                     ref_temp = sensor_reading
