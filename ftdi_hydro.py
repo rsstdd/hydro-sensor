@@ -15,7 +15,7 @@ class AtlasDevice(Device):
         line_buffer = []
         try:
             start_time = time.time()
-            for i = 0 to 1:
+            while i < 1:
 
                 # read bytes until Carriage Return is received.
                 next_char = self.read(1)    # read one byte
@@ -25,6 +25,7 @@ class AtlasDevice(Device):
                 if time.time() - start_time > 1.0:  # timeout
                     line_buffer = ''
                     break
+            i += 1
             return ''.join(line_buffer)
 
         except FtdiError:
