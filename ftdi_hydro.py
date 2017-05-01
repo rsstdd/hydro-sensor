@@ -48,16 +48,14 @@ class AtlasDevice(Device):
 
 
 def log_sensor_readings(all_curr_readings):
+    
+    for readings in all_curr_readings:
+        try:
+            print readings
+        except:
+            pass
 
-    return all_curr_readings
-    #
-    # for readings in all_curr_readings:
-    #     try:
-    #         print readings
-    #     except:
-    #         pass
-
-    # return
+    return
 
 
 def read_sensors():
@@ -150,7 +148,6 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
 def get_reading():
     read_sensors()
-    return 
 
 #
 # loops = 0
