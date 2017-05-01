@@ -10,7 +10,7 @@ import ftdi_hydro
 hydroData=ftdi_hydro.get_reading()
 
 if hydroData is not None:
-    print(hydroData)
+    print(hydroData[0])
     for item in hydroData:
         print(item)
 else:
