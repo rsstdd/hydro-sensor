@@ -41,6 +41,24 @@ class AtlasDevice(Device):
             return False
 
 
+def log_sensor_readings(all_curr_readings):
+
+    # Create a timestamp and store all readings on the MySQL database
+
+    last_timestamp = curs.fetchone()
+    last_timestamp = last_timestamp[0].strftime('%Y-%m-%d %H:%M:%S')
+
+    for readings in all_curr_readings:
+        try:
+            print readings
+        except:
+            pass
+
+    close_database_connection(conn, curs)
+
+    return
+
+
 def read_sensors():
 
     all_curr_readings = []
