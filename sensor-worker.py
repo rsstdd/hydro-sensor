@@ -13,7 +13,9 @@ import os
 import sys
 sys.path.append(os.path.join("..", "..", "Sources"))
 
-print hydro_data.format_data
+data = hydro_data.format_data()
+print data
+
 
 # def sensor_data_dispatch(type, jsonPackage):
 #     client = MongoClient('10.9.0.1')
