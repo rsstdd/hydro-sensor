@@ -76,6 +76,7 @@ if hydroData is not None:
 
         print jsonPackage
         print '---------------------------'
+        print ''
 
     print '---------------------------'
     print hydroData[0]['sensor_type']
