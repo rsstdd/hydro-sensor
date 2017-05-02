@@ -106,9 +106,9 @@ def read_sensors():
                     all_curr_readings.append({'name': value["name"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
 
 
-    log_sensor_readings(all_curr_readings)
+    # log_sensor_readings(all_curr_readings)
 
-    return
+    return all_curr_readings
 
 
 sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
@@ -148,11 +148,11 @@ loops = 0
 
 # while True:  # Repeat the code indefinitely
 
-for i in range(0, 1)
+# for i in range(0, 1)
 
     # if loops == 300:
     #     loops = 0
 
-    read_sensors()
+read_sensors()
 
     # loops += 1
