@@ -14,10 +14,19 @@ if hydroData is not None:
     print '---------------------------'
     print hydroData
     print '---------------------------'
-    print hydroData[0]
+    print hydroData[0]['serial_number']
+    print hydroData[0]['sensor_type']
+    print hydroData[0]['name']
+    print hydroData[0]['sensor_reading']
     print '---------------------------'
-    print hydroData[1]
+    print hydroData[1]['serial_number']
+    print hydroData[1]['sensor_type']
+    print hydroData[1]['name']
+    print hydroData[1]['sensor_reading']
     print '---------------------------'
+    print hydroData[2]['serial_number']
+    print hydroData[2]['sensor_type']
+    print hydroData[2]['name']
     print hydroData[2]['sensor_reading']
     print '---------------------------'
 else:
