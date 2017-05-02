@@ -45,7 +45,7 @@ def sensor_data_dispatch(type, jsonPackage):
 
     record_id = db[type].insert_one(jsonPackage).inserted_id
 
-	print sensorRecord
+    print sensorRecord
 
     # Send to DB
     try:
