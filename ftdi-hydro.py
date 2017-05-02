@@ -134,7 +134,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
                        ("atlas_sensor_4", {  # Atlas Scientific EC Sensor
                             "sensor_type": "atlas_scientific_ec",
-                            "name": "hydro-ec",
+                            "name": "ec",
                             "is_connected": True,
                             "is_ref": False,
                             "serial_number": 'DJ00RU96',  # Enter Serial Number

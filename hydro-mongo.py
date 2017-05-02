@@ -1,13 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os, sys
+import os
+import sys
 import json
 from datetime import timedelta, date
 from socket import gethostname
-import json
 import requests
-
+from pymongo import MongoClient
+import gspread
 import ftdi_hydro
 
 hydroData=ftdi_hydro.read_sensors()
@@ -41,17 +42,18 @@ def mongoize(type,jsonPackage):
     sensorRecord = {"sensordata":jsonPackage}
     print sensorRecord
     try :
-        record_id2=db.sensordata.insert_one(sensorRecord)
+        # record_id2=db.sensordata.insert_one(sensorRecord)
     except:
         with open('~thoth/sensordata.txt','w') as outfile:
             json.dump(jsonPackage, outfile)
 
     record_id=db[type].insert_one(jsonPackage).inserted_id
 
-    #print record_id
-    #print record_id2
-#	print sensorRecord
+    print record_id
+    print record_id2
+	print sensorRecord
     #send to heroku
+
     # try:
 
         # r = requests.post('https://luna-api.herokuapp.com/sensordata', data = jsonPackage)
@@ -63,16 +65,57 @@ if hydroData is not None:
     # timestamp = datetime.datetime.now()
 
     for data in hydroData:
-        jsonPackage={
-        'sensor_num': data['serial_number'],
-        'hostname' : gethostname(),
-        'timestamp': 'now',
-        'sensor_version':'1.00',
-        'sensor_group': data['name'],
-        'role': data['sensor_type'],
-        'type': data['sensor_type']
-        }
+        if any('hydro-ec' in x for x in data)
+            jsonPackage={
+            'sensor_num': data['serial_number'],
+            'hostname' : gethostname(),
+            'timestamp': 'now',
+            'sensor_version':'1.00',
+            'sensor_group': data['name'],
+            'role': data['sensor_type'],
+            'type': data['sensor_type']
+            }
 
+            mongoize('hydro-ec', jsonPackage)
+
+        if any('hydro-ph' in x for x in data)
+            jsonPackage={
+            'sensor_num': data['serial_number'],
+            'hostname' : gethostname(),
+            'timestamp': 'now',
+            'sensor_version':'1.00',
+            'sensor_group': data['name'],
+            'role': data['sensor_type'],
+            'type': data['sensor_type']
+            }
+
+            mongoize('hydro-ph', jsonPackage)
+
+        if any('hydro-temp' in x for x in data)
+            jsonPackage={
+            'sensor_num': data['serial_number'],
+            'hostname' : gethostname(),
+            'timestamp': 'now',
+            'sensor_version':'1.00',
+            'sensor_group': data['name'],
+            'role': data['sensor_type'],
+            'type': data['sensor_type']
+            }
+
+            mongoize('hydro-temp', jsonPackage)
+
+        if any('hydro-flow' in x for x in data)
+            jsonPackage={
+            'sensor_num': data['serial_number'],
+            'hostname' : gethostname(),
+            'timestamp': 'now',
+            'sensor_version':'1.00',
+            'sensor_group': data['name'],
+            'role': data['sensor_type'],
+            'type': data['sensor_type']
+            }
+
+            mongoize('hydro-flow', jsonPackage)
 
         print ''
         print jsonPackage
@@ -97,8 +140,3 @@ if hydroData is not None:
     print '---------------------------'
 else:
     print "None error"
-
-
-
-    # timestamp = datetime.datetime.now()
-    #
