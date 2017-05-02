@@ -148,8 +148,11 @@ loops = 0
 
 # while True:  # Repeat the code indefinitely
 
-for num in range(0, 1)
+for i in range(0, 1)
 
-        read_sensors()
+    # if loops == 300:
+    #     loops = 0
 
-    loops += 1
+    read_sensors()
+
+    # loops += 1
