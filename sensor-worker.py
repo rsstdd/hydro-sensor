@@ -6,7 +6,7 @@ import json
 from datetime import datetime, timedelta
 import ftdi_hydro
 
-hydroData=ftdi_hydro.get_reading()
+hydroData=ftdi_hydro
 
 print hydroData
 
