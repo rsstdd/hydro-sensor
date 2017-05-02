@@ -63,7 +63,7 @@ if hydroData is not None:
     # timestamp = datetime.datetime.now()
 
     for data in hydroData:
-        if data['sensor-group'] == 'hydro-ec'
+        if data['sensor-group'] == 'hydro-ec':
             jsonPackage={
             'sensor_num': data['serial_number'],
             'hostname' : gethostname(),
@@ -76,7 +76,7 @@ if hydroData is not None:
 
             mongoize('hydro-ec', jsonPackage)
 
-        if data['sensor_group'] == 'hydro-ph'
+        if data['sensor_group'] == 'hydro-ph':
             jsonPackage={
             'sensor_num': data['serial_number'],
             'hostname' : gethostname(),
@@ -89,7 +89,7 @@ if hydroData is not None:
 
             mongoize('hydro-ph', jsonPackage)
 
-        if data['type'] == 'hydro-temp'
+        if data['type'] == 'hydro-temp':
             jsonPackage={
             'sensor_num': data['serial_number'],
             'hostname' : gethostname(),
@@ -102,7 +102,7 @@ if hydroData is not None:
 
             mongoize('hydro-temp', jsonPackage)
 
-        if data['sensor_group'] == 'hydro-flow'
+        if data['sensor_group'] == 'hydro-flow':
             jsonPackage={
             'sensor_num': data['serial_number'],
             'hostname' : gethostname(),
