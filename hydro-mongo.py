@@ -22,9 +22,9 @@ def postAPI(url, payload):
 def mongoize(type,jsonPackage):
 #   print jsonPackage
     # filename="/var/local/thoth.id"
-    # deviceData = {}
-    # deviceData['room']="1"
-    # deviceData['role']="1"
+    deviceData = {}
+    deviceData['room']="undefined"
+    deviceData['role']="undefined"
 
     # with open(filename,"r") as file:
     #     deviceData=json.load(file)
