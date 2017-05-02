@@ -8,7 +8,7 @@ import ftdi_hydro
 
 hydroData=ftdi_hydro.get_reading()
 
-print ftdi_hydro.get_reading()
+print hydroData
 
 # if hydroData is not None:
 #     print '---------------------------'
