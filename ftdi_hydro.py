@@ -17,7 +17,6 @@ class AtlasDevice(Device):
         try:
             start_time = time.time()
             while True:
-
                 # read bytes until Carriage Return is received.
                 next_char = self.read(1)    # read one byte
                 if next_char == "\r":  # response of sensor always ends with CR.
@@ -49,13 +48,13 @@ class AtlasDevice(Device):
 
 def log_sensor_readings(all_curr_readings):
 
-    for readings in all_curr_readings:
-        try:
-            print readings
-        except:
-            pass
+    # for readings in all_curr_readings:
+    #     try:
+    #         print readings
+    #     except:
+    #         pass
 
-    return
+    return all_curr_readings
 
 
 def read_sensors():
