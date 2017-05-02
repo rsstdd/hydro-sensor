@@ -64,58 +64,58 @@ if hydroData is not None:
 
     for data in hydroData:
         print data
-        if data['sensor-group'] == 'hydro-ec':
-            jsonPackage={
-            'sensor_num': data['serial_number'],
-            'hostname' : gethostname(),
-            'timestamp': 'now',
-            'sensor_version':'1.00',
-            'sensor_group': data['name'],
-            'role': data['sensor_type'],
-            'type': data['sensor_type']
-            }
-
-            mongoize('hydro-ec', jsonPackage)
-
-        if data['sensor_group'] == 'hydro-ph':
-            jsonPackage={
-            'sensor_num': data['serial_number'],
-            'hostname' : gethostname(),
-            'timestamp': 'now',
-            'sensor_version':'1.00',
-            'sensor_group': data['name'],
-            'role': data['sensor_type'],
-            'type': data['sensor_type']
-            }
-
-            mongoize('hydro-ph', jsonPackage)
-
-        if data['type'] == 'hydro-temp':
-            jsonPackage={
-            'sensor_num': data['serial_number'],
-            'hostname' : gethostname(),
-            'timestamp': 'now',
-            'sensor_version':'1.00',
-            'sensor_group': data['name'],
-            'role': data['sensor_type'],
-            'type': data['sensor_type']
-            }
-
-            mongoize('hydro-temp', jsonPackage)
-
-        if data['sensor_group'] == 'hydro-flow':
-            jsonPackage={
-            'sensor_num': data['serial_number'],
-            'hostname' : gethostname(),
-            'timestamp': 'now',
-            'sensor_version':'1.00',
-            'sensor_group': data['name'],
-            'role': data['sensor_type'],
-            'type': data['sensor_type']
-            }
-
-            mongoize('hydro-flow', jsonPackage)
-
+        # if data['sensor-group'] == 'hydro-ec':
+        #     jsonPackage={
+        #     'sensor_num': data['serial_number'],
+        #     'hostname' : gethostname(),
+        #     'timestamp': 'now',
+        #     'sensor_version':'1.00',
+        #     'sensor_group': data['name'],
+        #     'role': data['sensor_type'],
+        #     'type': data['sensor_type']
+        #     }
+        #
+        #     mongoize('hydro-ec', jsonPackage)
+        #
+        # if data['sensor_group'] == 'hydro-ph':
+        #     jsonPackage={
+        #     'sensor_num': data['serial_number'],
+        #     'hostname' : gethostname(),
+        #     'timestamp': 'now',
+        #     'sensor_version':'1.00',
+        #     'sensor_group': data['name'],
+        #     'role': data['sensor_type'],
+        #     'type': data['sensor_type']
+        #     }
+        #
+        #     mongoize('hydro-ph', jsonPackage)
+        #
+        # if data['type'] == 'hydro-temp':
+        #     jsonPackage={
+        #     'sensor_num': data['serial_number'],
+        #     'hostname' : gethostname(),
+        #     'timestamp': 'now',
+        #     'sensor_version':'1.00',
+        #     'sensor_group': data['name'],
+        #     'role': data['sensor_type'],
+        #     'type': data['sensor_type']
+        #     }
+        #
+        #     mongoize('hydro-temp', jsonPackage)
+        #
+        # if data['sensor_group'] == 'hydro-flow':
+        #     jsonPackage={
+        #     'sensor_num': data['serial_number'],
+        #     'hostname' : gethostname(),
+        #     'timestamp': 'now',
+        #     'sensor_version':'1.00',
+        #     'sensor_group': data['name'],
+        #     'role': data['sensor_type'],
+        #     'type': data['sensor_type']
+        #     }
+        #
+        #     mongoize('hydro-flow', jsonPackage)
+        #
 
         print ''
         print jsonPackage
