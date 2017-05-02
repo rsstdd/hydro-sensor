@@ -48,12 +48,12 @@ class AtlasDevice(Device):
 
 def log_sensor_readings(all_curr_readings):
 
-    # for reading in all_curr_readings:
-    #     try:
-    #         print reading
-    #         print '---------'
-    #     except:
-    #         pass
+    for reading in all_curr_readings:
+        try:
+            print reading
+            print '---------'
+        except:
+            pass
 
     return
 
@@ -105,15 +105,12 @@ def read_sensors():
                     atlas_scientific_ph = Set([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
                     all_curr_readings.append({'name': value["name"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
 
-
-    # log_sensor_readings(all_curr_readings)
-
     return all_curr_readings
 
 
 sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "sensor_type": "atlas_scientific_temp",
-                            "name": "temp",
+                            "name": "hydro-temp",
                             "is_connected": True,
                             "is_ref": True,
                             "serial_number": 'DJ00RVZR',  # Enter Serial Number
@@ -121,7 +118,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
                        ("atlas_sensor_2", {  # FLOW
                             "sensor_type": "atlas_scientific_flo",
-                            "name": "flow",
+                            "name": "hydro-flow",
                             "is_connected": False,
                             "is_ref": False,
                             "serial_number": 'DJ00RB93',  # Enter Serial Number
@@ -129,7 +126,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
                        ("atlas_sensor_3", {  # pH Atlas Scientific Sensor
                             "sensor_type": "atlas_scientific_ph",
-                            "name": "ph",
+                            "name": "hydro-ph",
                             "is_connected": True,
                             "is_ref": False,
                             "serial_number": 'DJ00RUV8',  # Enter Serial Number
@@ -137,25 +134,12 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
                        ("atlas_sensor_4", {  # Atlas Scientific EC Sensor
                             "sensor_type": "atlas_scientific_ec",
-                            "name": "ec",
+                            "name": "hydro-ec",
                             "is_connected": True,
                             "is_ref": False,
                             "serial_number": 'DJ00RU96',  # Enter Serial Number
                             "accuracy": 0,
                             "ppm_multiplier": 0.67})])  # Convert EC to PPM
 
-loops = 0
-
 def get_sensor_data():
     read_sensors()
-
-# while True:  # Repeat the code indefinitely
-
-# for i in range(0, 1)
-
-    # if loops == 300:
-    #     loops = 0
-
-    # read_sensors()
-
-    # loops += 1
