@@ -2,16 +2,16 @@
 # -*- coding: utf-8 -*-
 
 # import yocto_data
+# from pymongo import MongoClient
 import hydro_data
 from socket import gethostname
 from datetime import timedelta, date
-# from pymongo import MongoClient
 import json
 import requests
 
 import os
 import sys
-sys.path.append(os.path.join("..", "..", "Sources"))
+sys.path.append(os.path.join("..", "Sources"))
 
 hydroList = hydro_data.format_data()
 
