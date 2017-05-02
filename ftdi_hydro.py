@@ -48,12 +48,12 @@ class AtlasDevice(Device):
 
 def log_sensor_readings(all_curr_readings):
 
-    for reading in all_curr_readings:
-        try:
-            print reading
-            print '---------'
-        except:
-            pass
+    # for reading in all_curr_readings:
+    #     try:
+    #         print reading
+    #         print '---------'
+    #     except:
+    #         pass
 
     return
 
@@ -146,10 +146,9 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
 loops = 0
 
-while True:  # Repeat the code indefinitely
+# while True:  # Repeat the code indefinitely
 
-    if loops == 300:
-        loops = 0
+for num in range(1)
 
         read_sensors()
 
