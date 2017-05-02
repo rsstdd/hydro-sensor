@@ -68,7 +68,7 @@ if hydroData is not None:
         'hostname' : gethostname(),
         'timestamp': 'now',
         'sensor_version':'1.00',
-        'sensor_group': '',
+        'sensor_group': data['name'],
         'role': data['sensor_type'],
         'type': data['sensor_type']
         }
