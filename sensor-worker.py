@@ -52,12 +52,12 @@ def mongoize(type,jsonPackage):
     #print record_id2
 #	print sensorRecord
     #send to heroku
-    try:
+    # try:
 
         # r = requests.post('https://luna-api.herokuapp.com/sensordata', data = jsonPackage)
         # r2 = requests.post('https://luna-api-staging.herokuapp.com/sensordata', data = jsonPackage)
-    except Exception as e:
-        print e
+    # except Exception as e:
+    #     print e
 
 if hydroData is not None:
     for data in hydroData:
