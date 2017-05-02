@@ -13,7 +13,6 @@ hydroData=ftdi_hydro.read_sensors()
 
 if hydroData is not None:
     # timestamp = datetime.datetime.now()
-
     for data in hydroData:
         jsonPackage={
         'sensor_num': data['serial_number'],
@@ -24,4 +23,7 @@ if hydroData is not None:
         'role': data['sensor_type'],
         'type': data['sensor_type']
         }
-        return jsonPackage
+
+
+
+    print jsonPackage
