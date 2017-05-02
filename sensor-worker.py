@@ -10,14 +10,15 @@ hydroData=ftdi_hydro.get_reading()
 
 print hydroData
 
-# if hydroData is not None:
-#     print '---------------------------'
-#     print hydroData[0].sensor_reading
-#     print hydroData[1].sensor_reading
-#     print hydroData[2].sensor_reading
-#     print '---------------------------'
-# else:
-#     print "None error"
+if hydroData is not None:
+    print '---------------------------'
+    print hydroData
+    print hydroData[0].sensor_reading
+    print hydroData[1].sensor_reading
+    print hydroData[2].sensor_reading
+    print '---------------------------'
+else:
+    print "None error"
 
 
 
