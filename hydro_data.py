@@ -14,7 +14,7 @@ hydroData = ftdi_hydro.read_sensors()
 
 def format_data():
     if hydroData is not None:
-        timestamp = datetime.datetime.now()
+        # timestamp = datetime.datetime.now()
         hydrojson = []
 
         for data in hydroData:
