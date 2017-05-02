@@ -60,11 +60,13 @@ def mongoize(type,jsonPackage):
     #     print e
 
 if hydroData is not None:
+    timestamp = datetime.datetime.now()
+
     for data in hydroData:
         jsonPackage={
         'sensor_num': hydroData[0]['serial_number'],
         'hostname' : gethostname(),
-        'timestamp': timestamp,
+        'timestamp': time.time,
         'sensor_version':'1.00',
         'sensor_group': '',
         'role': 'hydro_sensor',
