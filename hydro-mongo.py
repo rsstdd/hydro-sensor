@@ -39,8 +39,6 @@ def mongoize(type,jsonPackage):
     jsonPackage['role']=deviceData['role']
     sensorRecord = {"sensordata":jsonPackage}
 
-    print sensorRecord
-
     # try :
     #     # record_id2=db.sensordata.insert_one(sensorRecord)
     # except:
@@ -49,9 +47,10 @@ def mongoize(type,jsonPackage):
     #
     # record_id=db[type].insert_one(jsonPackage).inserted_id
 
-    print record_id
-    print record_id2
-	print sensorRecord
+    # print record_id
+    # print record_id2
+
+    print sensorRecord
 
     #send to heroku
 
