@@ -13,9 +13,12 @@ print hydroData
 if hydroData is not None:
     print '---------------------------'
     print hydroData
-    print hydroData[0].sensor_reading
-    print hydroData[1].sensor_reading
-    print hydroData[2].sensor_reading
+    print '---------------------------'
+    print hydroData[0]
+    print '---------------------------'
+    print hydroData[1]
+    print '---------------------------'
+    print hydroData[2]
     print '---------------------------'
 else:
     print "None error"
