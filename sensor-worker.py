@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import yocto_data
+# import yocto_data
 import hydro_data
 from socket import gethostname
 from datetime import timedelta, date
