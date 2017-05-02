@@ -41,17 +41,19 @@ def mongoize(type,jsonPackage):
     jsonPackage['role']=deviceData['role']
     sensorRecord = {"sensordata":jsonPackage}
     print sensorRecord
-    try :
-        # record_id2=db.sensordata.insert_one(sensorRecord)
-    except:
-        with open('~thoth/sensordata.txt','w') as outfile:
-            json.dump(jsonPackage, outfile)
 
-    record_id=db[type].insert_one(jsonPackage).inserted_id
+    # try :
+    #     # record_id2=db.sensordata.insert_one(sensorRecord)
+    # except:
+    #     with open('~thoth/sensordata.txt','w') as outfile:
+    #         json.dump(jsonPackage, outfile)
+    #
+    # record_id=db[type].insert_one(jsonPackage).inserted_id
 
     print record_id
     print record_id2
 	print sensorRecord
+
     #send to heroku
 
     # try:
