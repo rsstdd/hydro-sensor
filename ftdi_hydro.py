@@ -108,7 +108,7 @@ def read_sensors():
 
     log_sensor_readings(all_curr_readings)
 
-    return all_curr_readings
+    return
 
 
 sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
