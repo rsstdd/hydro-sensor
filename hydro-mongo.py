@@ -63,6 +63,7 @@ if hydroData is not None:
     # timestamp = datetime.datetime.now()
 
     for data in hydroData:
+        print data
         if data['sensor-group'] == 'hydro-ec':
             jsonPackage={
             'sensor_num': data['serial_number'],
