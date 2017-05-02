@@ -117,7 +117,7 @@ if hydroData is not None:
         #
         #     mongoize('hydro-flow', jsonPackage)
 
-        print if data['type'] == 'hydro-flow'
+        print data['type']
 
         print ''
         print jsonPackage
