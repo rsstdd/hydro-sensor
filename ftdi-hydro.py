@@ -72,7 +72,7 @@ def read_sensors():
                 dev = AtlasDevice(value["serial_number"])
                 dev.send_cmd("R")
                 sensor_reading=dev.read_line()
-                all_curr_readings.append({'name': value["name"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
+                all_curr_readings.append({'type': value["name"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
                 if value["is_ref"] is True:
                     ref_temp = sensor_reading
 
@@ -87,30 +87,27 @@ def read_sensors():
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
-                    atlas_scientific_ec = Set([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
-                    all_curr_readings.append({'name': value["name"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
+                    all_curr_readings.append({'type': value["type"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
 
                 if value["sensor_type"] == "atlas_scientific_ph":
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
-                    atlas_scientific_ph = Set([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
-                    all_curr_readings.append({'name': value["name"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
+                    all_curr_readings.append({'type': value["type"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
 
 
                 if value["sensor_type"] == "atlas_scientific_flo":
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading=dev.read_line()
-                    atlas_scientific_ph = Set([value["name"], value["serial_number"], value["sensor_type"], sensor_reading])
-                    all_curr_readings.append({'name': value["name"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
+                    all_curr_readings.append({'type': value["type"], 'serial_number': value["serial_number"], 'sensor_type': value["sensor_type"], 'sensor_reading': sensor_reading})
 
     return all_curr_readings
 
 
 sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "sensor_type": "atlas_scientific_temp",
-                            "name": "hydro-temp",
+                            "type": "hydro-temp",
                             "is_connected": True,
                             "is_ref": True,
                             "serial_number": 'DJ00RVZR',  # Enter Serial Number
@@ -118,7 +115,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
                        ("atlas_sensor_2", {  # FLOW
                             "sensor_type": "atlas_scientific_flo",
-                            "name": "hydro-flow",
+                            "type": "hydro-flow",
                             "is_connected": False,
                             "is_ref": False,
                             "serial_number": 'DJ00RB93',  # Enter Serial Number
@@ -126,7 +123,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
                        ("atlas_sensor_3", {  # pH Atlas Scientific Sensor
                             "sensor_type": "atlas_scientific_ph",
-                            "name": "hydro-ph",
+                            "type": "hydro-ph",
                             "is_connected": True,
                             "is_ref": False,
                             "serial_number": 'DJ00RUV8',  # Enter Serial Number
@@ -134,7 +131,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
                        ("atlas_sensor_4", {  # Atlas Scientific EC Sensor
                             "sensor_type": "atlas_scientific_ec",
-                            "name": "ec",
+                            "type": "ec",
                             "is_connected": True,
                             "is_ref": False,
                             "serial_number": 'DJ00RU96',  # Enter Serial Number
