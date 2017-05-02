@@ -13,7 +13,7 @@ import os
 import sys
 sys.path.append(os.path.join("..", "..", "Sources"))
 
-print hydro-json
+print hydro-json.format_data
 
 # def sensor_data_dispatch(type, jsonPackage):
 #     client = MongoClient('10.9.0.1')
