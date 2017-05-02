@@ -21,14 +21,14 @@ def postAPI(url, payload):
 
 def mongoize(type,jsonPackage):
 #   print jsonPackage
-    filename="/var/local/thoth.id"
-    deviceData = {}
-    deviceData['room']="1"
-    deviceData['role']="1"
+    # filename="/var/local/thoth.id"
+    # deviceData = {}
+    # deviceData['room']="1"
+    # deviceData['role']="1"
 
-    with open(filename,"r") as file:
-        deviceData=json.load(file)
-        file.close()
+    # with open(filename,"r") as file:
+    #     deviceData=json.load(file)
+    #     file.close()
 
     # client = MongoClient('10.9.0.1')
     # db=client.solstice
@@ -118,26 +118,26 @@ if hydroData is not None:
             mongoize('hydro-flow', jsonPackage)
 
 
-        print ''
-        print jsonPackage
-        print '---------------------------'
-        print ''
-
-    print '---------------------------'
-    print hydroData[0]['sensor_type']
-    print hydroData[0]['serial_number']
-    print hydroData[0]['name']
-    print hydroData[0]['sensor_reading']
-    print '---------------------------'
-    print hydroData[1]['sensor_type']
-    print hydroData[1]['serial_number']
-    print hydroData[1]['name']
-    print hydroData[1]['sensor_reading']
-    print '---------------------------'
-    print hydroData[2]['sensor_type']
-    print hydroData[2]['serial_number']
-    print hydroData[2]['name']
-    print hydroData[2]['sensor_reading']
-    print '---------------------------'
-else:
-    print "None error"
+#         print ''
+#         print jsonPackage
+#         print '---------------------------'
+#         print ''
+#
+#     print '---------------------------'
+#     print hydroData[0]['sensor_type']
+#     print hydroData[0]['serial_number']
+#     print hydroData[0]['name']
+#     print hydroData[0]['sensor_reading']
+#     print '---------------------------'
+#     print hydroData[1]['sensor_type']
+#     print hydroData[1]['serial_number']
+#     print hydroData[1]['name']
+#     print hydroData[1]['sensor_reading']
+#     print '---------------------------'
+#     print hydroData[2]['sensor_type']
+#     print hydroData[2]['serial_number']
+#     print hydroData[2]['name']
+#     print hydroData[2]['sensor_reading']
+#     print '---------------------------'
+# else:
+#     print "None error"
