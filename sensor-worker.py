@@ -3,7 +3,7 @@
 
 import os, sys
 import json
-from datetime import datetime, timedelta
+from datetime import timedelta, date
 from socket import gethostname
 import json
 import requests
