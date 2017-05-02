@@ -15,8 +15,10 @@ sys.path.append(os.path.join("..", "..", "Sources"))
 
 hydroList = hydro_data.format_data()
 
+print hydroList
 
-def sensor_data_dispatch(type, jsonPackage):
+
+def sensor_data_dispatch(jsonPackage):
     client = MongoClient('10.9.0.1')
     db = client.solstice
     collection = db[type]
@@ -50,11 +52,11 @@ def sensor_data_dispatch(type, jsonPackage):
     # Send to DB
     try:
         requests.post(
-            'https://luna-api.herokuapp.com/sensordata',
+            # 'https://luna-api.herokuapp.com/sensordata',
             data=jsonPackage
         )
         requests.post(
-            'https://luna-api-staging.herokuapp.com/sensordata',
+            # 'https://luna-api-staging.herokuapp.com/sensordata',
             data=jsonPackage
         )
     except Exception as e:
