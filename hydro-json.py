@@ -9,10 +9,13 @@ from socket import gethostname
 import requests
 import ftdi_hydro
 
-hydroData=ftdi_hydro.read_sensors()
+hydroData = ftdi_hydro.read_sensors()
 
 if hydroData is not None:
-    # timestamp = datetime.datetime.now()
+    timestamp = datetime.datetime.now()
+
+    hydroJson = []
+
     for data in hydroData:
         print data
         jsonPackage={
@@ -25,7 +28,6 @@ if hydroData is not None:
         'type': data['sensor_type']
         }
 
+        hydroJson.append(jsonPackage)
 
-        print ""
-        print jsonPackage
-        print '-------'
+    return hydroJson

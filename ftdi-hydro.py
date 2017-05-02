@@ -135,7 +135,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "type": "hydro-temp",
                             "is_connected": True,
                             "is_ref": True,
-                            "serial_number": 'DJ00RVZR',  # Enter Serial Number
+                            "serial_number": 'DJ00RVZR',
                             "accuracy": 1}),
 
                        ("atlas_sensor_2", {  # FLOW
@@ -143,7 +143,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "type": "hydro-flow",
                             "is_connected": False,
                             "is_ref": False,
-                            "serial_number": 'DJ00RB93',  # Enter Serial Number
+                            "serial_number": 'DJ00RB93',
                             "accuracy": 2}),
 
                        ("atlas_sensor_3", {  # pH Atlas Scientific Sensor
@@ -151,7 +151,7 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "type": "hydro-ph",
                             "is_connected": True,
                             "is_ref": False,
-                            "serial_number": 'DJ00RUV8',  # Enter Serial Number
+                            "serial_number": 'DJ00RUV8',
                             "accuracy": 0}),
 
                        ("atlas_sensor_4", {  # Atlas Scientific EC Sensor
@@ -159,9 +159,9 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "type": "ec",
                             "is_connected": True,
                             "is_ref": False,
-                            "serial_number": 'DJ00RU96',  # Enter Serial Number
+                            "serial_number": 'DJ00RU96',
                             "accuracy": 0,
-                            "ppm_multiplier": 0.67})])  # Convert EC to PPM
+                            "ppm_multiplier": 0.67})])  # Convert EC to PPM If desired
 
 
 def get_sensor_data():
