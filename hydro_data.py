@@ -27,6 +27,6 @@ if hydroData is not None:
             'type': data['sensor_type']
         }
 
-        hydroJson.append(jsonPackage)
+        hydrojson.append(jsonPackage)
 
-return hydrojson
+    return hydrojson
