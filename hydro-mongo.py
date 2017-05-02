@@ -31,8 +31,6 @@ def mongoize(type,jsonPackage):
         deviceData=json.load(file)
         file.close()
 
-# Need to figure out how to config the DB stuff
-
     # client = MongoClient('10.9.0.1')
     # db=client.solstice
     # collection=db[type]
@@ -40,6 +38,7 @@ def mongoize(type,jsonPackage):
     jsonPackage['room'] = deviceData['room']
     jsonPackage['role']=deviceData['role']
     sensorRecord = {"sensordata":jsonPackage}
+
     print sensorRecord
 
     # try :
