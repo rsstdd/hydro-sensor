@@ -4,7 +4,7 @@
 import os
 import sys
 import json
-from datetime import timedelta, date
+# from datetime import timedelta, date
 from socket import gethostname
 import requests
 import ftdi_hydro
