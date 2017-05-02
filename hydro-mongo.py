@@ -22,8 +22,9 @@ def postAPI(url, payload):
 def mongoize(type,jsonPackage):
 #   print jsonPackage
     filename="/var/local/thoth.id"
-    deviceData['room']="Undefined"
-    deviceData['role']="Undefined"
+    deviceData = {}
+    deviceData['room']="1"
+    deviceData['role']="1"
 
     with open(filename,"r") as file:
         deviceData=json.load(file)
@@ -34,7 +35,7 @@ def mongoize(type,jsonPackage):
     # collection=db[type]
     jsonPackage['type'] = type
     jsonPackage['room'] = deviceData['room']
-    jsonPackage['role']=deviceData['role']
+    jsonPackage['role'] = deviceData['role']
     sensorRecord = {"sensordata":jsonPackage}
 
     # try :
