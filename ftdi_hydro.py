@@ -148,7 +148,7 @@ loops = 0
 
 # while True:  # Repeat the code indefinitely
 
-for num in range(1)
+for num in range(0, 1)
 
         read_sensors()
 
