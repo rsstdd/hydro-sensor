@@ -7,7 +7,6 @@ import json
 from datetime import timedelta, date
 from socket import gethostname
 import requests
-from pymongo import MongoClient
 import gspread
 import ftdi_hydro
 
