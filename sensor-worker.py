@@ -64,13 +64,13 @@ if hydroData is not None:
 
     for data in hydroData:
         jsonPackage={
-        'sensor_num': hydroData[0]['serial_number'],
+        'sensor_num': data[0]['serial_number'],
         'hostname' : gethostname(),
         'timestamp': 'now',
         'sensor_version':'1.00',
         'sensor_group': '',
-        'role': 'hydro_sensor',
-        'type': hydroData[0]['sensor_type']
+        'role': data['sensor_type'],
+        'type': data[0]['sensor_type']
         }
 
 
