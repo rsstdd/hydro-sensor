@@ -17,7 +17,6 @@ def format_data():
         for sensor in hydroData:
             print sensor
 
-            jsonPackage = {}
             jsonPackage = {
                 'sensor_num': sensor['serial_number'],
                 'timestamp': 'Should-be-timestamp',
