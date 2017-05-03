@@ -168,7 +168,3 @@ def get_sensor_data():
     read_sensors()
 
 get_sensor_data()
-
-# while True:
-#
-#     read_sensors()
