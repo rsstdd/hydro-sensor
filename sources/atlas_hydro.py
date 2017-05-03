@@ -94,7 +94,7 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
                     # ppm = (int(sensor_reading.split(',')[0]) * value['ppm_multiplier'])
-                    ppm = (round(((int(dev.read_line())) *
+                    ppm = (round(((float(sensor_reading.split(',')[0]) *
                                   value["ppm_multiplier"])))
                     readings.append(
                         {
