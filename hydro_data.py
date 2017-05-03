@@ -8,7 +8,7 @@ import atlas_ftdi_hydro
 import os
 import sys
 # add ../../Sources to the PYTHONPATH
-sys.path.append(os.path.join("..", "Sources"))
+sys.path.append(os.path.join("..", "sources"))
 
 
 def format_data():
