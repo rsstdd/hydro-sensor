@@ -10,7 +10,7 @@ import atlas_hydro
 
 
 def format_data():
-    hydroData = atlas_ftdi_hydro.read_sensors()
+    hydroData = atlas_ftdi_hydro.get_sensor_data()
 
     if hydroData is not None:
         # timestamp = datetime.datetime.now()
