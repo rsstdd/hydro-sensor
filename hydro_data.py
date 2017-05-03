@@ -27,7 +27,7 @@ def format_data():
         hydrojson.extend(jsonPackage)
 
     print '----'
-        print hydrojson
+    print hydrojson
     print ''
     return hydrojson
 
