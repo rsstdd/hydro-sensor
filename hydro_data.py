@@ -45,6 +45,7 @@ def format_data():
                     'sensor_reading': sensor['sensor_reading']
                 })
 
+    print hydrojson
     return hydrojson
 
 
