@@ -8,9 +8,10 @@ import json
 from datetime import timedelta, date
 import atlas_hydro
 
+hydroData = atlas_ftdi_hydro.get_sensor_data()
+
 
 def format_data():
-    hydroData = atlas_ftdi_hydro.get_sensor_data()
 
     print hydroData
 
