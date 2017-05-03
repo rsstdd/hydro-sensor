@@ -5,25 +5,22 @@
 # from pymongo import MongoClient
 import hydro_data
 from socket import gethostname
-from datetime import timedelta, date
+# from datetime import timedelta, date
 import json
 import requests
 
 import os
 import sys
-sys.path.append(os.path.join("..", "Sources"))
+sys.path.append(os.path.join("..", "sources"))
 
 hydroList = hydro_data.format_data()
-
-print hydroList
-
 
 def sensor_data_dispatch(jsonPackage):
     client = MongoClient('10.9.0.1')
     db = client.solstice
     collection = db[type]
 
-    filename = "/var/local/thoth.id"
+    # filename = "/var/local/thoth.id"
 
     with open(filename, 'r') as file:
         deviceData = json.load(file)

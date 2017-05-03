@@ -11,6 +11,7 @@ import datetime
 from socket import gethostname
 import json
 from datetime import timedelta, date
+from sensor_worker import mongoize
 import os
 import sys
 # add ../../Sources to the PYTHONPATH
