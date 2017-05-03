@@ -54,3 +54,5 @@ def format_data():
                 }
 
                 dispatch_sensor_data('HYDRO_TEMP', temp_data)
+
+format_data()
