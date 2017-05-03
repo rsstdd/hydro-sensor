@@ -36,25 +36,25 @@ def dispatch_sensor_data(type, jsonPackage):
 
     print sensorRecord
 
-    try:
-        # record_id2 = db.sensordata.insert_one(sensorRecord)
-    except:
-        with open('~thoth/sensordata.txt', 'w') as outfile:
-            json.dump(jsonPackage, outfile)
-
-    record_id = db[type].insert_one(jsonPackage).inserted_id
+    # try:
+    #     # record_id2 = db.sensordata.insert_one(sensorRecord)
+    # except:
+    #     with open('~thoth/sensordata.txt', 'w') as outfile:
+    #         json.dump(jsonPackage, outfile)
+    #
+    # record_id = db[type].insert_one(jsonPackage).inserted_id
 
     print sensorRecord
 
     # Send to DB
-    try:
-        requests.post(
-            # 'https://luna-api.herokuapp.com/sensordata',
-            data=jsonPackage
-        )
-        requests.post(
-            # 'https://luna-api-staging.herokuapp.com/sensordata',
-            data=jsonPackage
-        )
-    except Exception as e:
-        print e
+    # try:
+    #     requests.post(
+    #         # 'https://luna-api.herokuapp.com/sensordata',
+    #         data=jsonPackage
+    #     )
+    #     requests.post(
+    #         # 'https://luna-api-staging.herokuapp.com/sensordata',
+    #         data=jsonPackage
+    #     )
+    # except Exception as e:
+    #     print e
