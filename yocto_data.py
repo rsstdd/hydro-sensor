@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 from yocto_api import *
 from yocto_humidity import *
 from yocto_temperature import *
@@ -39,8 +40,6 @@ while module is not None:
 
         module.saveToFlash()
 
-    #  print moddesc
-
     module.set_luminosity(25)
 
     if "METEO" in moddesc:
@@ -70,7 +69,7 @@ while module is not None:
 
         mongoize('meteo', jsonPackage)
 
-        es = 0.6108 * exp((2.5e6 / 461) * (1 / 273 -1 / (273 + temp)))
+        es = 0.6108 * exp((2.5e6 / 461) * (1 / 273 - 1 / (273 + temp)))
 
         vpd = es * (100 - hum) / 100
 
@@ -103,7 +102,6 @@ while module is not None:
     if "CO2" in moddesc:
         sensor = YCarbonDioxide.FindCarbonDioxide(target+'.carbonDioxide')
         # print("CO2 :" + str(int(sensor.get_currentValue()))+" ppm")
-        #        googleize(target,[sensor.get_currentValue()])
 
         jsonPackage = {
             'sensor_num': target,

@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# import yocto_data
 # from pymongo import MongoClient
 import hydro_data
 from socket import gethostname
@@ -15,12 +14,13 @@ sys.path.append(os.path.join("..", "sources"))
 
 hydroList = hydro_data.format_data()
 
-def sensor_data_dispatch(jsonPackage):
+
+def sensor_data_dispatch(type, jsonPackage):
     client = MongoClient('10.9.0.1')
     db = client.solstice
     collection = db[type]
 
-    # filename = "/var/local/thoth.id"
+    filename = "/var/local/thoth.id"
 
     with open(filename, 'r') as file:
         deviceData = json.load(file)
