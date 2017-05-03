@@ -20,7 +20,6 @@ if YAPI.RegisterHub("usb", errmsg) != YAPI.SUCCESS:
 else:
     module = YModule.FirstModule()
 
-    print module
     while module is not None:
         print(module.get_serialNumber() + ' (' + module.get_productName() + ')')
 
@@ -30,6 +29,10 @@ else:
         lightT = YLightSensor.FindLightSensor("LIGHTMK3-853DA.lightSensor")
         humidT = YHumidity.FindHumidity('METEOMK1-7FB03.humidity')
         tempT = YTemperature.FindTemperature('METEOMK1-7FB03.temperature')
+
+        print lightT
+        print humidT
+        print tempT
 
     if lightT.isOnline() and humidT.isOnline() is True:
         i = 1
