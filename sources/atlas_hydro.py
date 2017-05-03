@@ -125,8 +125,6 @@ def read_sensors():
                             'sensor_reading': sensor_reading
                         })
 
-
-    log_sensor_readings(readings)
     print readings
     print '================'
     return readings
