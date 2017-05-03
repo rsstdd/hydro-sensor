@@ -169,4 +169,4 @@ def get_sensor_data():
 
 while True:
 
-    read_sensors()
+    # read_sensors()

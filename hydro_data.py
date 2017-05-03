@@ -12,6 +12,8 @@ import atlas_hydro
 def format_data():
     hydroData = atlas_ftdi_hydro.get_sensor_data()
 
+    print hydroData
+
     if hydroData is not None:
         # timestamp = datetime.datetime.now()
         hydrojson = []
