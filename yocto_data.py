@@ -66,7 +66,7 @@ while module is not None:
             'humidity': hum
         }
 
-        mongoize('meteo', jsonPackage)
+        # mongoize('meteo', jsonPackage)
 
         es = 0.6108 * exp((2.5e6 / 461) * (1 / 273 - 1 / (273 + temp)))
 
@@ -81,13 +81,14 @@ while module is not None:
             'vpd': vpd
         }
 
+        print jsonPackage
         # mongoize('vpd', vpdPackage)
 
     if "LIGHT" in moddesc:
         sensor = YLightSensor.FindLightSensor(target + '.lightSensor')
 
-    #   print("Light :  "+ str(int(sensor.get_currentValue()))+" lx ")
-    #   googleize(target,[sensor.get_currentValue()])
+        # print("Light :  "+ str(int(sensor.get_currentValue()))+" lx ")
+        # googleize(target,[sensor.get_currentValue()])
 
         jsonPackage = {
             'sensor_num': target,
@@ -96,10 +97,13 @@ while module is not None:
             'lux': sensor.get_currentValue(),
         }
 
+        print jsonPackage
+
     # mongoize('light', jsonPackage)
 
     if "CO2" in moddesc:
         sensor = YCarbonDioxide.FindCarbonDioxide(target+'.carbonDioxide')
+
         # print("CO2 :" + str(int(sensor.get_currentValue()))+" ppm")
 
         jsonPackage = {
@@ -109,7 +113,8 @@ while module is not None:
             'co2': sensor.get_currentValue(),
         }
 
-        mongoize('co2', jsonPackage)
+        print jsonPackage
+        # mongoize('co2', jsonPackage)
 
     module.set_luminosity(0)
     module = module.nextModule()
