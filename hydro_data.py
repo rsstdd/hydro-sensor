@@ -24,10 +24,10 @@ def format_data():
                 sensor['type']: sensor['sensor_reading']
             }
 
-        hydrojson.append(jsonPackage)
+            hydrojson.append(jsonPackage)
 
-    print hydrojson
     print '----'
+        print hydrojson
     print ''
     return hydrojson
 
