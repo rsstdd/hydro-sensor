@@ -10,6 +10,7 @@ import atlas_hydro
 
 hydroData = atlas_hydro.get_sensor_data()
 
+
 def format_data():
     hydrojson = []
 
@@ -38,5 +39,7 @@ def format_data():
 
     return hydrojson
 
-if hydroData is not None:
-    format_data()
+
+def get_hydro_json():
+    if hydroData is not None:
+        format_data()

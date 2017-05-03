@@ -47,19 +47,6 @@ class AtlasDevice(Device):
             return False
 
 
-def log_sensor_readings(readings):
-
-    for reading in readings:
-        try:
-            print 'log'
-            print reading
-            print ''
-        except:
-            pass
-
-    return
-
-
 def read_sensors():
 
     readings = []
@@ -93,8 +80,8 @@ def read_sensors():
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
-                    # ppm = (int(sensor_reading.split(',')[0]) * value['ppm_multiplier'])
-                    ppm = (round((float(sensor_reading.split(',')[0] )
+                    # calculate ppm ~ .67 * reading
+                    ppm = (round((float(sensor_reading.split(',')[0])
                         * value["ppm_multiplier"]), value["accuracy"]))
                     readings.append(
                         {
@@ -129,7 +116,6 @@ def read_sensors():
                             'sensor_reading': sensor_reading
                         })
 
-    log_sensor_readings(readings)
     return readings
 
 
@@ -164,7 +150,8 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "is_ref": False,
                             "serial_number": 'DJ00RU96',
                             "accuracy": 0,
-                            "ppm_multiplier": 0.67})])  # Convert EC to PPM If desired
+                            "ppm_multiplier": 0.67})])  # Convert EC to PPM
+
 
 def get_sensor_data():
     read_sensors()
