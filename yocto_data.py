@@ -15,7 +15,7 @@ import datetime
 from socket import gethostname
 import json
 from datetime import timedelta, date
-from sensor_worker import mongoize
+from sensor_worker import dispatch_sensor_data
 
 module = YModule.FirstModule()
 while module is not None:
@@ -66,7 +66,7 @@ while module is not None:
             'humidity': hum
         }
 
-        # mongoize('meteo', jsonPackage)
+        dispatch_sensor_data("METEO", jsonPackage)
 
         es = 0.6108 * exp((2.5e6 / 461) * (1 / 273 - 1 / (273 + temp)))
 
@@ -99,7 +99,7 @@ while module is not None:
 
         print jsonPackage
 
-    # mongoize('light', jsonPackage)
+        dispatch_sensor_data("METEO", jsonPackage)
 
     if "CO2" in moddesc:
         sensor = YCarbonDioxide.FindCarbonDioxide(target+'.carbonDioxide')
@@ -113,8 +113,7 @@ while module is not None:
             'co2': sensor.get_currentValue(),
         }
 
-        print jsonPackage
-        # mongoize('co2', jsonPackage)
+        dispatch_sensor_data("METEO", jsonPackage)
 
     module.set_luminosity(0)
     module = module.nextModule()

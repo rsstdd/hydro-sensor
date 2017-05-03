@@ -4,18 +4,14 @@
 import os, sys
 sys.path.append(os.path.join("./sources"))
 
-# from pymongo import MongoClient
-import hydro_data
+from pymongo import MongoClient
 from socket import gethostname
 from datetime import timedelta, date
 import json
 import requests
 
 
-hydroList = hydro_data.format_data()
-
-
-def sensor_data_dispatch(type, jsonPackage):
+def dispatch_sensor_data(type, jsonPackage):
     client = MongoClient('10.9.0.1')
     db = client.solstice
     collection = db[type]
@@ -26,18 +22,22 @@ def sensor_data_dispatch(type, jsonPackage):
         deviceData = json.load(file)
         file.close()
 
-    client = MongoClient('10.9.0.1')
-    db = client.solstice
     collection = db[type]
+
     jsonPackage['type'] = type
     jsonPackage['room'] = deviceData['room']
     jsonPackage['role'] = deviceData['role']
+    jsonPackage["room"] = "ROOM",
+    jsonPackage["timestamp"] = "Should-be-timestamp"
+    jsonPackage["sensor_version"] = "1.00"
+    jsonPackage["sensor_group"] = "Test"
+
     sensorRecord = {"sensordata": jsonPackage}
 
     print sensorRecord
 
     try:
-        record_id2 = db.sensordata.insert_one(sensorRecord)
+        # record_id2 = db.sensordata.insert_one(sensorRecord)
     except:
         with open('~thoth/sensordata.txt', 'w') as outfile:
             json.dump(jsonPackage, outfile)
@@ -58,10 +58,3 @@ def sensor_data_dispatch(type, jsonPackage):
         )
     except Exception as e:
         print e
-
-                    # SHOULD ADD
-                    #
-                    # "room": "ROOM",
-                    # "timestamp": "Should-be-timestamp",
-                    # "sensor_version": "1.00",
-                    # "sensor_group": "Test",

@@ -6,6 +6,7 @@ from datetime import timedelta, date
 import os, sys
 # add ../sources to the PYTHONPATH
 sys.path.append(os.path.join("./sources"))
+from sensor_worker import dispatch_sensor_data
 import atlas_hydro
 
 hydroData = atlas_hydro.read_sensors()
