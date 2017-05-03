@@ -19,7 +19,6 @@ def format_data():
             print sensor
             jsonPackage = {
                 'sensor_num': sensor['serial_number'],
-                'hostname': gethostname(),
                 'timestamp': 'Should-be-timestamp',
                 'sensor_version': '1.00',
                 'sensor_group': sensor['name'],
