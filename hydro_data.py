@@ -15,20 +15,27 @@ def format_data():
 
     if hydroData is not None:
         for sensor in hydroData:
+            if sensor['sensor_type'] == atlas_scientific_ec
+                hydrojson.append({
+                    'sensor_num': sensor['serial_number'],
+                    'timestamp': 'Should-be-timestamp',
+                    'sensor_version': '1.00',
+                    'sensor_group': 'Production',
+                    'role': sensor['sensor_type'],
+                    'ec': sensor['sensor_reading'],
+                    'ppm': sensor['ppm']
+                })
+            else
+                hydrojson.append({
+                    'sensor_num': sensor['serial_number'],
+                    'timestamp': 'Should-be-timestamp',
+                    'sensor_version': '1.00',
+                    'sensor_group': 'Production',
+                    'role': sensor['sensor_type'],
+                    'sensor_reading': sensor['sensor_reading']
+                })
 
-            hydrojson.append({
-                'sensor_num': sensor['serial_number'],
-                'timestamp': 'Should-be-timestamp',
-                'sensor_version': '1.00',
-                'sensor_group': 'Production',
-                'role': sensor['sensor_type'],
-                'sensor_reading': sensor['sensor_reading']
-            })
-
-    print '----'
-    print hydrojson
-    print ''
-    # return hydrojson
+    return hydrojson
 
 if hydroData is not None:
     format_data()
