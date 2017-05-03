@@ -165,4 +165,6 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
 
 
 def get_sensor_data():
-    read_sensors()
+    # read_sensors()
+
+    return [{'serial_number': 'DJ00RU96', 'sensor_type': 'atlas_scientific_ec', 'type': 'ec', 'sensor_reading': '69.90,37,0.00'}]
