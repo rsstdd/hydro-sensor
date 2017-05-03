@@ -14,11 +14,9 @@ hydroData = atlas_hydro.get_sensor_data()
 print hydroData
 
 def format_data():
+    hydrojson = []
 
     if hydroData is not None:
-        # timestamp = datetime.datetime.now()
-        hydrojson = []
-
         for data in hydroData:
             jsonPackage = {
                 'sensor_num': data['serial_number'],
@@ -31,8 +29,11 @@ def format_data():
             }
 
         hydrojson.append(jsonPackage)
+
     print hydrojson
-    return hydrojson
+    # return hydrojson
 
 
-format_data()
+while True:
+
+    format_data()
