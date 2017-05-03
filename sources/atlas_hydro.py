@@ -127,8 +127,8 @@ def read_sensors():
 
 
     # log_sensor_readings(all_curr_readings)
-    print all_curr_readings
-    print '================'
+    # print all_curr_readings
+    # print '================'
     return all_curr_readings
 
 
