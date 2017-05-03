@@ -30,7 +30,7 @@ def format_data():
 
     print hydrojson
     print '----'
-    # return hydrojson
+    return hydrojson
 
 if hydroData is not None:
     format_data()
