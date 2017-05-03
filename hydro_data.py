@@ -24,7 +24,7 @@ def format_data():
                     'sensor_version': '1.00',
                     'sensor_group': 'Production',
                     'role': sensor['sensor_type'],
-                    'ec': sensor['sensor_reading'],
+                    'ec': sensor['ec'],
                 })
 
                 hydrojson.append({
