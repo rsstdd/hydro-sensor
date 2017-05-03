@@ -18,13 +18,13 @@ def format_data():
         for sensor in hydroData:
             print sensor
             jsonPackage = {
-                'sensor_num': data['serial_number'],
+                'sensor_num': sensor['serial_number'],
                 'hostname': gethostname(),
                 'timestamp': 'Should-be-timestamp',
                 'sensor_version': '1.00',
-                'sensor_group': data['name'],
-                'role': data['sensor_type'],
-                'type': data['sensor_type']
+                'sensor_group': sensor['name'],
+                'role': sensor['sensor_type'],
+                'type': sensor['sensor_type']
             }
 
         hydrojson.extend(jsonPackage)
