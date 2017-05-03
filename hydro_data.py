@@ -1,14 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import json
-# from datetime import timedelta, date
-import atlas_ftdi_hydro
-
 import os
 import sys
-# add ../../Sources to the PYTHONPATH
+# add ../sources to the PYTHONPATH
 sys.path.append(os.path.join("..", "sources"))
+import json
+# from datetime import timedelta, date
+import atlas_hydro
 
 
 def format_data():
