@@ -20,7 +20,6 @@ def format_data():
         hydrojson = []
 
         for data in hydroData:
-
             jsonPackage = {
                 'sensor_num': data['serial_number'],
                 'hostname': gethostname(),
@@ -31,11 +30,9 @@ def format_data():
                 'type': data['sensor_type']
             }
 
-        print hydrojson
-
         hydrojson.append(jsonPackage)
-
-        # return hydrojson
+    print hydrojson
+    return hydrojson
 
 
 format_data()
