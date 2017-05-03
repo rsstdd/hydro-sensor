@@ -93,6 +93,7 @@ def read_sensors():
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
+                    print sensor_reading
                     readings.append(
                         {
                             'type': value["type"],
@@ -125,6 +126,7 @@ def read_sensors():
                             'sensor_reading': sensor_reading
                         })
 
+    log_sensor_readings(readings)
     print readings
     print '================'
     return readings
