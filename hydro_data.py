@@ -19,7 +19,7 @@ def format_data():
             if sensor["sensor_type"] == "atlas_scientific_ec":
                 hydrojson.append({
                     "sensor_num": sensor["serial_number"],
-                    "type": "ec"
+                    "type": "ec",
                     "role": sensor["sensor_type"],
                     "ec": sensor["ec"],
                 })
@@ -27,7 +27,7 @@ def format_data():
                 hydrojson.append({
                     "sensor_num": sensor["serial_number"],
                     "role": sensor["sensor_type"],
-                    "type": "ppm"
+                    "type": "ppm",
                     "ppm": sensor["ppm"]
                 })
 
@@ -46,6 +46,7 @@ def format_data():
                     "type": "hydro-ph",
                     "hydro-ph": sensor["sensor_reading"]
                 })
+
     print hydrojson
     return hydrojson
 
