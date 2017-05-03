@@ -27,7 +27,7 @@ def format_data():
                 'type': data['sensor_type']
             }
 
-        hydrojson.append(jsonPackage)
+        hydrojson.extend(jsonPackage)
 
     print hydrojson
     return hydrojson
