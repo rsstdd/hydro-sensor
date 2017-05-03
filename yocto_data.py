@@ -81,7 +81,7 @@ while module is not None:
             'vpd': vpd
         }
 
-        mongoize('vpd', vpdPackage)
+        # mongoize('vpd', vpdPackage)
 
     if "LIGHT" in moddesc:
         sensor = YLightSensor.FindLightSensor(target + '.lightSensor')
@@ -96,7 +96,7 @@ while module is not None:
             'lux': sensor.get_currentValue(),
         }
 
-    mongoize('light', jsonPackage)
+    # mongoize('light', jsonPackage)
 
     if "CO2" in moddesc:
         sensor = YCarbonDioxide.FindCarbonDioxide(target+'.carbonDioxide')
