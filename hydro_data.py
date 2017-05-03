@@ -23,7 +23,7 @@ def format_data():
                 'sensor_version': '1.00',
                 'sensor_group': sensor['type'],
                 'role': sensor['sensor_type'],
-                'sensor_reading': sensor['sensor_reading']
+                sensor['type']: sensor['sensor_reading']
             }
 
         hydrojson.extend(jsonPackage)
