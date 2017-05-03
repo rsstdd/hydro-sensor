@@ -127,7 +127,7 @@ def read_sensors():
 
 
     # log_sensor_readings(readings)
-    # print readings
+    print readings
     # print '================'
     return readings
 
