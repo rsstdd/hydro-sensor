@@ -12,7 +12,7 @@ import atlas_hydro
 def format_data():
     hydrojson = []
 
-    dydroData = atlas_hydro.get_sensor_data()
+    hydroData = atlas_hydro.get_sensor_data()
 
     if hydroData is not None:
         for sensor in hydroData:
