@@ -1,5 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import os, sys
+# add ../sources to the PYTHONPATH
+sys.path.append(os.path.join('./sources'))
 
 from yocto_api import *
 from yocto_humidity import *
@@ -13,10 +16,6 @@ from socket import gethostname
 import json
 from datetime import timedelta, date
 from sensor_worker import mongoize
-import os
-import sys
-# add ../../Sources to the PYTHONPATH
-sys.path.append(os.path.join("..", "Sources"))
 
 module = YModule.FirstModule()
 while module is not None:
