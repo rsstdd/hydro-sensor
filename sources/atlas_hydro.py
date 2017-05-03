@@ -162,3 +162,6 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "serial_number": 'DJ00RU96',
                             "accuracy": 0,
                             "ppm_multiplier": 0.67})])  # Convert EC to PPM If desired
+
+def get_sensor_data():
+    read_sensors()
