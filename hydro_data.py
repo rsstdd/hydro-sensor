@@ -1,18 +1,19 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os
-import sys
 import json
 # from datetime import timedelta, date
-from socket import gethostname
-import requests
-import ftdi_hydro
+import atlas_ftdi_hydro
 
-hydroData = ftdi_hydro.read_sensors()
+import os
+import sys
+# add ../../Sources to the PYTHONPATH
+sys.path.append(os.path.join("..", "Sources"))
 
 
 def format_data():
+    hydroData = atlas_ftdi_hydro.read_sensors()
+
     if hydroData is not None:
         # timestamp = datetime.datetime.now()
         hydrojson = []
@@ -29,6 +30,7 @@ def format_data():
                 'type': data['sensor_type']
             }
 
-            hydrojson.append(jsonPackage)
+        print hydroData
+        hydrojson.append(jsonPackage)
 
     return hydrojson
