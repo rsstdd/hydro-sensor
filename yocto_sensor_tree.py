@@ -14,18 +14,16 @@ import time
 errmsg = YRefParam()
 
 
-# Setup the API to use local USB devices
 if YAPI.RegisterHub("usb", errmsg) != YAPI.SUCCESS:
     sys.exit("init error" + errmsg.value)
 
+else:
 
+    print('TOP LEVEL')
 
-# retreive any humidity sensor
-
-print('TOP LEVEL')
-lightT = YLightSensor.FindLightSensor("LIGHTMK3-853DA.lightSensor")
-humidT = YHumidity.FindHumidity('METEOMK1-7FB03.humidity')
-tempT = YTemperature.FindTemperature('METEOMK1-7FB03.temperature')
+    lightT = YLightSensor.FindLightSensor("LIGHTMK3-853DA.lightSensor")
+    humidT = YHumidity.FindHumidity('METEOMK1-7FB03.humidity')
+    tempT = YTemperature.FindTemperature('METEOMK1-7FB03.temperature')
 
 if lightT.isOnline() and humidT.isOnline() is True:
     i = 1
