@@ -1,12 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-import os
-import sys
+import os, sys
 # add ../sources to the PYTHONPATH
-sys.path.append(os.path.join("..", "sources"))
+sys.path.append(os.path.join('./sources'))
+
 import json
-# from datetime import timedelta, date
+from datetime import timedelta, date
 import atlas_hydro
 
 
