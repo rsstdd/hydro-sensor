@@ -81,15 +81,16 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
                     # calculate ppm ~ .67 * reading
-                    ppm = (round((float(sensor_reading.split(',')[0])
+                    ppmNum = (round((float(sensor_reading.split(',')[0])
                         * value["ppm_multiplier"]), value["accuracy"]))
+                    ppmStr = str(ppmNum)
                     readings.append(
                         {
                             'type': value["type"],
                             'serial_number': value["serial_number"],
                             'sensor_type': value["sensor_type"],
                             'ec': sensor_reading,
-                            'ppm': ppm
+                            'ppm': ppmStr
                         })
 
                 if value["sensor_type"] == "atlas_scientific_ph":

@@ -28,7 +28,7 @@ def format_data():
                     "sensor_num": sensor["serial_number"],
                     "role": sensor["sensor_type"],
                     "type": "ppm",
-                    "ppm": "str(sensor["ppm"])"
+                    "ppm": sensor["ppm"]
                 })
 
             if sensor["sensor_type"] == "atlas_scientific_temp":
