@@ -15,6 +15,7 @@ def format_data():
 
     if hydroData is not None:
         for sensor in hydroData:
+            jsonPackage = {}
             jsonPackage = {
                 'sensor_num': sensor['serial_number'],
                 'timestamp': 'Should-be-timestamp',
