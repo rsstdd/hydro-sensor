@@ -95,7 +95,7 @@ def read_sensors():
                     sensor_reading = dev.read_line()
                     # ppm = (int(sensor_reading.split(',')[0]) * value['ppm_multiplier'])
                     ppm = (round(((float(sensor_reading.split(',')[0]) *
-                                  value["ppm_multiplier"])))
+                                  value["ppm_multiplier"])), 0)
                     readings.append(
                         {
                             'type': value["type"],
