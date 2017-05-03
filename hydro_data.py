@@ -11,14 +11,15 @@ import atlas_hydro
 
 def format_data():
     hydrojson = []
-    hydroData = atlas_hydro.get_sensor_data()
 
-    print hydroData
+    print atlas_hydro.get_sensor_data()
+
+    # print hydroData
 
     if hydroData is not None:
 
-        for sensor in hydroData:
-            print sensor
+        # for sensor in hydroData:
+        #     print sensor
         #     jsonPackage = {
         #         'sensor_num': data['serial_number'],
         #         'hostname': gethostname(),
