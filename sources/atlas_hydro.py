@@ -26,7 +26,7 @@ class AtlasDevice(Device):
                 if time.time() - start_time > 1.0:  # timeout
                     line_buffer = ''
                     break
-            # return ''.join(line_buffer)
+            return ''.join(line_buffer)
 
         except FtdiError:
             return ''
