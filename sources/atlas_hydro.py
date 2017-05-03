@@ -93,7 +93,9 @@ def read_sensors():
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
-                    ppm = (int(sensor_reading.split(',')[0]) * value['ppm_multiplier'])
+                    # ppm = (int(sensor_reading.split(',')[0]) * value['ppm_multiplier'])
+                    ppm = (round(((float(dev.read_line())) *
+                                  value["ppm_multiplier"])))
                     readings.append(
                         {
                             'type': value["type"],
