@@ -34,6 +34,8 @@ else:
         print humidT
         print tempT
 
+        time.sleep(10)
+
     if lightT.isOnline() and humidT.isOnline() is True:
         i = 1
 
@@ -96,17 +98,14 @@ else:
         tempL = YTemperature.FindTemperature('METEOMK1-7FA23.temperature')
 
     if lightL.isOnline() and humidL.isOnline() is True:
-        i = 1
-
-        for i in range(1, 6):
             print(
                 '%2.2f' % tempL.get_currentValue() + "deg F   "
                 + "%2.1f" % humidL.get_currentValue() + "%  "
                 + str(int(lightL.get_currentValue()) / 82) + ' PAR'
             )
-
-            i = i + 1
-            time.sleep(1)
     else:
         print('No devices found!')
         print('TEST COMPLETE')
+
+
+    time.sleep(10)
