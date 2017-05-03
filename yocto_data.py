@@ -4,7 +4,8 @@
 from socket import gethostname
 import json
 from datetime import timedelta, date
-import os, sys
+import os
+import sys
 # add ../sources to the PYTHONPATH
 sys.path.append(os.path.join('./sources'))
 
