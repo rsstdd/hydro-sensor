@@ -10,8 +10,6 @@ import atlas_hydro
 
 hydroData = atlas_hydro.read_sensors()
 
-print hydroData
-
 def format_data():
     hydrojson = []
 
