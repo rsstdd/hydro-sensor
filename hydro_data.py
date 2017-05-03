@@ -49,6 +49,4 @@ def format_data():
     return hydrojson
 
 
-def get_hydro_json():
-    if hydroData is not None:
-        format_data()
+format_data()
