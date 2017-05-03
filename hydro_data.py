@@ -29,7 +29,7 @@ def format_data():
 
             hydrojson.append(jsonPackage)
 
-            print hydrojson
+            print jsonPackage
         except:
             print "No hydrodata"
 
