@@ -11,10 +11,9 @@ import atlas_hydro
 
 hydroData = atlas_hydro.get_sensor_data()
 
+print hydroData
 
 def format_data():
-
-    print hydroData
 
     if hydroData is not None:
         # timestamp = datetime.datetime.now()
