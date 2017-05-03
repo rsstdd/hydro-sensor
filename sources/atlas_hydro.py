@@ -96,14 +96,15 @@ def read_sensors():
                     # ppm = (int(sensor_reading.split(',')[0]) * value['ppm_multiplier'])
                     ppm = (round(((float(sensor_reading.split(',')[0]) *
                                   value["ppm_multiplier"]), value["accuracy"]))
-                    readings.append(
-                        {
-                            'type': value["type"],
-                            'serial_number': value["serial_number"],
-                            'sensor_type': value["sensor_type"],
-                            'ec': sensor_reading,
-                            'ppm': ppm
-                        })
+                    print ppm
+                    # readings.append(
+                    #     {
+                    #         'type': value["type"],
+                    #         'serial_number': value["serial_number"],
+                    #         'sensor_type': value["sensor_type"],
+                    #         'ec': sensor_reading,
+                    #         'ppm': ppm
+                    #     })
 
                 if value["sensor_type"] == "atlas_scientific_ph":
                     dev = AtlasDevice(value["serial_number"])
