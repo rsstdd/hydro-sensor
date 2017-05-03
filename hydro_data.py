@@ -14,26 +14,25 @@ def format_data():
 
     print atlas_hydro.get_sensor_data()
 
-    # print hydroData
+    print hydroData
 
-    # if hydroData is not None:
-    #
-    #     # for sensor in hydroData:
-    #     #     print sensor
-    #     #     jsonPackage = {
-    #     #         'sensor_num': data['serial_number'],
-    #     #         'hostname': gethostname(),
-    #     #         'timestamp': 'Should-be-timestamp',
-    #     #         'sensor_version': '1.00',
-    #     #         'sensor_group': data['name'],
-    #     #         'role': data['sensor_type'],
-    #     #         'type': data['sensor_type']
-    #     #     }
-    #     #
-    #     # hydrojson.append(jsonPackage)
-    #
-    # # print hydrojson
-    # return hydrojson
+    if hydroData is not None:
+        for sensor in hydroData:
+            print sensor
+            jsonPackage = {
+                'sensor_num': data['serial_number'],
+                'hostname': gethostname(),
+                'timestamp': 'Should-be-timestamp',
+                'sensor_version': '1.00',
+                'sensor_group': data['name'],
+                'role': data['sensor_type'],
+                'type': data['sensor_type']
+            }
+
+        hydrojson.append(jsonPackage)
+
+    print hydrojson
+    return hydrojson
 
 while True:
     format_data()
