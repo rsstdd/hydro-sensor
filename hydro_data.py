@@ -36,7 +36,7 @@ def format_data():
 
         hydrojson.append(jsonPackage)
 
-    return hydrojson
+        # return hydrojson
 
 
 format_data()
