@@ -21,9 +21,9 @@ def format_data():
                 'sensor_num': sensor['serial_number'],
                 'timestamp': 'Should-be-timestamp',
                 'sensor_version': '1.00',
-                'sensor_group': sensor['name'],
+                'sensor_group': sensor['type'],
                 'role': sensor['sensor_type'],
-                'type': sensor['sensor_type']
+                'sensor_reading': sensor['sensor_reading']
             }
 
         hydrojson.extend(jsonPackage)
