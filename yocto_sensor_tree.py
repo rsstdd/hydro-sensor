@@ -18,9 +18,9 @@ if YAPI.RegisterHub("usb", errmsg) != YAPI.SUCCESS:
     sys.exit("init error" + errmsg.value)
 
 else:
-module = YModule.FirstModule()
+    module = YModule.FirstModule()
 
-print module
+    print module
     while module is not None:
         print(module.get_serialNumber() + ' (' + module.get_productName() + ')')
 
