@@ -126,9 +126,9 @@ def read_sensors():
                         })
 
 
-    # log_sensor_readings(readings)
-    # print readings
-    # print '================'
+    log_sensor_readings(readings)
+    print readings
+    print '================'
     return readings
 
 
@@ -164,6 +164,3 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "serial_number": 'DJ00RU96',
                             "accuracy": 0,
                             "ppm_multiplier": 0.67})])  # Convert EC to PPM If desired
-
-
-read_sensors()
