@@ -26,11 +26,11 @@ def format_data():
                 sensor['type']: sensor['sensor_reading']
             }
 
-        hydrojson.extend(jsonPackage)
+        hydrojson.append(jsonPackage)
 
     print hydrojson
     print ''
-    return hydrojson
+    # return hydrojson
 
 if hydroData is not None:
     format_data()
