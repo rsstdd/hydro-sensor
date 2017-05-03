@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+import json
+from datetime import timedelta, date
 import os, sys
 # add ../sources to the PYTHONPATH
 sys.path.append(os.path.join('./sources'))
 
-import json
-from datetime import timedelta, date
 import atlas_hydro
 
 hydroData = atlas_hydro.get_sensor_data()
@@ -36,3 +37,6 @@ def format_data():
         hydrojson.append(jsonPackage)
 
     return hydrojson
+
+
+format_data()
