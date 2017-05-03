@@ -34,8 +34,6 @@ def dispatch_sensor_data(type, jsonPackage):
 
     sensorRecord = {"sensordata": jsonPackage}
 
-    print sensorRecord
-
     # try:
     #     # record_id2 = db.sensordata.insert_one(sensorRecord)
     # except:
