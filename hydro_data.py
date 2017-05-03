@@ -44,7 +44,7 @@ def format_data():
                     'role': sensor['sensor_type'],
                     'sensor_reading': sensor['sensor_reading']
                 })
-
+    print hydrojson
     return hydrojson
 
 
