@@ -30,7 +30,7 @@ def format_data():
         hydrojson.append(jsonPackage)
 
     print '----'
-    print hydrojson
+    # print hydrojson
     print ''
 
 if hydroData is not None:
