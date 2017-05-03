@@ -58,3 +58,10 @@ def sensor_data_dispatch(type, jsonPackage):
         )
     except Exception as e:
         print e
+
+                    # SHOULD ADD 
+                    #
+                    # "room": "ROOM",
+                    # "timestamp": "Should-be-timestamp",
+                    # "sensor_version": "1.00",
+                    # "sensor_group": "Test",
