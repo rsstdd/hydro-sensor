@@ -1,16 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import os, sys
+sys.path.append(os.path.join("./sources"))
+
 # from pymongo import MongoClient
 import hydro_data
 from socket import gethostname
-# from datetime import timedelta, date
+from datetime import timedelta, date
 import json
 import requests
 
-import os
-import sys
-sys.path.append(os.path.join("..", "sources"))
 
 hydroList = hydro_data.format_data()
 
@@ -59,7 +59,7 @@ def sensor_data_dispatch(type, jsonPackage):
     except Exception as e:
         print e
 
-                    # SHOULD ADD 
+                    # SHOULD ADD
                     #
                     # "room": "ROOM",
                     # "timestamp": "Should-be-timestamp",
