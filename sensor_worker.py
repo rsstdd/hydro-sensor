@@ -27,7 +27,7 @@ def dispatch_sensor_data(type, jsonPackage):
     jsonPackage['type'] = type
     # jsonPackage['room'] = deviceData['room']
     # jsonPackage['role'] = deviceData['role']
-    jsonPackage["room"] = "ROOM",
+    jsonPackage["room"] = "ROOM"
     jsonPackage["timestamp"] = "Should-be-timestamp"
     jsonPackage["sensor_version"] = "1.00"
     jsonPackage["sensor_group"] = "Test"
