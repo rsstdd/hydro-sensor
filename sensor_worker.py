@@ -12,17 +12,17 @@ import requests
 
 
 def dispatch_sensor_data(type, jsonPackage):
-    client = MongoClient('10.9.0.1')
-    db = client.solstice
-    collection = db[type]
+    # client = MongoClient('10.9.0.1')
+    # db = client.solstice
+    # collection = db[type]
 
-    filename = "/var/local/thoth.id"
+    # filename = "/var/local/thoth.id"
 
-    with open(filename, 'r') as file:
-        deviceData = json.load(file)
-        file.close()
-
-    collection = db[type]
+    # with open(filename, 'r') as file:
+    #     deviceData = json.load(file)
+    #     file.close()
+    #
+    # collection = db[type]
 
     jsonPackage['type'] = type
     jsonPackage['room'] = deviceData['room']
