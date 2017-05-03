@@ -18,7 +18,6 @@ def format_data():
 
         for data in hydroData:
 
-            print data
             jsonPackage = {
                 'sensor_num': data['serial_number'],
                 'hostname': gethostname(),
