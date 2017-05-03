@@ -1,5 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+from socket import gethostname
+import json
+from datetime import timedelta, date
 import os, sys
 # add ../sources to the PYTHONPATH
 sys.path.append(os.path.join('./sources'))
@@ -12,9 +16,7 @@ from yocto_lightsensor import *
 from yocto_carbondioxide import *
 from yocto_datalogger import *
 import datetime
-from socket import gethostname
-import json
-from datetime import timedelta, date
+
 from sensor_worker import dispatch_sensor_data
 
 module = YModule.FirstModule()
