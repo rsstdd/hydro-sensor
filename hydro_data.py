@@ -10,13 +10,13 @@ import atlas_hydro
 
 hydroData = atlas_hydro.read_sensors()
 
-print hydroData
-
 def format_data():
     hydrojson = []
 
     if hydroData is not None:
         for sensor in hydroData:
+            print sensor
+
             jsonPackage = {}
             jsonPackage = {
                 'sensor_num': sensor['serial_number'],
