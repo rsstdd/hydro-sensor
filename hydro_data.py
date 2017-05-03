@@ -22,7 +22,7 @@ def format_data():
                 'sensor_version': '1.00',
                 'sensor_group': 'Production',
                 'role': sensor['sensor_type'],
-                sensor['type']: sensor['sensor_reading']
+                'sensor_reading': sensor['sensor_reading']
             })
 
     print '----'
