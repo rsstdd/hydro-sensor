@@ -15,7 +15,6 @@ def format_data():
 
     if hydroData is not None:
         for sensor in hydroData:
-            print sensor
 
             jsonPackage = {
                 'sensor_num': sensor['serial_number'],
@@ -29,7 +28,7 @@ def format_data():
         hydrojson.append(jsonPackage)
 
     print '----'
-    # print hydrojson
+    print hydrojson
     print ''
 
 if hydroData is not None:
