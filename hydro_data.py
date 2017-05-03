@@ -35,5 +35,5 @@ def format_data():
     # # print hydrojson
     # return hydrojson
 
-
-format_data()
+while True:
+    format_data()
