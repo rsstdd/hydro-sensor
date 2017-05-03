@@ -47,9 +47,9 @@ class AtlasDevice(Device):
             return False
 
 
-def log_sensor_readings(all_curr_readings):
+def log_sensor_readings(readings):
 
-    for reading in all_curr_readings:
+    for reading in readings:
         try:
             print 'log'
             print reading
@@ -62,7 +62,7 @@ def log_sensor_readings(all_curr_readings):
 
 def read_sensors():
 
-    all_curr_readings = []
+    readings = []
     ref_temp = 25
 
     for key, value in sensors.items():
@@ -72,7 +72,7 @@ def read_sensors():
                 dev = AtlasDevice(value["serial_number"])
                 dev.send_cmd("R")
                 sensor_reading = dev.read_line()
-                all_curr_readings.append(
+                readings.append(
                     {
                         'type': value["type"],
                         'serial_number': value["serial_number"],
@@ -93,7 +93,7 @@ def read_sensors():
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
-                    all_curr_readings.append(
+                    readings.append(
                         {
                             'type': value["type"],
                             'serial_number': value["serial_number"],
@@ -105,7 +105,7 @@ def read_sensors():
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
-                    all_curr_readings.append(
+                    readings.append(
                         {
                             'type': value["type"],
                             'serial_number': value["serial_number"],
@@ -117,7 +117,7 @@ def read_sensors():
                     dev = AtlasDevice(value["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
-                    all_curr_readings.append(
+                    readings.append(
                         {
                             'type': value["type"],
                             'serial_number': value["serial_number"],
@@ -126,10 +126,10 @@ def read_sensors():
                         })
 
 
-    # log_sensor_readings(all_curr_readings)
-    # print all_curr_readings
+    # log_sensor_readings(readings)
+    # print readings
     # print '================'
-    return all_curr_readings
+    return readings
 
 
 sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
