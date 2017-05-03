@@ -8,11 +8,10 @@ import os, sys
 sys.path.append(os.path.join('./sources'))
 import atlas_hydro
 
+hydroData = atlas_hydro.get_sensor_data()
 
 def format_data():
     hydrojson = []
-
-    hydroData = atlas_hydro.get_sensor_data()
 
     if hydroData is not None:
         for sensor in hydroData:
