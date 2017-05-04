@@ -46,4 +46,4 @@
 
 ## About
 
-* The file `atlas_hydro.py`
+* `atlas_hydro.py`
