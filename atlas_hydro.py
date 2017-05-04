@@ -98,6 +98,8 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading = round(float(dev.read_line()),
                                 value["accuracy"])
+
+                    print sensor_reading
                     readings.append(
                         {
                             'type': value["type"],
