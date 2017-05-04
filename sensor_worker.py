@@ -7,7 +7,7 @@ sys.path.append(os.path.join("./sources"))
 
 # from pymongo import MongoClient
 from socket import gethostname
-from datetime import timedelta, date
+import datetime
 import json
 import requests
 
