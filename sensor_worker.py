@@ -16,7 +16,7 @@ def dispatch_sensor_data(type, jsonPackage):
     # client = MongoClient('10.9.0.1')
     # db = client.solstice
     # collection = db[type]
-    ts = datetime.datatetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+    ts = str(datetime.datetime.now())
 
     # filename = "/var/local/thoth.id"
     #
