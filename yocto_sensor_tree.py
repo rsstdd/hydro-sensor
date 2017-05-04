@@ -45,7 +45,7 @@ tempL = YTemperature.FindTemperature('METEOMK1-7FA23.temperature')
 sensors = [lightTM, humidTM, tempTM, lightML, humidML, tempML, lightL, tempL, humidL]
 
 for sensor in sensors:
-    print sensor..get_currentValue()
+    print sensor.get_currentValue()
 
 # print('TOP LEVEL')
 # print (
