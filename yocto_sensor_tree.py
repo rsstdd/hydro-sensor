@@ -44,7 +44,8 @@ tempL = YTemperature.FindTemperature('METEOMK1-7FA23.temperature')
 
 sensors = [lightTM, humidTM, tempTM, lightML, humidML, tempML, lightL, tempL, humidL]
 
-for sensor in sensors:
-    if sensor.isOnline() is True:
-        print ''
-        print '%2.2f' % sensor.get_currentValue() + 'deg F   ' + '%2.1f' % sensor.get_currentValue() + '%  ' + str(int(sensor.get_currentValue()) / 82) + ' PAR'
+def get_tree_data:
+    for sensor in sensors:
+        if sensor.isOnline() is True:
+            print ''
+            print '%2.2f' % sensor.get_currentValue() + 'deg F   ' + '%2.1f' % sensor.get_currentValue() + '%  ' + str(int(sensor.get_currentValue()) / 82) + ' PAR'
