@@ -16,6 +16,7 @@ def dispatch_sensor_data(type, jsonPackage):
     # client = MongoClient('10.9.0.1')
     # db = client.solstice
     # collection = db[type]
+    ts = datetime.datatetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
     # filename = "/var/local/thoth.id"
     #
@@ -30,7 +31,8 @@ def dispatch_sensor_data(type, jsonPackage):
     #
     # jsonPackage['type'] = type
     # jsonPackage["room"] = "ROOM"
-    jsonPackage["timestamp"] = "Should-be-timestamp"
+
+    jsonPackage["timestamp"] = ts
     jsonPackage["sensor_version"] = "1.00"
     jsonPackage["sensor_group"] = "Test"
 
