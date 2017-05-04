@@ -45,37 +45,9 @@ tempL = YTemperature.FindTemperature('METEOMK1-7FA23.temperature')
 sensors = [lightTM, humidTM, tempTM, lightML, humidML, tempML, lightL, tempL, humidL]
 
 for sensor in sensors:
-    print sensor.get_currentValue()
-
-# print('TOP LEVEL')
-# print (
-#     '%2.2f' % tempT.get_currentValue() + "deg F   "
-#     + "%2.1f" % humidT.get_currentValue() + "%  "
-#     + str(int(lightT.get_currentValue())/82) + ' PAR'
-# )
-#
-# print('TOP MID LEVEL')
-# print (
-#     '%2.2f' % tempTM.get_currentValue() + "deg F   "
-#     + "%2.1f" % humidTM.get_currentValue() + "%  "
-#     + str(int(lightTM.get_currentValue())/82) + ' PAR'
-# )
-#
-# print('MID LOW LEVEL')
-#
-# print (
-#     '%2.2f' % tempML.get_currentValue() + "deg F   "
-#     + "%2.1f" % humidML.get_currentValue() + "%  "
-#     + str(int(lightML.get_currentValue())/82) + ' PAR'
-# )
-#
-# print('LOW LEVEL')
-#
-# print (
-#     '%2.2f' % tempL.get_currentValue() + "deg F   "
-#     + "%2.1f" % humidL.get_currentValue() + "%  "
-#     + str(int(lightL.get_currentValue())/82) + ' PAR'
-# )
-#
-# print '----------------'
-# print ''
+    print (
+        '%2.2f' % sensor.get_currentValue() + "deg F   "
+        + "%2.1f" % sensor.get_currentValue() + "%  "
+        + str(int(sensor.get_currentValue())/82) + ' PAR'
+    )
+    print ''
