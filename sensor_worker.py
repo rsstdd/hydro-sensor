@@ -14,23 +14,23 @@ import requests
 
 def dispatch_sensor_data(type, jsonPackage):
     timestamp = str(datetime.datetime.now())
-    # client = MongoClient('10.9.0.1')
-    # db = client.solstice
-    # collection = db[type]
+    client = MongoClient('10.9.0.1')
+    db = client.solstice
+    collection = db[type]
 
-    # filename = "/var/local/thoth.id"
-    #
-    # with open(filename, 'r') as file:
-    #     deviceData = json.load(file)
-    #     file.close()
-    #
-    # collection = db[type]
-    #
-    # jsonPackage['room'] = deviceData['room']
-    # jsonPackage['role'] = deviceData['role']
-    #
-    # jsonPackage['type'] = type
-    # jsonPackage["room"] = "ROOM"
+    filename = "/var/local/thoth.id"
+
+    with open(filename, 'r') as file:
+        deviceData = json.load(file)
+        file.close()
+
+    collection = db[type]
+
+    jsonPackage['room'] = deviceData['room']
+    jsonPackage['role'] = deviceData['role']
+
+    jsonPackage['type'] = type
+    jsonPackage["room"] = "ROOM"
 
     jsonPackage["timestamp"] = timestamp
     jsonPackage["sensor_version"] = "1.00"
@@ -38,25 +38,25 @@ def dispatch_sensor_data(type, jsonPackage):
 
     sensorRecord = {"sensordata": jsonPackage}
 
-    # try:
-    #     # record_id2 = db.sensordata.insert_one(sensorRecord)
-    # except:
-    #     with open('~thoth/sensordata.txt', 'w') as outfile:
-    #         json.dump(jsonPackage, outfile)
-    #
-    # record_id = db[type].insert_one(jsonPackage).inserted_id
+    try:
+        # record_id2 = db.sensordata.insert_one(sensorRecord)
+    except:
+        with open('~thoth/sensordata.txt', 'w') as outfile:
+            json.dump(jsonPackage, outfile)
+
+    record_id = db[type].insert_one(jsonPackage).inserted_id
 
     print sensorRecord
 
-    # # Send to DB
-    # try:
-    #     requests.post(
-    #         'https://luna-api.herokuapp.com/sensordata',
-    #         data=jsonPackage
-    #     )
-    #     requests.post(
-    #         'https://luna-api-staging.herokuapp.com/sensordata',
-    #         data=jsonPackage
-    #     )
-    # except Exception as e:
-    #     print e
+    # Send to DB
+    try:
+        requests.post(
+            'https://luna-api.herokuapp.com/sensordata',
+            data=jsonPackage
+        )
+        requests.post(
+            'https://luna-api-staging.herokuapp.com/sensordata',
+            data=jsonPackage
+        )
+    except Exception as e:
+        print e
