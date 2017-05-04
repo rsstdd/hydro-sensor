@@ -1,18 +1,18 @@
-# FTDI MODE #
+# Atlas Scientific Sensors: FTDI MODE #
 
 ### Installing dependencies for FTDI adaptors ###
 
-- Install libftdi package.
+* Install libftdi package.
 
         sudo apt-get install libftdi-dev
 
 
-- Install pylibftdi python package.
+* Install pylibftdi python package.
 
         sudo pip install pylibftdi
 
 
-- Create SYMLINK of the FTDI adaptors.
+* Create SYMLINK of the FTDI adaptors.
     **NOTE:** If you are using device with root permission, just skip this step.
 
     The following will allow ordinary users (e.g. ‘pi’ on the RPi) to access to the FTDI device without needing root permissions:
@@ -28,7 +28,7 @@
         sudo service udev restart
 
 
-- Modify FTDI python driver
+* Modify FTDI python driver
 
     Since our FTDI devices use other USB PID(0x6015), we need to tweak the original FTDI Driver.
 
@@ -43,3 +43,5 @@
     Added line:
 
         USB_PID_LIST = [0x6001, 0x6010, 0x6011, 0x6014, 0x6015]        
+
+## 
