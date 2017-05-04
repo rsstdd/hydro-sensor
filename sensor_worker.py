@@ -25,9 +25,10 @@ def dispatch_sensor_data(type, jsonPackage):
     #
     # collection = db[type]
 
-    jsonPackage['type'] = type
     # jsonPackage['room'] = deviceData['room']
     # jsonPackage['role'] = deviceData['role']
+
+    jsonPackage['type'] = type
     jsonPackage["room"] = "ROOM"
     jsonPackage["timestamp"] = "Should-be-timestamp"
     jsonPackage["sensor_version"] = "1.00"
@@ -46,14 +47,15 @@ def dispatch_sensor_data(type, jsonPackage):
     print sensorRecord
 
     # Send to DB
-    # try:
-    #     requests.post(
-    #         # 'https://luna-api.herokuapp.com/sensordata',
-    #         data=jsonPackage
-    #     )
-    #     requests.post(
-    #         # 'https://luna-api-staging.herokuapp.com/sensordata',
-    #         data=jsonPackage
-    #     )
-    # except Exception as e:
-    #     print e
+    try:
+        requests.post(
+            # 'https://luna-api.herokuapp.com/sensordata',
+            'http://localhost:4000/sensordata',
+            data=jsonPackage
+        )
+        # requests.post(
+        #     # 'https://luna-api-staging.herokuapp.com/sensordata',
+        #     data=jsonPackage
+        # )
+    except Exception as e:
+        print e
