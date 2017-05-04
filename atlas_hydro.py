@@ -59,13 +59,16 @@ def read_sensors():
                 dev = AtlasDevice(value["serial_number"])
                 dev.send_cmd("R")
                 sensor_reading = dev.read_line()
+                report_temp = round(float(sensor_reading),
+                            value["accuracy"])
                 readings.append(
                     {
                         'type': value["type"],
                         'serial_number': value["serial_number"],
                         'sensor_type': value["sensor_type"],
-                        'sensor_reading': sensor_reading
+                        'sensor_reading': report_temp
                     })
+
                 if value["is_ref"] is True:
                     ref_temp = sensor_reading  # calibration temp for pH
 
@@ -98,20 +101,6 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading = round(float(dev.read_line()),
                                 value["accuracy"])
-
-                    print sensor_reading
-                    readings.append(
-                        {
-                            'type': value["type"],
-                            'serial_number': value["serial_number"],
-                            'sensor_type': value["sensor_type"],
-                            'sensor_reading': sensor_reading
-                        })
-
-                if value["sensor_type"] == "atlas_scientific_flo":
-                    dev = AtlasDevice(value["serial_number"])
-                    dev.send_cmd("R")
-                    sensor_reading = dev.read_line()
                     readings.append(
                         {
                             'type': value["type"],
@@ -130,14 +119,6 @@ sensors = OrderedDict([("atlas_sensor_1", {  # Atlas Scientific Temp Sensor
                             "is_ref": True,
                             "serial_number": 'DJ00RVZR',
                             "accuracy": 1}),
-
-                       ("atlas_sensor_2", {  # FLOW
-                            "sensor_type": "atlas_scientific_flo",
-                            "type": "hydro-flow",
-                            "is_connected": False,
-                            "is_ref": False,
-                            "serial_number": 'DJ00RB93',
-                            "accuracy": 2}),
 
                        ("atlas_sensor_3", {  # pH Atlas Scientific Sensor
                             "sensor_type": "atlas_scientific_ph",
