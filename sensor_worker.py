@@ -63,8 +63,7 @@ def dispatch_sensor_data(type, jsonPackage):
     #     print e
 
 
-
-while True:
-    get_sensor_data()
+# while True:
+#     get_sensor_data()
 
     # time.sleep(100000)
