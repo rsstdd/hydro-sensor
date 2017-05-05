@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import time
 from datetime import timedelta, date
 import os
 import sys
@@ -55,3 +56,8 @@ def format_data():
                 }
 
                 dispatch_sensor_data('HYDRO_TEMP', temp_data)
+
+
+while True:
+    format_data()
+    time.sleep(1)
