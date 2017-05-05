@@ -6,7 +6,7 @@ import sys
 sys.path.append(os.path.join("./sources"))
 sys.path.append(os.path.join("./"))
 
-from hydro_data import format_data
+import hydro_data
 # from pymongo import MongoClient
 from socket import gethostname
 import datetime
