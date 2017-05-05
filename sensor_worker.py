@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+import time
 import os
 import sys
 sys.path.append(os.path.join("./sources"))
@@ -67,4 +67,4 @@ def dispatch_sensor_data(type, jsonPackage):
 while True:
     get_sensor_data()
 
-    sleep(100000)
+    time.sleep(100000)
