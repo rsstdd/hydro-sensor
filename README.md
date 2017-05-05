@@ -1,16 +1,28 @@
-# Atlas Scientific Sensors: FTDI MODE #
+# Hydro Sensor #
 
+## Start
+1. Configure Atlas Scientific FTDI (Below)
+2. `sudo python hydro_data.py`
+
+## About
+
+Hydro Sensor module utilizes Atlas Scientific Temperature (DJ00RVZR), pH (DJ00RUV8), and EC (DJ00RU96) sensors.
+
+* `hydro_data.py` calls `sensor_lib/atlas_hydro.py` and formats the data returned from that function
+* `util/sensor_worker.py` adds metadata from the thoth.id and ships JSON to the API
+
+---
+
+## Configure Atlas Scientific FTDI
 ### Installing dependencies for FTDI adaptors ###
 
 * Install libftdi package.
 
         sudo apt-get install libftdi-dev
 
-
 * Install pylibftdi python package.
 
         sudo pip install pylibftdi
-
 
 * Create SYMLINK of the FTDI adaptors.
     **NOTE:** If you are using device with root permission, just skip this step.
@@ -43,7 +55,3 @@
     Added line:
 
         USB_PID_LIST = [0x6001, 0x6010, 0x6011, 0x6014, 0x6015]        
-
-## About
-
-* `atlas_hydro.py`
