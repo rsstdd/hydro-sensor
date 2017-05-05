@@ -60,4 +60,4 @@ def format_data():
 
 while True:
     format_data()
-    time.sleep(1)
+    time.sleep(10)
