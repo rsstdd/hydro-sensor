@@ -13,8 +13,6 @@ import atlas_hydro
 
 hydroData = atlas_hydro.read_sensors()
 
-print hydroData
-
 def format_data():
     if hydroData is not None:
         for sensor in hydroData:
@@ -57,5 +55,3 @@ def format_data():
                 }
 
                 dispatch_sensor_data('HYDRO_TEMP', temp_data)
-
-format_data()

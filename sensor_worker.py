@@ -6,7 +6,7 @@ import sys
 sys.path.append(os.path.join("./sources"))
 
 # from pymongo import MongoClient
-from atlas_hydro import get_sensor_data
+from hydro_data import format_data
 from socket import gethostname
 import datetime
 import json
@@ -62,8 +62,6 @@ def dispatch_sensor_data(type, jsonPackage):
     # except Exception as e:
     #     print e
 
-
-# while True:
-#     get_sensor_data()
-
-    # time.sleep(100000)
+while True:
+    format_data()
+    time.sleep(1)
