@@ -29,19 +29,15 @@ def dispatch_sensor_data(jsonPackage):
     except Exception as e:
         print e
 
+    jsonPackage['room'] = deviceData['locaton']['room']
+    jsonPackage['role'] = deviceData['device']['role']
+    jsonPackage["timestamp"] = timestamp
+    jsonPackage["sensor_version"] = "1.00"
+    jsonPackage["sensor_group"] = "Production"
 
-    print deviceData['locaton']['room']
+    sensorRecord = {"sensordata": jsonPackage}
 
-    # jsonPackage['room'] = deviceData['room']
-    # jsonPackage['role'] = deviceData['role']
-    # jsonPackage['type'] = jsonPackage['type']
-    # jsonPackage["timestamp"] = timestamp
-    # jsonPackage["sensor_version"] = "1.00"
-    # jsonPackage["sensor_group"] = "Production"
-    #
-    # sensorRecord = {"sensordata": jsonPackage}
-    #
-    # print sensorRecord
+    print sensorRecord
 
     # try:
     #     record_id2 = db.sensordata.insert_one(sensorRecord)
