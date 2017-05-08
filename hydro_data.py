@@ -26,7 +26,7 @@ def format_data():
                     "ec": sensor["ec"],
                 }
 
-                dispatch_sensor_data('HYDRO_EC', ec_data)
+                dispatch_sensor_data(ec_data)
 
                 ppm_data = {
                     "sensor_num": sensor["serial_number"],
@@ -35,7 +35,7 @@ def format_data():
                     "ppm": sensor["ppm"]
                 }
 
-                dispatch_sensor_data('HYDRO_PPM', ppm_data)
+                dispatch_sensor_data(ppm_data)
 
             if sensor["sensor_type"] == "atlas_scientific_temp":
                 temp_data = {
@@ -55,7 +55,7 @@ def format_data():
                     "hydro-ph": sensor["sensor_reading"]
                 }
 
-                dispatch_sensor_data('HYDRO_TEMP', temp_data)
+                dispatch_sensor_data(temp_data)
 
 
 while True:
