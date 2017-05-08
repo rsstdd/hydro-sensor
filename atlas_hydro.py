@@ -90,8 +90,10 @@ def read_sensors():
                     sensor_reading = dev.read_line()
                     # calculate ppm ~ .67 * reading
 
+                    print sensor_reading.split(',')[0]
                     ppmNum = (round((float(sensor_reading.split(',')[0])
                         * sensor["ppm_multiplier"]), sensor["accuracy"]))
+
                     ppmStr = str(ppmNum)
                     readings.append(
                         {
