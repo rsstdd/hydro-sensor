@@ -12,31 +12,33 @@ import json
 import requests
 
 
-def dispatch_sensor_data(type, jsonPackage):
+def dispatch_sensor_data(jsonPackage):
     timestamp = str(datetime.datetime.now())
     client = MongoClient('10.9.0.1')
     db = client.solstice
     collection = db[type]
-
     filename = "/var/local/thoth.id"
+    deviceData={}
+    deviceData['room']="Undefined"
+    deviceData['role']="Undefined"
 
-    with open(filename, 'r') as file:
-        deviceData = json.load(file)
-        file.close()
-
-    collection = db[type]
+    try:
+        with open(filename, 'r') as file:
+            deviceData.json.load(file)
+            file.close()
+    except Exception as e:
+        print e
 
     jsonPackage['room'] = deviceData['room']
     jsonPackage['role'] = deviceData['role']
-
-    jsonPackage['type'] = type
-    jsonPackage["room"] = "ROOM"
-
+    jsonPackage['type'] = jsonPackage['type']
     jsonPackage["timestamp"] = timestamp
     jsonPackage["sensor_version"] = "1.00"
-    jsonPackage["sensor_group"] = "Test"
+    jsonPackage["sensor_group"] = "Production"
 
     sensorRecord = {"sensordata": jsonPackage}
+
+    print sensorRecord
 
     try:
         record_id2 = db.sensordata.insert_one(sensorRecord)
@@ -44,19 +46,26 @@ def dispatch_sensor_data(type, jsonPackage):
         with open('~thoth/sensordata.txt', 'w') as outfile:
             json.dump(jsonPackage, outfile)
 
-    record_id = db[type].insert_one(jsonPackage).inserted_id
-
     print sensorRecord
 
-    Send to DB
+    #send to heroku
+
+    if deviceData['room'] in ['0804', '0808']:  # skagit?
+        postAPI('https://skagit-luna-api.herokuapp.com/sensordata', jsonPackage)
+    else:
+        postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
+        postAPI('https://luna-api-staging.herokuapp.com/sensordata', jsonPackage)
+
+    #send to mongo
+
     try:
-        requests.post(
-            'https://luna-api.herokuapp.com/sensordata',
-            data=jsonPackage
-        )
-        requests.post(
-            'https://luna-api-staging.herokuapp.com/sensordata',
-            data=jsonPackage
-        )
+        collection.insert_one(jsonPackage).inserted_id
+        client.close()
+        print "mongo sent"
     except Exception as e:
-        print e
+        print "hydro sensor_worker.py FAILED to send to mongo", e
+        try:
+            with open('sensordata.txt','a') as outfile:
+                json.dump(jsonPackage, outfile)
+        except:
+            pass

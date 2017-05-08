@@ -12,10 +12,10 @@ sys.path.append(os.path.join("./sources"))
 from sensor_worker import dispatch_sensor_data
 import atlas_hydro
 
-hydroData = atlas_hydro.read_sensors()
+# hydroData = atlas_hydro.read_sensors() # should this be in the loop?
 
 def format_data():
-    if hydroData is not None:
+    if hydroData:
         for sensor in hydroData:
 
             if sensor["sensor_type"] == "atlas_scientific_ec":
@@ -35,7 +35,7 @@ def format_data():
                     "ppm": sensor["ppm"]
                 }
 
-                dispatch_sensor_data('HYDRO_PPM', ec_data)
+                dispatch_sensor_data('HYDRO_PPM', ppm_data)
 
             if sensor["sensor_type"] == "atlas_scientific_temp":
                 temp_data = {
