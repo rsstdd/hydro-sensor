@@ -45,7 +45,7 @@ def format_data():
                     "hydro-temp": sensor["sensor_reading"]
                 }
 
-                dispatch_sensor_data('HYDRO_TEMP', temp_data)
+                dispatch_sensor_data(temp_data)
 
             if sensor["sensor_type"] == "atlas_scientific_ph":
                 temp_data = {
