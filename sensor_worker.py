@@ -30,7 +30,7 @@ def dispatch_sensor_data(jsonPackage):
         print e
 
 
-    print deviceData
+    print deviceData['locaton']['room']
 
     # jsonPackage['room'] = deviceData['room']
     # jsonPackage['role'] = deviceData['role']
