@@ -51,15 +51,16 @@ def dispatch_sensor_data(jsonPackage):
     #send to heroku
 
     if deviceData['room'] in ['0804', '0808']:  # skagit?
-        postAPI('https://skagit-luna-api.herokuapp.com/sensordata', jsonPackage)
+        # postAPI('https://skagit-luna-api.herokuapp.com/sensordata', jsonPackage)
+        print deviceData
     else:
-        postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
-        postAPI('https://luna-api-staging.herokuapp.com/sensordata', jsonPackage)
+        # postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
+        # postAPI('https://luna-api-staging.herokuapp.com/sensordata', jsonPackage)
 
     #send to mongo
 
     try:
-        collection.insert_one(jsonPackage).inserted_id
+        # collection.insert_one(jsonPackage).inserted_id
         client.close()
         print "mongo sent"
     except Exception as e:

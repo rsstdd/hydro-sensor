@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import time
-from collections import OrderedDict
 from pylibftdi.device import Device
 from pylibftdi.driver import FtdiError
 from sets import Set
@@ -19,6 +18,7 @@ class AtlasDevice(Device):
             start_time = time.time()
             while True:
                 # read bytes until Carriage Return is received.
+
                 next_char = self.read(1)  # read one byte
                 if next_char == "\r":  # sensor always ends with CR.
                     break
@@ -38,6 +38,7 @@ class AtlasDevice(Device):
         :param cmd:
         :return:
         """
+
         buf = cmd + "\r"  # add carriage return
         try:
             self.write(buf)
@@ -57,6 +58,7 @@ def read_sensors():
 
             if value["sensor_type"] == "atlas_scientific_temp":
                 # instantiate atlas scientific temp device
+
                 dev = AtlasDevice(value["serial_number"])
                 dev.send_cmd("R")
                 sensor_reading = dev.read_line()
@@ -75,9 +77,10 @@ def read_sensors():
 
             else:
                 # Set reference temperature value on the sensor
+
                 dev.send_cmd("T," + str(ref_temp))
 
-    # Get the readings from any Atlas Scientific Elec Conductivity sensors
+                # Get the readings from any Atlas Scientific Elec Conductivity sensors
 
                 if value["sensor_type"] == "atlas_scientific_ec":
                     # instantiate atlas scientific EC device
@@ -119,6 +122,7 @@ def read_sensors():
 
 sensors = [{
         # TEMP Atlas Scientific Sensor (also reference temp)
+
             "sensor_type": "atlas_scientific_temp",
             "type": "hydro-temp",
             "is_connected": True,
@@ -127,6 +131,7 @@ sensors = [{
             "accuracy": 2
         }, {
          # pH Atlas Scientific Sensor
+
             "sensor_type": "atlas_scientific_ph",
             "type": "hydro-ph",
             "is_connected": True,
@@ -135,6 +140,7 @@ sensors = [{
             "accuracy": 3
         }, {
           # Atlas Scientific EC Sensor
+
             "sensor_type": "atlas_scientific_ec",
             "type": "ec",
             "is_connected": True,
