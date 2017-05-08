@@ -12,7 +12,7 @@ sys.path.append(os.path.join("./sources"))
 from sensor_worker import dispatch_sensor_data
 import atlas_hydro
 
-# hydroData = atlas_hydro.read_sensors() # should this be in the loop?
+hydroData = atlas_hydro.read_sensors() # should this be in the loop?
 
 def format_data():
     if hydroData:
