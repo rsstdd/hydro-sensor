@@ -53,7 +53,7 @@ def read_sensors():
     readings = []
     ref_temp = 25
 
-    for key, value in sensors.items():
+    for value in sensors.items():
         if value["is_connected"] is True:
 
             if value["sensor_type"] == "atlas_scientific_temp":
