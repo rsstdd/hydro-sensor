@@ -23,7 +23,7 @@ def dispatch_sensor_data(jsonPackage):
     deviceData['role']="Undefined"
 
     try:
-        with open(filename, 'r') as file:
+        with open(filename) as file:
             deviceData.json.load(file)
             file.close()
     except Exception as e:

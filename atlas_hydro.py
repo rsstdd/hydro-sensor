@@ -89,14 +89,10 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
                     # calculate ppm ~ .67 * reading
-
-                    print sensor_reading.split(',')[0]
                     ppmNum = (round((float(sensor_reading.split(',')[0])
                         * sensor["ppm_multiplier"]), sensor["accuracy"]))
-
                     ppmStr = str(ppmNum)
-                    readings.append(
-                        {
+                    readings.append({
                             'type': sensor["type"],
                             'serial_number': sensor["serial_number"],
                             'sensor_type': sensor["sensor_type"],
@@ -111,8 +107,7 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading = round(float(dev.read_line()),
                                 sensor["accuracy"])
-                    readings.append(
-                        {
+                    readings.append({
                             'type': sensor["type"],
                             'serial_number': sensor["serial_number"],
                             'sensor_type': sensor["sensor_type"],
@@ -124,7 +119,6 @@ def read_sensors():
 
 sensors = [{
         # TEMP Atlas Scientific Sensor (also reference temp)
-
             "sensor_type": "atlas_scientific_temp",
             "type": "hydro-temp",
             "is_connected": True,
@@ -133,7 +127,6 @@ sensors = [{
             "accuracy": 2
         }, {
          # pH Atlas Scientific Sensor
-
             "sensor_type": "atlas_scientific_ph",
             "type": "hydro-ph",
             "is_connected": True,
@@ -142,7 +135,6 @@ sensors = [{
             "accuracy": 3
         }, {
           # Atlas Scientific EC Sensor
-
             "sensor_type": "atlas_scientific_ec",
             "type": "ec",
             "is_connected": True,
