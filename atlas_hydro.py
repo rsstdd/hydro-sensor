@@ -53,67 +53,67 @@ def read_sensors():
     readings = []
     ref_temp = 25
 
-    for value in sensors.items():
-        if value["is_connected"] is True:
+    for sensor in sensors:
+        if sensor["is_connected"] is True:
 
-            if value["sensor_type"] == "atlas_scientific_temp":
+            if sensor["sensor_type"] == "atlas_scientific_temp":
                 # instantiate atlas scientific temp device
 
-                dev = AtlasDevice(value["serial_number"])
+                dev = AtlasDevice(sensor["serial_number"])
                 dev.send_cmd("R")
                 sensor_reading = dev.read_line()
                 report_temp = round(float(sensor_reading),
-                            value["accuracy"])
+                            sensor["accuracy"])
                 readings.append(
                     {
-                        'type': value["type"],
-                        'serial_number': value["serial_number"],
-                        'sensor_type': value["sensor_type"],
+                        'type': sensor["type"],
+                        'serial_number': sensor["serial_number"],
+                        'sensor_type': sensor["sensor_type"],
                         'sensor_reading': report_temp
                     })
 
-                if value["is_ref"] is True:
+                if sensor["is_ref"] is True:
                     ref_temp = sensor_reading  # calibration temp for pH
 
             else:
-                # Set reference temperature value on the sensor
+                # Set reference temperature sensor on the sensor
 
                 dev.send_cmd("T," + str(ref_temp))
 
                 # Get the readings from any Atlas Scientific Elec Conductivity sensors
 
-                if value["sensor_type"] == "atlas_scientific_ec":
+                if sensor["sensor_type"] == "atlas_scientific_ec":
                     # instantiate atlas scientific EC device
 
-                    dev = AtlasDevice(value["serial_number"])
+                    dev = AtlasDevice(sensor["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
                     # calculate ppm ~ .67 * reading
 
                     ppmNum = (round((float(sensor_reading.split(',')[0])
-                        * value["ppm_multiplier"]), value["accuracy"]))
+                        * sensor["ppm_multiplier"]), sensor["accuracy"]))
                     ppmStr = str(ppmNum)
                     readings.append(
                         {
-                            'type': value["type"],
-                            'serial_number': value["serial_number"],
-                            'sensor_type': value["sensor_type"],
+                            'type': sensor["type"],
+                            'serial_number': sensor["serial_number"],
+                            'sensor_type': sensor["sensor_type"],
                             'ec': sensor_reading,
                             'ppm': ppmStr
                         })
 
-                if value["sensor_type"] == "atlas_scientific_ph":
+                if sensor["sensor_type"] == "atlas_scientific_ph":
                     # instantiate atlas scientific EC device
 
-                    dev = AtlasDevice(value["serial_number"])
+                    dev = AtlasDevice(sensor["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = round(float(dev.read_line()),
-                                value["accuracy"])
+                                sensor["accuracy"])
                     readings.append(
                         {
-                            'type': value["type"],
-                            'serial_number': value["serial_number"],
-                            'sensor_type': value["sensor_type"],
+                            'type': sensor["type"],
+                            'serial_number': sensor["serial_number"],
+                            'sensor_type': sensor["sensor_type"],
                             'sensor_reading': sensor_reading
                         })
 
