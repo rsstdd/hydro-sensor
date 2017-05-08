@@ -9,8 +9,8 @@ import sys
 # add ../sources to the PYTHONPATH
 sys.path.append(os.path.join("./sources"))
 
-from sensor_worker import dispatch_sensor_data
 import atlas_hydro
+from sensor_worker import dispatch_sensor_data
 
 hydroData = atlas_hydro.read_sensors() # should this be in the loop?
 
