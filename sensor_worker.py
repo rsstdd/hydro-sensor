@@ -24,7 +24,7 @@ def dispatch_sensor_data(jsonPackage):
 
     try:
         with open(filename) as file:
-            deviceData.json.load(file)
+            deviceData = json.load(file)
             file.close()
     except Exception as e:
         print e
