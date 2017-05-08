@@ -5,7 +5,7 @@ import os
 import sys
 sys.path.append(os.path.join("./sources"))
 
-from pymongo import MongoClient
+# from pymongo import MongoClient
 from socket import gethostname
 import datetime
 import json
@@ -14,9 +14,9 @@ import requests
 
 def dispatch_sensor_data(jsonPackage):
     timestamp = str(datetime.datetime.now())
-    client = MongoClient('10.9.0.1')
-    db = client.solstice
-    collection = db[type]
+    # client = MongoClient('10.9.0.1')
+    # db = client.solstice
+    # collection = db[type]
     filename = "/var/local/thoth.id"
     deviceData={}
     deviceData['room']="Undefined"

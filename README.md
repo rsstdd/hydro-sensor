@@ -8,8 +8,8 @@
 
 Hydro Sensor module utilizes Atlas Scientific Temperature (DJ00RVZR), pH (DJ00RUV8), and EC (DJ00RU96) sensors.
 
-* `hydro_data.py` calls `sensor_lib/atlas_hydro.py` and formats the data returned from that function
-* `util/sensor_worker.py` adds metadata from the thoth.id and ships JSON to the API
+* `hydro_data.py` calls `atlas_hydro.py` and formats the data returned from that function
+* `sensor_worker.py` adds metadata from the thoth.id and ships JSON to the API
 
 ---
 
