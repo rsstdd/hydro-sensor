@@ -29,22 +29,25 @@ def dispatch_sensor_data(jsonPackage):
     except Exception as e:
         print e
 
-    jsonPackage['room'] = deviceData['room']
-    jsonPackage['role'] = deviceData['role']
-    jsonPackage['type'] = jsonPackage['type']
-    jsonPackage["timestamp"] = timestamp
-    jsonPackage["sensor_version"] = "1.00"
-    jsonPackage["sensor_group"] = "Production"
 
-    sensorRecord = {"sensordata": jsonPackage}
+    print deviceData
 
-    print sensorRecord
+    # jsonPackage['room'] = deviceData['room']
+    # jsonPackage['role'] = deviceData['role']
+    # jsonPackage['type'] = jsonPackage['type']
+    # jsonPackage["timestamp"] = timestamp
+    # jsonPackage["sensor_version"] = "1.00"
+    # jsonPackage["sensor_group"] = "Production"
+    #
+    # sensorRecord = {"sensordata": jsonPackage}
+    #
+    # print sensorRecord
 
-    try:
-        record_id2 = db.sensordata.insert_one(sensorRecord)
-    except:
-        with open('~thoth/sensordata.txt', 'w') as outfile:
-            json.dump(jsonPackage, outfile)
+    # try:
+    #     record_id2 = db.sensordata.insert_one(sensorRecord)
+    # except:
+    #     with open('~thoth/sensordata.txt', 'w') as outfile:
+    #         json.dump(jsonPackage, outfile)
 
     # print sensorRecord
 
