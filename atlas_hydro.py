@@ -18,7 +18,6 @@ class AtlasDevice(Device):
             start_time = time.time()
             while True:
                 # read bytes until Carriage Return is received.
-
                 next_char = self.read(1)  # read one byte
                 if next_char == "\r":  # sensor always ends with CR.
                     break
@@ -58,7 +57,6 @@ def read_sensors():
 
             if sensor["sensor_type"] == "atlas_scientific_temp":
                 # instantiate atlas scientific temp device
-
                 dev = AtlasDevice(sensor["serial_number"])
                 dev.send_cmd("R")
                 sensor_reading = dev.read_line()
@@ -77,32 +75,29 @@ def read_sensors():
 
             else:
                 # Set reference temperature sensor on the sensor
-
                 dev.send_cmd("T," + str(ref_temp))
 
                 # Get the readings from any Atlas Scientific Elec Conductivity sensors
 
                 if sensor["sensor_type"] == "atlas_scientific_ec":
                     # instantiate atlas scientific EC device
-
                     dev = AtlasDevice(sensor["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
-                    # calculate ppm ~ .67 * reading
-                    ppmNum = (round((float(sensor_reading.split(',')[0])
-                        * sensor["ppm_multiplier"]), sensor["accuracy"]))
-                    ppmStr = str(ppmNum)
+
+                    ppm = sensor_reading.split(',')[1]
+                    ec = round((float(sensor_reading.split(',')[0]) / 1000), 2)
+
                     readings.append({
                             'type': sensor["type"],
                             'serial_number': sensor["serial_number"],
                             'sensor_type': sensor["sensor_type"],
-                            'ec': sensor_reading,
-                            'ppm': ppmStr
+                            'ec': ec,
+                            'ppm': ppm
                         })
 
                 if sensor["sensor_type"] == "atlas_scientific_ph":
                     # instantiate atlas scientific EC device
-
                     dev = AtlasDevice(sensor["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = round(float(dev.read_line()),
@@ -118,7 +113,7 @@ def read_sensors():
 
 
 sensors = [{
-        # TEMP Atlas Scientific Sensor (also reference temp)
+            # TEMP Atlas Scientific Sensor (also reference temp)
             "sensor_type": "atlas_scientific_temp",
             "type": "hydro-temp",
             "is_connected": True,
@@ -126,7 +121,7 @@ sensors = [{
             "serial_number": 'DJ00RVZR',
             "accuracy": 2
         }, {
-         # pH Atlas Scientific Sensor
+            # pH Atlas Scientific Sensor
             "sensor_type": "atlas_scientific_ph",
             "type": "hydro-ph",
             "is_connected": True,
@@ -134,7 +129,7 @@ sensors = [{
             "serial_number": 'DJ00RUV8',
             "accuracy": 3
         }, {
-          # Atlas Scientific EC Sensor
+            # Atlas Scientific EC Sensor
             "sensor_type": "atlas_scientific_ec",
             "type": "ec",
             "is_connected": True,
