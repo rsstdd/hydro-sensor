@@ -60,8 +60,8 @@ def read_sensors():
                 dev = AtlasDevice(sensor["serial_number"])
                 dev.send_cmd("R")
                 sensor_reading = dev.read_line()
-                report_temp = round(float(sensor_reading),
-                            sensor["accuracy"])
+                report_temp = round((float(sensor_reading) * 9  / 5 + 32), sensor["accuracy"])
+
                 readings.append(
                     {
                         'type': sensor["type"],
@@ -84,7 +84,6 @@ def read_sensors():
                     dev = AtlasDevice(sensor["serial_number"])
                     dev.send_cmd("R")
                     sensor_reading = dev.read_line()
-
                     ppm = sensor_reading.split(',')[1]
                     ec = round((float(sensor_reading.split(',')[0]) / 1000), 2)
 
@@ -102,6 +101,7 @@ def read_sensors():
                     dev.send_cmd("R")
                     sensor_reading = round(float(dev.read_line()),
                                 sensor["accuracy"])
+
                     readings.append({
                             'type': sensor["type"],
                             'serial_number': sensor["serial_number"],
