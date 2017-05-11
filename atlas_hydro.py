@@ -53,61 +53,60 @@ def read_sensors():
     ref_temp = 25
 
     for sensor in sensors:
-        if sensor["is_connected"] is True:
 
-            if sensor["sensor_type"] == "atlas_scientific_temp":
-                # instantiate atlas scientific temp device
+        if sensor["sensor_type"] == "atlas_scientific_temp":
+            # instantiate atlas scientific temp device
+            dev = AtlasDevice(sensor["serial_number"])
+            dev.send_cmd("R")
+            sensor_reading = dev.read_line()
+            report_temp = round((float(sensor_reading) * 9  / 5 + 32), sensor["accuracy"])
+
+            readings.append(
+                {
+                    'type': sensor["type"],
+                    'serial_number': sensor["serial_number"],
+                    'sensor_type': sensor["sensor_type"],
+                    'sensor_reading': report_temp
+                })
+
+            if sensor["is_ref"] is True:
+                ref_temp = sensor_reading  # calibration temp for pH
+
+        else:
+            # Set reference temperature sensor on the sensor
+            dev.send_cmd("T," + str(ref_temp))
+
+            # Get the readings from any Atlas Scientific Elec Conductivity sensors
+
+            if sensor["sensor_type"] == "atlas_scientific_ec":
+                # instantiate atlas scientific EC device
                 dev = AtlasDevice(sensor["serial_number"])
                 dev.send_cmd("R")
                 sensor_reading = dev.read_line()
-                report_temp = round((float(sensor_reading) * 9  / 5 + 32), sensor["accuracy"])
+                ppm = sensor_reading.split(',')[1]
+                ec = round((float(sensor_reading.split(',')[0]) / 1000), 2)
 
-                readings.append(
-                    {
+                readings.append({
                         'type': sensor["type"],
                         'serial_number': sensor["serial_number"],
                         'sensor_type': sensor["sensor_type"],
-                        'sensor_reading': report_temp
+                        'ec': ec,
+                        'ppm': ppm
                     })
 
-                if sensor["is_ref"] is True:
-                    ref_temp = sensor_reading  # calibration temp for pH
+            if sensor["sensor_type"] == "atlas_scientific_ph":
+                # instantiate atlas scientific EC device
+                dev = AtlasDevice(sensor["serial_number"])
+                dev.send_cmd("R")
+                sensor_reading = round(float(dev.read_line()),
+                            sensor["accuracy"])
 
-            else:
-                # Set reference temperature sensor on the sensor
-                dev.send_cmd("T," + str(ref_temp))
-
-                # Get the readings from any Atlas Scientific Elec Conductivity sensors
-
-                if sensor["sensor_type"] == "atlas_scientific_ec":
-                    # instantiate atlas scientific EC device
-                    dev = AtlasDevice(sensor["serial_number"])
-                    dev.send_cmd("R")
-                    sensor_reading = dev.read_line()
-                    ppm = sensor_reading.split(',')[1]
-                    ec = round((float(sensor_reading.split(',')[0]) / 1000), 2)
-
-                    readings.append({
-                            'type': sensor["type"],
-                            'serial_number': sensor["serial_number"],
-                            'sensor_type': sensor["sensor_type"],
-                            'ec': ec,
-                            'ppm': ppm
-                        })
-
-                if sensor["sensor_type"] == "atlas_scientific_ph":
-                    # instantiate atlas scientific EC device
-                    dev = AtlasDevice(sensor["serial_number"])
-                    dev.send_cmd("R")
-                    sensor_reading = round(float(dev.read_line()),
-                                sensor["accuracy"])
-
-                    readings.append({
-                            'type': sensor["type"],
-                            'serial_number': sensor["serial_number"],
-                            'sensor_type': sensor["sensor_type"],
-                            'sensor_reading': sensor_reading
-                        })
+                readings.append({
+                        'type': sensor["type"],
+                        'serial_number': sensor["serial_number"],
+                        'sensor_type': sensor["sensor_type"],
+                        'sensor_reading': sensor_reading
+                    })
 
     return readings
 
@@ -116,7 +115,6 @@ sensors = [{
             # TEMP Atlas Scientific Sensor (also reference temp)
             "sensor_type": "atlas_scientific_temp",
             "type": "hydro-temp",
-            "is_connected": True,
             "is_ref": True,
             "serial_number": 'DJ00RVZR',
             "accuracy": 2
@@ -124,7 +122,6 @@ sensors = [{
             # pH Atlas Scientific Sensor
             "sensor_type": "atlas_scientific_ph",
             "type": "hydro-ph",
-            "is_connected": True,
             "is_ref": False,
             "serial_number": 'DJ00RUV8',
             "accuracy": 3
@@ -132,11 +129,9 @@ sensors = [{
             # Atlas Scientific EC Sensor
             "sensor_type": "atlas_scientific_ec",
             "type": "ec",
-            "is_connected": True,
             "is_ref": False,
             "serial_number": 'DJ00RU96',
             "accuracy": 0,
-            "ppm_multiplier": 0.67  # Convert EC to PPM
         }]
 
 
