@@ -14,20 +14,21 @@ import requests
 
 def dispatch_sensor_data(jsonPackage):
     timestamp = str(datetime.datetime.now())
-    client = MongoClient('10.9.0.1')
-    db = client.solstice
-    collection = db[type]
     filename = "/var/local/thoth.id"
     deviceData = {}
     deviceData['room'] = "Undefined"
     deviceData['role'] = "Undefined"
 
     try:
-        with open(filename) as file:
+        with open(filename, 'r') as file:
             deviceData = json.load(file)
             file.close()
     except Exception as e:
         print e
+
+    client = MongoClient('10.9.0.1')
+    db = client.solstice
+    collection = db[type]
 
     jsonPackage['room'] = deviceData['locaton']['room']
     jsonPackage['role'] = deviceData['device']['role']
@@ -45,27 +46,12 @@ def dispatch_sensor_data(jsonPackage):
         with open('~thoth/sensordata.txt', 'w') as outfile:
             json.dump(jsonPackage, outfile)
 
+    record_id=db[type].insert_one(jsonPackage).inserted_id
+
     print sensorRecord
 
-    # send to heroku
-
-    if deviceData['room'] in ['0804', '0808']:  # skagit?
-        postAPI('https://skagit-luna-api.herokuapp.com/sensordata', jsonPackage)
-        print deviceData
-    else:
-        postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
-        postAPI('https://luna-api-staging.herokuapp.com/sensordata', jsonPackage)
-
-    # send to mongo
-
     try:
-        collection.insert_one(jsonPackage).inserted_id
-        client.close()
-        print "mongo sent"
+        r = requests.post('https://luna-api.herokuapp.com/sensordata', data = jsonPackage)
+        r2 = requests.post('https://luna-api-staging.herokuapp.com/sensordata', data = jsonPackage)
     except Exception as e:
-        print "hydro sensor_worker.py FAILED to send to mongo", e
-        try:
-            with open('sensordata.txt', 'a') as outfile:
-                json.dump(jsonPackage, outfile)
-        except:
-            pass
+        print e
