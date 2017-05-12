@@ -34,7 +34,8 @@ def dispatch_sensor_data(dataPackage):
         print e
 
     type = dataPackage['type']
-    jsonPackage['type'] = type
+
+    dataPackage['type'] = type
     dataPackage['room'] = deviceData['locaton']['room']
     dataPackage['role'] = deviceData['device']['role']
     dataPackage["timestamp"] = timestamp
