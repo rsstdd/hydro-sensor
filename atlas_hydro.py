@@ -59,7 +59,7 @@ def read_sensors():
             dev = AtlasDevice(sensor["serial_number"])
             dev.send_cmd("R")
             sensor_reading = dev.read_line()
-            report_temp = round((float(sensor_reading) * 9  / 5 + 32), 2)
+            report_temp = round((float(sensor_reading) * 9  / 5 + 32), sensor["accuracy"])
 
             readings.append(
                 {
@@ -98,8 +98,7 @@ def read_sensors():
                 # instantiate atlas scientific EC device
                 dev = AtlasDevice(sensor["serial_number"])
                 dev.send_cmd("R")
-                sensor_reading = round(float(dev.read_line()),
-                            sensor["accuracy"])
+                sensor_reading = round(float(dev.read_line()), 2)
 
                 readings.append({
                         'type': sensor["type"],
