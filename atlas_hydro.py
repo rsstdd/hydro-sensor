@@ -131,7 +131,7 @@ sensors = [{
             "type": "ec",
             "is_ref": False,
             "serial_number": 'DJ00RU96',
-            "accuracy": 0,
+            "accuracy": 2,
         }]
 
 
