@@ -48,7 +48,7 @@ def dispatch_sensor_data(dataPackage):
     # Heroku
     try:
         print jsonPackage
-        # postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
+        postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
     except:
         with open('~thoth/sensordata.txt', 'w') as outfile:
             json.dump(jsonPackage, outfile)
