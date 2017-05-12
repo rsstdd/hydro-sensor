@@ -33,16 +33,16 @@ def dispatch_sensor_data(dataPackage):
     except Exception as e:
         print e
 
+    type = dataPackage['type']
+    jsonPackage['type'] = type
     dataPackage['room'] = deviceData['locaton']['room']
     dataPackage['role'] = deviceData['device']['role']
     dataPackage["timestamp"] = timestamp
-    dataPackage["sensor_version"] = "1.00"
     dataPackage["sensor_group"] = "test"
+    dataPackage["sensor_version"] = "1.00"
 
     sensorRecord = {"sensordata": dataPackage}
     jsonPackage = json.dumps(sensorRecord)
-
-    # print jsonPackage
 
     # Heroku
     try:
@@ -56,12 +56,14 @@ def dispatch_sensor_data(dataPackage):
     try:
         client = MongoClient('10.9.0.1')
         db = client.solstice
-        collection = db[dataPackage['type']]
+        collection = db[type]
         record_id2 = db.sensordata.insert_one(sensorRecord)
         client.close()
         print "mongo sent"
+
     except Exception as e:
         print "sensor-worker.py FAILED to send to mongo", e
+
         try:
             with open('sensordata.txt','a') as outfile:
                 json.dump(jsonPackage, outfile)
