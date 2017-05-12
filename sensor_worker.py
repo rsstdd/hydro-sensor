@@ -8,13 +8,15 @@ import datetime
 import json
 import requests
 
+
 def postAPI(url, payload):
     try:
-        r = requests.post(url, data = payload)
+        r = requests.post(url, data=payload)
         assert r.status_code == 201, "%r %r != 201" % (r.url, r.status_code)
         print "sent", r.url
     except Exception as e:
-        print "yocto-mongo.py FAILED to send to", e
+        print "sensor-worker.py FAILED to send to", e
+
 
 def dispatch_sensor_data(jsonPackage):
     timestamp = str(datetime.datetime.now())
@@ -42,9 +44,8 @@ def dispatch_sensor_data(jsonPackage):
 
     sensorRecord = {"sensordata": jsonPackage}
 
-    print jsonPackage
-
     try:
+        print jsonPackage
         # postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
         # postAPI('https://luna-api-staging.herokuapp.com/sensordata', jsonPackage)
     except:
