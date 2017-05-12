@@ -42,7 +42,7 @@ def dispatch_sensor_data(dataPackage):
     sensorRecord = {"sensordata": dataPackage}
     jsonPackage = json.dumps(sensorRecord)
 
-    print jsonPackage
+    # print jsonPackage
 
     # Heroku
     try:
@@ -57,7 +57,7 @@ def dispatch_sensor_data(dataPackage):
         client = MongoClient('10.9.0.1')
         db = client.solstice
         collection = db[dataPackage['type']]
-        record_id2 = db.sensordata.insert_one(jsonPackage)
+        record_id2 = db.sensordata.insert_one(sensorRecord)
         client.close()
         print "mongo sent"
     except Exception as e:
