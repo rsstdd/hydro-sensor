@@ -33,6 +33,7 @@ def dispatch_sensor_data(dataPackage):
     except Exception as e:
         print e
 
+    dataPackage['hostname'] = deviceData['device']['serial_number']
     dataPackage['room'] = deviceData['locaton']['room']
     dataPackage['role'] = deviceData['device']['role']
     dataPackage["timestamp"] = timestamp
@@ -45,26 +46,25 @@ def dispatch_sensor_data(dataPackage):
 
     print jsonPackage
 
-    # Heroku
-    try:
-        postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
-        postAPI('https://luna-api-staging.herokuapp.com/sensordata', jsonPackage)
-    except:
-        with open('~thoth/sensordata.txt', 'w') as outfile:
-            json.dump(jsonPackage, outfile)
-
-    # Mongo
-    try:
-        client = MongoClient('10.9.0.1')
-        db = client.solstice
-        collection = db[dataPackage['type']]
-        record_id2 = db.sensordata.insert_one(sensorRecord)
-        client.close()
-        print "mongo sent"
-    except Exception as e:
-        print "sensor-worker.py FAILED to send to mongo", e
-        try:
-            with open('sensordata.txt','a') as outfile:
-                json.dump(jsonPackage, outfile)
-        except:
-            pass
+    # # Heroku
+    # try:
+    #     postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
+    # except:
+    #     with open('~thoth/sensordata.txt', 'w') as outfile:
+    #         json.dump(jsonPackage, outfile)
+    #
+    # # Mongo
+    # try:
+    #     client = MongoClient('10.9.0.1')
+    #     db = client.solstice
+    #     collection = db[dataPackage['type']]
+    #     record_id2 = db.sensordata.insert_one(sensorRecord)
+    #     client.close()
+    #     print "mongo sent"
+    # except Exception as e:
+    #     print "sensor-worker.py FAILED to send to mongo", e
+    #     try:
+    #         with open('sensordata.txt','a') as outfile:
+    #             json.dump(jsonPackage, outfile)
+    #     except:
+    #         pass
