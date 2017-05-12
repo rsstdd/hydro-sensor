@@ -18,7 +18,7 @@ def postAPI(url, payload):
         print "sensor-worker.py FAILED to send to", e
 
 
-def dispatch_sensor_data(jsonPackage):
+def dispatch_sensor_data(dataPackage):
     timestamp = str(datetime.datetime.now())
     thoth = "/var/local/thoth.id"
     deviceData = {}
@@ -32,15 +32,19 @@ def dispatch_sensor_data(jsonPackage):
     except Exception as e:
         print e
 
-    jsonPackage['room'] = deviceData['locaton']['room']
-    jsonPackage['role'] = deviceData['device']['role']
-    jsonPackage["timestamp"] = timestamp
-    jsonPackage["sensor_version"] = "1.00"
-    jsonPackage["sensor_group"] = "test"
+    dataPackage['room'] = deviceData['locaton']['room']
+    dataPackage['role'] = deviceData['device']['role']
+    dataPackage["timestamp"] = timestamp
+    dataPackage["sensor_version"] = "1.00"
+    dataPackage["sensor_group"] = "test"
 
-    sensorRecord = {"sensordata": jsonPackage}
+    sensorRecord = {"sensordata": dataPackage}
 
-    print sensorRecord
+
+    jsonPackage = json.dumps(jsonPackage)
+
+    print jsonPackage
+
 
     # try:
     #     postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
