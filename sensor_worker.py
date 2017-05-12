@@ -41,7 +41,7 @@ def dispatch_sensor_data(dataPackage):
 
     sensorRecord = {"sensordata": dataPackage}
 
-    jsonPackage = json.dumps(dataPackage)
+    jsonPackage = json.dumps(sensorRecord)
 
     print jsonPackage
 
