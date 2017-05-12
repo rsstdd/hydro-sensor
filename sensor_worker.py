@@ -32,10 +32,6 @@ def dispatch_sensor_data(jsonPackage):
     except Exception as e:
         print e
 
-    client = MongoClient('10.9.0.1')
-    db = client.solstice
-    collection = db[type]
-
     jsonPackage['room'] = deviceData['locaton']['room']
     jsonPackage['role'] = deviceData['device']['role']
     jsonPackage["timestamp"] = timestamp
