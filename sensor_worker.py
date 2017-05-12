@@ -33,7 +33,6 @@ def dispatch_sensor_data(dataPackage):
     except Exception as e:
         print e
 
-    dataPackage['hostname'] = deviceData['device']['serial_number']
     dataPackage['room'] = deviceData['locaton']['room']
     dataPackage['role'] = deviceData['device']['role']
     dataPackage["timestamp"] = timestamp
