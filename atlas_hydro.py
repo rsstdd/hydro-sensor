@@ -123,7 +123,7 @@ sensors = [{
             "type": "hydro-ph",
             "is_ref": False,
             "serial_number": 'DJ00RUV8',
-            "accuracy": 3
+            "accuracy": 2
         }, {
             # Atlas Scientific EC Sensor
             "sensor_type": "atlas_scientific_ec",
