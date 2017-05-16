@@ -48,6 +48,7 @@ def dispatch_sensor_data(dataPackage):
     # Heroku
     try:
         postAPI('http://localhost:4000/sensordata', dataPackage)
+        print ''
     except:
         with open('~thoth/sensordata.txt', 'w') as outfile:
             json.dump(jsonPackage, outfile)
