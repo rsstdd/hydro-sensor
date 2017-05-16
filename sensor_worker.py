@@ -30,11 +30,12 @@ def dispatch_sensor_data(dataPackage):
         with open(thoth, 'r') as file:
             deviceData = json.load(file)
             print deviceData
+
             file.close()
     except Exception as e:
         print e
 
-    type = dataPackage['type']
+    # type = dataPackage['type']
 
     # dataPackage['type'] = type
     # dataPackage['room'] = deviceData['locaton']['room']
