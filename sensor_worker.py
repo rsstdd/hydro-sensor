@@ -23,22 +23,23 @@ def dispatch_sensor_data(dataPackage):
     timestamp = str(datetime.datetime.now())
     thoth = "/var/local/thoth.id"
     # deviceData = {}
-    # deviceData['room'] = "Undefined"
-    # deviceData['role'] = "Undefined"
+    # deviceData['room'] = thoth['location']['room']
+    # deviceData['role'] = thoth['device']['role']
 
-    # try:
-    #     with open(thoth, 'r') as file:
-    #         deviceData = json.load(file)
-    #         file.close()
-    # except Exception as e:
-    #     print e
-    #
-    # type = dataPackage['type']
-    #
+    try:
+        with open(thoth, 'r') as file:
+            deviceData = json.load(file)
+            print deviceData
+            file.close()
+    except Exception as e:
+        print e
+
+    type = dataPackage['type']
+
     # dataPackage['type'] = type
     # dataPackage['room'] = deviceData['locaton']['room']
     # dataPackage['role'] = deviceData['device']['role']
-    # dataPackage["timestamp"] = timestamp
+    dataPackage["timestamp"] = timestamp
     dataPackage["sensor_group"] = "test"
     dataPackage["sensor_version"] = "1.00"
 
