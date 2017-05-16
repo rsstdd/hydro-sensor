@@ -34,7 +34,7 @@ def dispatch_sensor_data(dataPackage):
         print e
 
     dataPackage['type'] = deviceData['device']['hostname']
-    dataPackage['room'] = deviceData['lociaton']['room']
+    dataPackage['room'] = deviceData['location']['room']
     dataPackage['role'] = deviceData['device']['role']
     dataPackage["timestamp"] = timestamp
     dataPackage["sensor_group"] = "test"
