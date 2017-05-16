@@ -22,24 +22,20 @@ def postAPI(url, payload):
 def dispatch_sensor_data(dataPackage):
     timestamp = str(datetime.datetime.now())
     thoth = "/var/local/thoth.id"
-    # deviceData = {}
-    # deviceData['room'] = thoth['location']['room']
-    # deviceData['role'] = thoth['device']['role']
+    deviceData = {}
+    deviceData['room'] = 'undefined'
+    deviceData['role'] = 'undefined'
 
     try:
         with open(thoth, 'r') as file:
             deviceData = json.load(file)
-            print deviceData
-
             file.close()
     except Exception as e:
         print e
 
-    # type = dataPackage['type']
-
-    # dataPackage['type'] = type
-    # dataPackage['room'] = deviceData['locaton']['room']
-    # dataPackage['role'] = deviceData['device']['role']
+    dataPackage['type'] = deviceData['device']['hostname']
+    dataPackage['room'] = deviceData['locaton']['room']
+    dataPackage['role'] = deviceData['device']['role']
     dataPackage["timestamp"] = timestamp
     dataPackage["sensor_group"] = "test"
     dataPackage["sensor_version"] = "1.00"
@@ -47,7 +43,7 @@ def dispatch_sensor_data(dataPackage):
     sensorRecord = {"sensordata": dataPackage}
     jsonPackage = json.dumps(sensorRecord)
 
-    # print jsonPackage
+    print jsonPackage
 
     # # Heroku
     # try:
