@@ -48,13 +48,13 @@ def dispatch_sensor_data(dataPackage):
     print jsonPackage
 
     # Heroku
-    try:
-        postAPI('http://localhost:4000/sensordata', dataPackage)
-        print ''
-    except:
-        with open('~thoth/sensordata.txt', 'w') as outfile:
-            json.dump(jsonPackage, outfile)
-    #
+    # try:
+    #     postAPI('http://localhost:4000/sensordata', dataPackage)
+    #     print ''
+    # except:
+    #     with open('~thoth/sensordata.txt', 'w') as outfile:
+    #         json.dump(jsonPackage, outfile)
+    # #
     # # Mongo
     # try:
     #     client = MongoClient('10.9.0.1:27017')
