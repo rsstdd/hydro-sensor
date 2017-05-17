@@ -46,6 +46,7 @@ def dispatch_sensor_data(dataPackage):
     jsonPackage = json.dumps(sensorRecord)
 
     print jsonPackage
+    print ''
 
     # Heroku
     # try:
