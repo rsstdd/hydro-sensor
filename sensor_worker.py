@@ -64,7 +64,7 @@ def dispatch_sensor_data(dataPackage):
 
     #  Mongo
 
-    sensorPayload = json.dump(sensorRecord)
+    sensorPayload = json.dumps(sensorRecord)
 
     try:
         client = MongoClient('10.9.0.1:27017')
