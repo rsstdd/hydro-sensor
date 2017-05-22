@@ -52,7 +52,7 @@ def dispatch_sensor_data(dataPackage):
     #  Heroku
 
     # try:
-    if deviceData['room'] in ['0804', '0808']:  # skagit?
+    if deviceData['location']['room'] in ['0804', '0808']:  # skagit?
         postAPI('https://skagit-luna-api.herokuapp.com/sensordata', sensorRecord)
         print ''
     else:
