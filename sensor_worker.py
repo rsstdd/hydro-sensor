@@ -58,7 +58,8 @@ def dispatch_sensor_data(dataPackage):
             postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
             postAPI('https://luna-api-staging.herokuapp.com/sensordata', jsonPackage)
     except:
-        with open('~thoth/sensordata.txt', 'w') as outfile:
+        # with open('~thoth/sensordata.txt', 'w') as outfile:
+        with open('~pi/sensordata.txt', 'w') as outfile:
             json.dump(jsonPackage, outfile)
     #
     #  Mongo
