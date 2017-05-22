@@ -34,7 +34,7 @@ def dispatch_sensor_data(dataPackage):
     print deviceData
 
     dataPackage = {}
-    # dataPackage['hostname'] = deviceData['device']['hostname']
+    dataPackage['hostname'] = deviceData['device']['hostname']
     dataPackage['type'] = deviceData['device']['deviceRole']
     dataPackage['room'] = deviceData['location']['room']
     dataPackage['role'] = deviceData['device']['deviceRole']
@@ -64,7 +64,7 @@ def dispatch_sensor_data(dataPackage):
 
     #  Mongo
 
-    sensorPayload = json.dupm(sensorRecord)
+    sensorPayload = json.dump(sensorRecord)
 
     try:
         client = MongoClient('10.9.0.1:27017')
