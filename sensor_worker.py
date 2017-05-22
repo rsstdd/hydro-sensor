@@ -51,17 +51,18 @@ def dispatch_sensor_data(dataPackage):
 
     #  Heroku
 
-    try:
-        if deviceData['room'] in ['0804', '0808']:  # skagit?
-            postAPI('https://skagit-luna-api.herokuapp.com/sensordata', sensorRecord)
-            print ''
-        else:
-            postAPI('https://luna-api.herokuapp.com/sensordata', sensorRecord)
-            postAPI('https://luna-api-staging.herokuapp.com/sensordata', sensorRecord)
-    except:
-        # with open('~thoth/sensordata.txt', 'w') as outfile:
-        with open('/home/pi/sensordata.txt', 'w') as outfile:
-            json.dump(sensorRecord, outfile)
+    # try:
+    if deviceData['room'] in ['0804', '0808']:  # skagit?
+        postAPI('https://skagit-luna-api.herokuapp.com/sensordata', sensorRecord)
+        print ''
+    else:
+        postAPI('https://luna-api.herokuapp.com/sensordata', sensorRecord)
+        postAPI('https://luna-api-staging.herokuapp.com/sensordata', sensorRecord)
+
+    # except:
+    #     # with open('~thoth/sensordata.txt', 'w') as outfile:
+    #     with open('/home/pi/sensordata.txt', 'w') as outfile:
+    #         json.dump(sensorRecord, outfile)
 
     #  Mongo
 
