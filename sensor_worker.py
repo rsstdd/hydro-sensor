@@ -64,19 +64,19 @@ def dispatch_sensor_data(dataPackage):
     #
     #  Mongo
     #
-    try:
-        client = MongoClient('10.9.0.1:27017')
-        db = client.solstice
-        collection = db[type]
-        record_id2 = db.sensordata.insert_one(sensorRecord)
-        client.close()
-        print "mongo sent"
-
-    except Exception as e:
-        print "sensor-worker.py FAILED to send to mongo", e
-
-        try:
-            with open('sensordata.txt','a') as outfile:
-                json.dump(jsonPackage, outfile)
-        except:
-            pass
+    # try:
+    #     client = MongoClient('10.9.0.1:27017')
+    #     db = client.solstice
+    #     collection = db[type]
+    #     record_id2 = db.sensordata.insert_one(sensorRecord)
+    #     client.close()
+    #     print "mongo sent"
+    #
+    # except Exception as e:
+    #     print "sensor-worker.py FAILED to send to mongo", e
+    #
+    #     try:
+    #         with open('sensordata.txt','a') as outfile:
+    #             json.dump(jsonPackage, outfile)
+    #     except:
+    #         pass
