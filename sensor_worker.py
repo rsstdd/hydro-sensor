@@ -23,9 +23,6 @@ def postAPI(url, payload):
 def dispatch_sensor_data(dataPackage):
     timestamp = str(datetime.datetime.now())
     thoth = "/var/local/thoth.id"
-    deviceData = {}
-    deviceData['room'] = 'undefined'
-    deviceData['role'] = 'undefined'
 
     try:
         with open(thoth, 'r') as file:
@@ -35,7 +32,7 @@ def dispatch_sensor_data(dataPackage):
         print e
 
     dataPackage = {}
-    dataPackage['hostname'] = deviceData['device']['hostname']
+    # dataPackage['hostname'] = deviceData['device']['hostname']
     dataPackage['type'] = deviceData['device']['deviceRole']
     dataPackage['room'] = deviceData['location']['room']
     dataPackage['role'] = deviceData['device']['deviceRole']
