@@ -34,12 +34,13 @@ def dispatch_sensor_data(dataPackage):
     except Exception as e:
         print e
 
-    dataPackage['type'] = deviceData['device']['hostname']
+    dataPackage['hostname'] = deviceData['device']['hostname']
+    dataPackage['type'] = deviceData['device']['deviceRole']
     dataPackage['room'] = deviceData['location']['room']
     dataPackage['role'] = deviceData['device']['deviceRole']
     dataPackage["sensor_group"] = "test"
     dataPackage["sensor_version"] = "1.00"
-    # dataPackage["timestamp"] = timestamp
+    dataPackage["timestamp"] = timestamp
 
     sensorRecord = {"sensordata": dataPackage}
     jsonPackage = json.dumps(sensorRecord)
