@@ -74,7 +74,7 @@ def dispatch_sensor_data(dataPackage):
     except Exception as e:
         print "sensor-worker.py FAILED to send to mongo", e
 
-        try
+        try:
             with open('sensordata.txt','a') as outfile:
                 json.dump(jsonPackage, outfile)
         except:
