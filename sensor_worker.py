@@ -34,6 +34,7 @@ def dispatch_sensor_data(dataPackage):
     except Exception as e:
         print e
 
+    dataPackage = {}
     dataPackage['hostname'] = deviceData['device']['hostname']
     dataPackage['type'] = deviceData['device']['deviceRole']
     dataPackage['room'] = deviceData['location']['room']
