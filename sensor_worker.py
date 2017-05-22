@@ -16,7 +16,6 @@ def postAPI(url, payload):
         assert r.status_code == 201, "%r %r != 201" % (r.url, r.status_code)
         print "sent", r.url
     except Exception as e:
-        print ''
         print "sensor-worker.py FAILED to send to", e
         print ''
 
@@ -38,38 +37,45 @@ def dispatch_sensor_data(dataPackage):
     dataPackage['type'] = deviceData['device']['hostname']
     dataPackage['room'] = deviceData['location']['room']
     dataPackage['role'] = deviceData['device']['deviceRole']
-    dataPackage["timestamp"] = timestamp
     dataPackage["sensor_group"] = "test"
     dataPackage["sensor_version"] = "1.00"
+    # dataPackage["timestamp"] = timestamp
 
     sensorRecord = {"sensordata": dataPackage}
-    jsonPackage = json.dumps(sensorRecord)
+    # jsonPackage = json.dumps(sensorRecord)
 
     print jsonPackage
     print ''
 
-    # Heroku
-    # try:
-    #     postAPI('http://localhost:4000/sensordata', dataPackage)
-    #     print ''
-    # except:
-    #     with open('~thoth/sensordata.txt', 'w') as outfile:
-    #         json.dump(jsonPackage, outfile)
-    # #
-    # # Mongo
-    # try:
-    #     client = MongoClient('10.9.0.1:27017')
-    #     db = client.solstice
-    #     collection = db[type]
-    #     record_id2 = db.sensordata.insert_one(sensorRecord)
-    #     client.close()
-    #     print "mongo sent"
     #
-    # except Exception as e:
-    #     print "sensor-worker.py FAILED to send to mongo", e
+    #  Heroku
     #
-    #     try:
-    #         with open('sensordata.txt','a') as outfile:
-    #             json.dump(jsonPackage, outfile)
-    #     except:
-    #         pass
+    try:
+        if deviceData['room'] in ['0804', '0808']:  # skagit?
+            postAPI('https://skagit-luna-api.herokuapp.com/sensordata', jsonPackage)
+            print ''
+        else:
+            postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
+            postAPI('https://luna-api-staging.herokuapp.com/sensordata', jsonPackage)
+    except:
+        with open('~thoth/sensordata.txt', 'w') as outfile:
+            json.dump(jsonPackage, outfile)
+    #
+    #  Mongo
+    #
+    try:
+        client = MongoClient('10.9.0.1:27017')
+        db = client.solstice
+        collection = db[type]
+        record_id2 = db.sensordata.insert_one(sensorRecord)
+        client.close()
+        print "mongo sent"
+
+    except Exception as e:
+        print "sensor-worker.py FAILED to send to mongo", e
+
+        try
+            with open('sensordata.txt','a') as outfile:
+                json.dump(jsonPackage, outfile)
+        except:
+            pass
