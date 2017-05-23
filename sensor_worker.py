@@ -52,19 +52,16 @@ def dispatch_sensor_data(dataPackage):
 
     # if Skagit
 
-    # if deviceData['location']['room'] in ['0804', '0808']:  # skagit?
-    #     postAPI('https://skagit-luna-api.herokuapp.com/sensordata', sensorRecord)
-    #     print ''
-    # else:
-
-    # For now
-
-    postAPI('https://luna-api.herokuapp.com/sensordata', sensorRecord)
-    postAPI('https://luna-api-staging.herokuapp.com/sensordata', sensorRecord)
+    if deviceData['location']['room'] in ['0804', '0808']:  # skagit?
+        postAPI('https://skagit-luna-api.herokuapp.com/sensordata', sensorRecord)
+        print ''
+    else:
+    	postAPI('https://luna-api.herokuapp.com/sensordata', sensorRecord)
+    	postAPI('https://luna-api-staging.herokuapp.com/sensordata', sensorRecord)
 
     #  Mongo
 
-    sensorPayload = json.dumps(sensorRecord)
+    sensorPayload = json.dump(sensorRecord)
 
     try:
         client = MongoClient('10.9.0.1')
