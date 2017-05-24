@@ -22,6 +22,7 @@ def postAPI(url, payload):
 
 
 def dispatch_sensor_data(dataPackage):
+	print dataPackage
 	timestamp = str(datetime.datetime.now())
 	thoth = "/var/local/thoth.id"
 
