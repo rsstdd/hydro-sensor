@@ -44,7 +44,7 @@ def dispatch_sensor_data(dataPackage):
 	dataPackage["timestamp"] = timestamp
 
 	sensorRecord = {}
-	sensorRecord = {"sensordata": dataPackage}
+	sensorRecord = {dataPackage}
 
 	print sensorRecord["sensordata"]["type"]
 	print ''
