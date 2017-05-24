@@ -34,9 +34,9 @@ def dispatch_sensor_data(dataPackage):
 	# print deviceData
 
 	dataPackage = {}
-	type = deviceData['device']['deviceRole']
+	sensor_type = deviceData['device']['deviceRole']
 	dataPackage['hostname'] = deviceData['device']['hostname']
-	dataPackage['type'] = type
+	dataPackage['type'] = deviceData['device']['deviceRole']
 	dataPackage['room'] = deviceData['location']['room']
 	dataPackage['role'] = deviceData['device']['deviceRole']
 	dataPackage["sensor_group"] = "test"
@@ -64,7 +64,7 @@ def dispatch_sensor_data(dataPackage):
 	try:
 		client = MongoClient('10.9.0.1')
 		db=client.solstice
-		collection = db[type]
+		collection = db[sensor_type]
 		record_id2 = db.sensordata.insert_one(sensorRecord)
 		client.close()
 		print "mongo sent"
