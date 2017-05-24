@@ -63,10 +63,10 @@ def read_sensors():
 
 			readings.append(
 				{
-					'type': sensor["type"],
-					'serial_number': sensor["serial_number"],
-					'sensor_type': sensor["sensor_type"],
-					'sensor_reading': report_temp
+					"type": sensor["type"],
+					"serial_number": sensor["serial_number"],
+					"sensor_type": sensor["sensor_type"],
+					"sensor_reading": report_temp
 				})
 
 			if sensor["is_ref"] is True:
