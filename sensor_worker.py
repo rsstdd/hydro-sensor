@@ -39,12 +39,12 @@ def dispatch_sensor_data(dataPackage):
 	dataPackage['role'] = deviceData['device']['deviceRole']
 	sensor_type = deviceData['device']['deviceRole']
 
-	dataPackage["sensor_group"] = "test"
-	dataPackage["sensor_version"] = "1.00"
-	dataPackage["timestamp"] = timestamp
+	dataPackage['sensor_group'] = 'test'
+	dataPackage['sensor_version'] = '1.00'
+	dataPackage['timestamp'] = timestamp
 
 	sensorRecord = {}
-	sensorRecord = {"sensordata":dataPackage}
+	sensorRecord = {'sensordata':dataPackage}
 
 	print sensorRecord
 	print ''
