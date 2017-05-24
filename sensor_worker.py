@@ -13,7 +13,7 @@ from pymongo import MongoClient
 def postAPI(url, payload):
 	try:
 		r = requests.post(url, data=payload)
-		assert r.status_code == 201, "%r %r != 201" % (r.url, r.status_code)
+		assert r.status_code == 201, "%r %r != 201"%(r.url, r.status_code)
 		print "sent", r.url
 	except Exception as e:
 		print "sensor-worker.py FAILED to send to", e
@@ -48,8 +48,7 @@ def dispatch_sensor_data(dataPackage):
 
 	print sensorRecord
 	print ''
-	print type(sensorRecord)
-
+	print type(dataPackage)
 
 	#  Heroku
 
