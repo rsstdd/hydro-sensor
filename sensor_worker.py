@@ -31,7 +31,7 @@ def dispatch_sensor_data(dataPackage):
     except Exception as e:
         print e
 
-    print deviceData
+    # print deviceData
 
     dataPackage = {}
     dataPackage['hostname'] = deviceData['device']['hostname']
@@ -44,20 +44,12 @@ def dispatch_sensor_data(dataPackage):
 
     # sensorRecord = {"sensordata": dataPackage}
 
-    print sensorRecord
+    # print sensorRecord
     print ''
 
 
     #  Heroku
 
-    # if Skagit
-
-    # if deviceData['location']['room'] in ['0804', '0808']:  # skagit?
-    #     # postAPI('https://skagit-luna-api.herokuapp.com/sensordata', sensorRecord)
-    #     print ''
-    # else:
-    # 	# postAPI('https://luna-api.herokuapp.com/sensordata', sensorRecord)
-    # 	# postAPI('https://luna-api-staging.herokuapp.com/sensordata', sensorRecord)
 
     #  Mongo
 
