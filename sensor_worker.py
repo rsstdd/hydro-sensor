@@ -67,6 +67,7 @@ def dispatch_sensor_data(dataPackage):
 		db=client.solstice
 		collection = db[sensor_type]
 		record_id2 = db.sensordata.insert_one(sensorRecord)
+		print record_id2
 		client.close()
 		print "mongo sent"
 	except Exception as e:
