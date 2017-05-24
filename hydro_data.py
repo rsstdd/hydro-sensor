@@ -60,5 +60,4 @@ def format_data():
 				dispatch_sensor_data(temp_data)
 
 
-while True:
-	format_data()
+format_data()
