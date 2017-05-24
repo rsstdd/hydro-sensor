@@ -42,6 +42,7 @@ def dispatch_sensor_data(dataPackage):
 	dataPackage["sensor_version"] = "1.00"
 	dataPackage["timestamp"] = timestamp
 
+	sensorRecord = {}
 	sensorRecord = {"sensordata": dataPackage}
 
 	# print sensorRecord
