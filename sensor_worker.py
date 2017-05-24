@@ -33,11 +33,12 @@ def dispatch_sensor_data(dataPackage):
 
 	# print deviceData
 
-	sensor_type = deviceData['device']['deviceRole']
 	dataPackage['hostname'] = deviceData['device']['hostname']
 	dataPackage['title'] = deviceData['device']['deviceRole']
 	dataPackage['room'] = deviceData['location']['room']
 	dataPackage['role'] = deviceData['device']['deviceRole']
+	sensor_type = deviceData['device']['deviceRole']
+
 	dataPackage["sensor_group"] = "test"
 	dataPackage["sensor_version"] = "1.00"
 	dataPackage["timestamp"] = timestamp
