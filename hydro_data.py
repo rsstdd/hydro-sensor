@@ -21,8 +21,8 @@ def format_data():
 					"sensor_num": sensor["serial_number"],
 					"type": "ec",
 					"role": sensor["sensor_type"],
-					"ec": sensor["ec"],
-					"value": sensor["ec"]
+					"ec": str(sensor["ec"]),
+					"value": str(sensor["ec"])
 				}
 
 				dispatch_sensor_data(ec_data)
@@ -31,8 +31,8 @@ def format_data():
 					"sensor_num": sensor["serial_number"],
 					"role": sensor["sensor_type"],
 					"type": "ppm",
-					"ppm": sensor["ppm"],
-					"value": sensor["ppm"]
+					"ppm": str(sensor["ppm"]),
+					"value": str(sensor["ppm"])
 				}
 
 				dispatch_sensor_data(ppm_data)
@@ -42,8 +42,8 @@ def format_data():
 					"sensor_num": sensor["serial_number"],
 					"role": sensor["sensor_type"],
 					"type": "hydro-temp",
-					"hydro-temp": sensor["sensor_reading"],
-					"value": sensor["sensor_reading"]
+					"hydro-temp": str(sensor["sensor_reading"]),
+					"value": str(sensor["sensor_reading"])
 				}
 
 				dispatch_sensor_data(temp_data)
@@ -53,8 +53,8 @@ def format_data():
 					"sensor_num": sensor["serial_number"],
 					"role": sensor["sensor_type"],
 					"type": "hydro-ph",
-					"hydro-ph": sensor["sensor_reading"],
-					"value": sensor["sensor_reading"]
+					"hydro-ph": str(sensor["sensor_reading"]),
+					"value": str(sensor["sensor_reading"])
 				}
 
 				dispatch_sensor_data(temp_data)
