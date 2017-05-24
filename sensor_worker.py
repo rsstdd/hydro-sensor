@@ -42,7 +42,7 @@ def dispatch_sensor_data(dataPackage):
     dataPackage["sensor_version"] = "1.00"
     dataPackage["timestamp"] = timestamp
 
-    sensorRecord = {"sensordata": dataPackage}
+    # sensorRecord = {"sensordata": dataPackage}
 
     print sensorRecord
     print ''
@@ -61,11 +61,13 @@ def dispatch_sensor_data(dataPackage):
 
     #  Mongo
 
+	print json.dumps(sensorRecord)
+
     try:
         client = MongoClient('10.9.0.1')
         db = client.solstice
         collection = db[type]
-        record_id2 = db.sensordata.insert_one(sensorRecord)
+        # record_id2 = db.sensordata.insert_one(sensorRecord)
         client.close()
         print "mongo sent"
 
