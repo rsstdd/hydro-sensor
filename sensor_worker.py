@@ -53,15 +53,11 @@ def dispatch_sensor_data(dataPackage):
 
 
 	#  Mongo
-
-	try_this = json.dumps(sensorRecord)
-	print try_this
-
 	try:
 		client = MongoClient('10.9.0.1')
 		db = client.solstice
 		collection = db[type]
-		record_id2 = db.sensordata.insert_one(try_this)
+		record_id2 = db.sensordata.insert_one(sensorRecord)
 		client.close()
 		print "mongo sent"
 
