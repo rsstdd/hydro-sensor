@@ -55,8 +55,8 @@ def dispatch_sensor_data(dataPackage):
 	if deviceData['location']['room'] in ['0804', '0808']:
 		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', sensorRecord)
 	else:
-		postAPI('https://luna-api.herokuapp.com/sensordata', jsonPackage)
-		postAPI('https://luna-api-staging.herokuapp.com/sensordata', jsonPackage)
+		postAPI('https://luna-api.herokuapp.com/sensordata', sensorRecord)
+		postAPI('https://luna-api-staging.herokuapp.com/sensordata', sensorRecord)
 
 
 	#  Mongo
