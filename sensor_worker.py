@@ -48,6 +48,7 @@ def dispatch_sensor_data(dataPackage):
 
 	print sensorRecord
 	print ''
+	print type(sensorRecord)
 
 
 	#  Heroku
