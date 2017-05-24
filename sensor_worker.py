@@ -14,7 +14,6 @@ def postAPI(url, payload):
 	try:
 		r = requests.post(url, data=payload)
 		assert r.status_code == 201, "%r %r != 201" % (r.url, r.status_code)
-		print r.status_code
 		print "sent", r.url
 	except Exception as e:
 		print "sensor-worker.py FAILED to send to", e
