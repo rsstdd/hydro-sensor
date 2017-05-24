@@ -35,7 +35,6 @@ def dispatch_sensor_data(dataPackage):
 
 	# print deviceData
 
-	dataPackage = {}
 	sensor_type = deviceData['device']['deviceRole']
 	dataPackage['hostname'] = deviceData['device']['hostname']
 	dataPackage['title'] = deviceData['device']['deviceRole']
