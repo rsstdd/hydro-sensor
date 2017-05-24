@@ -41,7 +41,7 @@ def format_data():
 					"sensor_num": sensor["serial_number"],
 					"role": sensor["sensor_type"],
 					"type": "hydro_temp",
-					"hydroTemp": str(sensor["sensor_reading"])
+					"hydro_temp": str(sensor["sensor_reading"])
 				}
 
 				dispatch_sensor_data(temp_data)
