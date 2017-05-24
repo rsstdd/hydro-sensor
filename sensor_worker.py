@@ -60,7 +60,6 @@ def dispatch_sensor_data(dataPackage):
 		record_id2 = db.sensordata.insert_one(sensorRecord),isnerted_id
 		client.close()
 		print "mongo sent"
-
 	except Exception as e:
 		print "sensor-worker.py FAILED to send to mongo", e
 
