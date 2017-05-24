@@ -46,7 +46,8 @@ def dispatch_sensor_data(dataPackage):
 	sensorRecord = {}
 	sensorRecord = {"sensordata": dataPackage}
 
-	print sensorRecord
+	print sensorRecord["sensordata"].type
+	print sensorRecord["value"]
 	print ''
 
 
@@ -54,10 +55,10 @@ def dispatch_sensor_data(dataPackage):
 
 	# if Skagit
 	if deviceData['location']['room'] in ['0804', '0808']:
-		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', sensorRecord)
+		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', datapackage)
 	else:
-		postAPI('https://luna-api.herokuapp.com/sensordata', sensorRecord)
-		postAPI('https://luna-api-staging.herokuapp.com/sensordata', sensorRecord)
+		postAPI('https://luna-api.herokuapp.com/sensordata', datapackage)
+		postAPI('https://luna-api-staging.herokuapp.com/sensordata', datapackage)
 
 
 	#  Mongo
