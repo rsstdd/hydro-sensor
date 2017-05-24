@@ -37,7 +37,7 @@ def dispatch_sensor_data(dataPackage):
 	dataPackage = {}
 	sensor_type = deviceData['device']['deviceRole']
 	dataPackage['hostname'] = deviceData['device']['hostname']
-	dataPackage['type'] = deviceData['device']['deviceRole']
+	dataPackage['title'] = deviceData['device']['deviceRole']
 	dataPackage['room'] = deviceData['location']['room']
 	dataPackage['role'] = deviceData['device']['deviceRole']
 	dataPackage["sensor_group"] = "test"
@@ -67,7 +67,6 @@ def dispatch_sensor_data(dataPackage):
 		db=client.solstice
 		collection = db[sensor_type]
 		record_id2 = db.sensordata.insert_one(sensorRecord)
-		print record_id2
 		client.close()
 		print "mongo sent"
 	except Exception as e:

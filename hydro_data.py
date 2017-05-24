@@ -1,4 +1,4 @@
-#!/usr/bin/python
+\#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import json
@@ -56,5 +56,5 @@ def format_data():
 				dispatch_sensor_data(temp_data)
 
 
-
-format_data()
+while True:
+	format_data()
