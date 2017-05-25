@@ -8,7 +8,7 @@ import os
 import sys
 
 import atlas_hydro
-from sensor_worker import dispatch_sensor_data
+from sensor_worker2 import dispatch_sensor_data
 
 hydroData = atlas_hydro.read_sensors() # should this be in the loop?
 
