@@ -134,5 +134,8 @@ sensors = [{
 		}]
 
 
+read_sensors()
+
+
 def get_sensor_data():
 	read_sensors()
