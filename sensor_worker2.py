@@ -34,26 +34,23 @@ def dispatch_sensor_data(dataPackage):
 	dataPackage['timestamp'] = timestamp
 
 	if os.path.isfile(thoth2):
-		try:
-			with open(thoth2, 'r') as file:
-				deviceData = json.load(file)
-				file.close()
-		except Exception as e:
-			print e
+		open_thoth = thoth2
+	else:
+		 open_thoth = thoth
 
+	try:
+		with open(open_thoth) as file:
+			deviceData = json.load(file)
+			file.close()
+	except Exception as e:
+		print e
+
+	if open_thoth == thoth2:
 		dataPackage['hostname'] = deviceData['device']['hostname']
 		dataPackage['room'] = deviceData['location']['room']
 		dataPackage['role'] = deviceData['device']['deviceRole']
 		sensor_type = deviceData['device']['deviceRole']
-
 	else:
-		try:
-			with open(thoth, 'r') as file:
-				deviceData = json.load(file)
-				file.close()
-		except Exception as e:
-			print e
-
 		dataPackage['hostname'] = deviceData['hostname']
 		dataPackage['room'] = deviceData['room']
 		dataPackage['role'] = deviceData['role']
