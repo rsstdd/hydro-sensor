@@ -3,6 +3,7 @@
 ## Start
 1. Configure Atlas Scientific FTDI (Below)
 2. `sudo python hydro_data.py`
+3. `sudo python atlas_hydro.py` will return sensor data without posting to DB
 
 ## About
 
