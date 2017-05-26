@@ -24,8 +24,6 @@ def dispatch_sensor_data(dataPackage):
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
 
-	deviceData = {}
-
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
 	elif os.path.isfile(thoth):
@@ -40,7 +38,6 @@ def dispatch_sensor_data(dataPackage):
 	except Exception as e:
 		print e
 
-	dataPackage = {}
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
 
 	if open_thoth == thoth2:
@@ -57,7 +54,7 @@ def dispatch_sensor_data(dataPackage):
 		sensor_type = deviceData['role']
 
 	sensorRecord = {'sensordata': dataPackage}
-	print dataPackage
+	print sensorRecord
 	print ''
 
 	# Send to heroku
