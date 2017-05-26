@@ -21,22 +21,17 @@ def postAPI(url, payload):
 
 
 def dispatch_sensor_data(dataPackage):
-	timestamp = datetime.datetime.utcnow()
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
 
 	deviceData = {}
-	deviceData['room']='Undefined'
-	deviceData['role']='Undefined'
-
-	dataPackage['sensor_group'] = 'Test'
-	dataPackage['sensor_version'] = '1.00'
-	dataPackage['timestamp'] = timestamp
 
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
-	else:
+	elif:
 		 open_thoth = thoth
+	else:
+		open_thoth = None
 
 	try:
 		with open(open_thoth) as file:
@@ -45,29 +40,37 @@ def dispatch_sensor_data(dataPackage):
 	except Exception as e:
 		print e
 
+	dataPackage[timestamp] = datetime.datetime.utcnow()
+
 	if open_thoth == thoth2:
-		dataPackage['hostname'] = deviceData['device']['hostname']
+		customerName = deviceData['customer']['customerName']
+		sensor_type = deviceData['hardware']['role']
+		dataPackage['hostname'] = deviceData['hardware']['hostname']
+		dataPackage['role'] = deviceData['hardware']['role']
 		dataPackage['room'] = deviceData['location']['room']
-		dataPackage['role'] = deviceData['device']['deviceRole']
-		sensor_type = deviceData['device']['deviceRole']
 	else:
+		dataPackage['sensor_group'] = 'Test'
 		dataPackage['hostname'] = deviceData['hostname']
 		dataPackage['room'] = deviceData['room']
 		dataPackage['role'] = deviceData['role']
 		sensor_type = deviceData['role']
 
-	sensorRecord = {}
 	sensorRecord = {'sensordata': dataPackage}
-
 	print sensorRecord
 	print ''
 
 	# Send to heroku
-	customerName = deviceData['customer']['customerName']
-
-	if customerName.lower() == 'skagit' or dataPackage['room'] in ['0804', '0808']:
-		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
-	else:
+	try:
+		if customerName.lower() == 'skagit' or dataPackage['room'] in ['0804', '0808']:
+			postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
+	except Exception as e:
+		if open_thoth == thoth:
+			postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
+			postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
+		else: # No thoth/thoth2
+			postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
+			postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
+	else: # thoth2 - Solstice Cam
 		postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
 
@@ -76,6 +79,7 @@ def dispatch_sensor_data(dataPackage):
 		client = MongoClient('10.9.0.1')
 		db=client.solstice
 		collection = db[sensor_type]
+
 		record_id2 = db.sensordata.insert_one(sensorRecord)
 		client.close()
 		print 'mongo sent'
