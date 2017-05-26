@@ -56,7 +56,7 @@ def dispatch_sensor_data(dataPackage):
 		sensor_type = deviceData['role']
 
 	sensorRecord = {'sensordata': dataPackage}
-	print sensorRecord
+	print dataPackage
 	print ''
 
 	# Send to heroku
