@@ -28,7 +28,7 @@ def dispatch_sensor_data(dataPackage):
 
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
-	elif:
+	elif os.path.isfile(thoth):
 		 open_thoth = thoth
 	else:
 		open_thoth = None
