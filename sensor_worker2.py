@@ -43,7 +43,9 @@ def dispatch_sensor_data(dataPackage):
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
 		sensor_type = deviceData['hardware']['role']
+
 		dataPackage['hostname'] = deviceData['hardware']['hostname']
+		dataPackage['sensor_group'] = deviceData['hardware']['sensorGroup']
 		dataPackage['role'] = deviceData['hardware']['role']
 		dataPackage['room'] = deviceData['location']['room']
 	else:
