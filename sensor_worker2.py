@@ -40,7 +40,7 @@ def dispatch_sensor_data(dataPackage):
 	except Exception as e:
 		print e
 
-	dataPackage[timestamp] = datetime.datetime.utcnow()
+	dataPackage['timestamp'] = datetime.datetime.utcnow()
 
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
