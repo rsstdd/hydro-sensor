@@ -41,7 +41,7 @@ def dispatch_sensor_data(dataPackage):
 		print e
 
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
-	customerName = None
+	# customerName = None
 
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
