@@ -39,6 +39,7 @@ def dispatch_sensor_data(dataPackage):
 		print e
 
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
+	customerName = None
 
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
@@ -60,17 +61,12 @@ def dispatch_sensor_data(dataPackage):
 	print ''
 
 	# Send to heroku
-	try:
-		if customerName.lower() == 'skagit' or dataPackage['room'] in ['0804', '0808']:
-			postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
-	except Exception as e:
-		if open_thoth == thoth:
-			postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
-			postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
-		else: # No thoth/thoth2
-			postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
-			postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
-	else: # thoth2 - Solstice Cam
+	if customerName.lower() == 'skagit' or dataPackage['room'] in ['0804', '0808']:
+		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
+	elif open_thoth == thoth:
+		postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
+		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
+	else: # No thoth/thoth2
 		postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
 
