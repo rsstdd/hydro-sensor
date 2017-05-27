@@ -33,6 +33,8 @@ def dispatch_sensor_data(dataPackage):
 		open_thoth = None
 		deviceData = {}
 
+	print open_thoth
+
 	try:
 		with open(open_thoth) as file:
 			deviceData = json.load(file)
