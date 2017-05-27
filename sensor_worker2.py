@@ -51,7 +51,7 @@ def dispatch_sensor_data(dataPackage):
 		dataPackage['sensor_group'] = deviceData['hardware']['sensorGroup']
 		dataPackage['role'] = deviceData['hardware']['role']
 		dataPackage['room'] = deviceData['location']['room']
-	else:
+	elif open_thoth == thoth:
 		dataPackage['sensor_group'] = 'Test'
 		dataPackage['hostname'] = deviceData['hostname']
 		dataPackage['room'] = deviceData['room']
