@@ -23,14 +23,12 @@ def postAPI(url, payload):
 def dispatch_sensor_data(dataPackage):
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
+	open_thoth = None
 
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
 	elif os.path.isfile(thoth):
 		open_thoth = thoth
-	# else:
-	# 	open_thoth = None
-	# 	deviceData = None
 
 	print open_thoth
 	print ''
