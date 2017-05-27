@@ -33,8 +33,6 @@ def dispatch_sensor_data(dataPackage):
 		open_thoth = None
 		deviceData = {}
 
-	print open_thoth
-
 	try:
 		with open(open_thoth) as file:
 			deviceData = json.load(file)
@@ -66,7 +64,6 @@ def dispatch_sensor_data(dataPackage):
 	print ''
 
 	# Send to heroku
-	print customerName
 	if customerName.lower() == 'skagit' or 'room' in dataPackage and dataPackage['room'] in ['0804', '0808']:
 		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
 		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
