@@ -40,9 +40,6 @@ def dispatch_sensor_data(dataPackage):
 	except Exception as e:
 		print e
 
-	print deviceData
-	print ''
-
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
 	customerName = None
 
