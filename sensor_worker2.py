@@ -23,13 +23,12 @@ def postAPI(url, payload):
 def dispatch_sensor_data(dataPackage):
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
+	open_thoth = None
 
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
 	elif os.path.isfile(thoth):
 		 open_thoth = thoth
-	else:
-		open_thoth = None
 
 	try:
 		with open(open_thoth) as file:
@@ -61,6 +60,7 @@ def dispatch_sensor_data(dataPackage):
 	print ''
 
 	# Send to heroku
+	print customerName
 	if customerName.lower() == 'skagit' or dataPackage['room'] in ['0804', '0808']:
 		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
 	elif open_thoth == thoth:
