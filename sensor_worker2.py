@@ -27,10 +27,10 @@ def dispatch_sensor_data(dataPackage):
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
 	elif os.path.isfile(thoth):
-		 open_thoth = thoth
-	else:
-		open_thoth = None
-		deviceData = None
+		open_thoth = thoth
+	# else:
+	# 	open_thoth = None
+	# 	deviceData = None
 
 	print open_thoth
 	print ''
@@ -43,7 +43,8 @@ def dispatch_sensor_data(dataPackage):
 		print e
 
 	print deviceData
-	print 'S'
+	print ''
+
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
 	customerName = None
 
