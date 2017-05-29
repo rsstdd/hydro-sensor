@@ -32,6 +32,7 @@ def format_data():
 					"role": sensor["sensor_type"],
 					"type": "ppm",
 					"ppm": str(sensor["ppm"])
+					"value": str(sensor["ppm"])
 				}
 
 				dispatch_sensor_data(ppm_data)
@@ -42,6 +43,7 @@ def format_data():
 					"role": sensor["sensor_type"],
 					"type": "hydro_temp",
 					"hydro_temp": str(sensor["sensor_reading"])
+					"value": str(sensor["sensor_reading"])
 				}
 
 				dispatch_sensor_data(temp_data)
@@ -52,6 +54,7 @@ def format_data():
 					"role": sensor["sensor_type"],
 					"type": "hydro-ph",
 					"hydroPh": str(sensor["sensor_reading"])
+					"value": str(sensor["sensor_reading"])
 				}
 
 				dispatch_sensor_data(temp_data)
