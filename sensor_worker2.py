@@ -45,17 +45,16 @@ def dispatch_sensor_data(dataPackage):
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
 		sensor_type = deviceData['device']['role']
-
-		dataPackage['hostname'] = deviceData['device']['hostname']
 		dataPackage['sensor_group'] = deviceData['device']['sensorGroup']
-		dataPackage['role'] = deviceData['device']['role']
+		dataPackage['hostname'] = deviceData['device']['hostname']
 		dataPackage['room'] = deviceData['location']['room']
+		dataPackage['role'] = deviceData['device']['role']
 	elif open_thoth == thoth:
+		sensor_type = deviceData['role']
 		dataPackage['sensor_group'] = 'Test'
 		dataPackage['hostname'] = deviceData['hostname']
 		dataPackage['room'] = deviceData['room']
 		dataPackage['role'] = deviceData['role']
-		sensor_type = deviceData['role']
 
 	sensorRecord = {'sensordata': dataPackage}
 	print sensorRecord
@@ -70,10 +69,10 @@ def dispatch_sensor_data(dataPackage):
 	elif open_thoth == thoth2:
 		postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
-	elif open_thoth == thoth: # No thoth/thoth2
+	elif open_thoth == thoth:
 		postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
-	else: # No thoth/thoth2
+	else:
 		print "No thoth/thoth2"
 		postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
