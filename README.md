@@ -56,7 +56,3 @@ Hydro Sensor module utilizes Atlas Scientific Temperature (DJ00RVZR), pH (DJ00RU
     Added line:
 
         USB_PID_LIST = [0x6001, 0x6010, 0x6011, 0x6014, 0x6015]        
-
-
-
-				{"lat":"", "hostname”:"iunuTestPi", "role”:”hydroTest", "room”:”Grow Room 1","long":""}
