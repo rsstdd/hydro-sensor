@@ -18,20 +18,20 @@ def format_data():
 
 			if sensor["sensor_type"] == "atlas_scientific_ec":
 				ec_data = {
+					"ec": str(sensor["ec"]),
+					"role": sensor["sensor_type"],
 					"sensor_num": sensor["serial_number"],
 					"type": "ec",
-					"role": sensor["sensor_type"],
-					"ec": str(sensor["ec"]),
 					"value": str(sensor["ec"])
 				}
 
 				dispatch_sensor_data(ec_data)
 
 				ppm_data = {
-					"sensor_num": sensor["serial_number"],
-					"role": sensor["sensor_type"],
-					"type": "ppm",
 					"ppm": str(sensor["ppm"]),
+					"role": sensor["sensor_type"],
+					"sensor_num": sensor["serial_number"],
+					"type": "ppm",
 					"value": str(sensor["ppm"])
 				}
 
@@ -39,25 +39,25 @@ def format_data():
 
 			if sensor["sensor_type"] == "atlas_scientific_temp":
 				temp_data = {
-					"sensor_num": sensor["serial_number"],
+					"hydroTemp": str(sensor["sensor_reading"]),
 					"role": sensor["sensor_type"],
+					"sensor_num": sensor["serial_number"],
 					"type": "hydro_temp",
-					"hydro_temp": str(sensor["sensor_reading"]),
 					"value": str(sensor["sensor_reading"])
 				}
 
 				dispatch_sensor_data(temp_data)
 
 			if sensor["sensor_type"] == "atlas_scientific_ph":
-				temp_data = {
-					"sensor_num": sensor["serial_number"],
-					"role": sensor["sensor_type"],
-					"type": "hydro-ph",
+				ph_data = {
 					"hydroPh": str(sensor["sensor_reading"]),
+					"role": sensor["sensor_type"],
+					"sensor_num": sensor["serial_number"],
+					"type": "hydro-ph",
 					"value": str(sensor["sensor_reading"])
 				}
 
-				dispatch_sensor_data(temp_data)
+				dispatch_sensor_data(ph_data)
 
 
 format_data()
