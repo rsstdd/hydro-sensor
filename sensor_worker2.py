@@ -46,7 +46,7 @@ def dispatch_sensor_data(dataPackage):
 		customerName = deviceData['customer']['customerName']
 		sensor_type = deviceData['device']['role']
 		dataPackage['sensor_group'] = deviceData['device']['sensorGroup']
-		dataPackage['sensor_version'] = deviceData['device']['sensor_version']
+		dataPackage['sensor_version'] = deviceData['device']['sensorVersion']
 		dataPackage['hostname'] = deviceData['device']['hostname']
 		dataPackage['room'] = deviceData['location']['room']
 		dataPackage['role'] = deviceData['device']['role']
