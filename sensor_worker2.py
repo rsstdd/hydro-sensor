@@ -23,7 +23,7 @@ def postAPI(url, payload):
 def dispatch_sensor_data(dataPackage):
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
-
+	deviceData = {}
 
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
@@ -60,7 +60,8 @@ def dispatch_sensor_data(dataPackage):
 	sensorRecord = {'sensordata': dataPackage}
 	print sensorRecord
 	print ''
-
+	print open_thoth
+	
 	# Send to heroku
 	# Skagit?
 	if customerName.lower() == 'skagit' or 'room' in dataPackage and dataPackage['room'] in ['0804', '0808']:
