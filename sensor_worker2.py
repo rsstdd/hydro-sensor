@@ -31,7 +31,6 @@ def dispatch_sensor_data(dataPackage):
 		open_thoth = thoth
 	else:
 		open_thoth = None
-		deviceData = {}
 
 	try:
 		with open(open_thoth) as file:
