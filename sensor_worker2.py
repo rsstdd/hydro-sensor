@@ -45,18 +45,20 @@ def dispatch_sensor_data(dataPackage):
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
 		sensor_type = deviceData['device']['role']
+
+		dataPackage['hostname'] = deviceData['device']['hostname']
+		dataPackage['role'] = deviceData['device']['role']
+		dataPackage['room'] = deviceData['location']['room']
 		dataPackage['sensor_group'] = deviceData['device']['sensorGroup']
 		dataPackage['sensor_version'] = deviceData['device']['sensorVersion']
-		dataPackage['hostname'] = deviceData['device']['hostname']
-		dataPackage['room'] = deviceData['location']['room']
-		dataPackage['role'] = deviceData['device']['role']
 	elif open_thoth == thoth:
 		sensor_type = deviceData['role']
+
+		dataPackage['hostname'] = deviceData['hostname']
+		dataPackage['role'] = deviceData['role']
+		dataPackage['room'] = deviceData['room']
 		dataPackage['sensor_group'] = 'Test'
 		dataPackage['sensor_version'] = '1.00'
-		dataPackage['hostname'] = deviceData['hostname']
-		dataPackage['room'] = deviceData['room']
-		dataPackage['role'] = deviceData['role']
 
 	sensorRecord = {'sensordata': dataPackage}
 	print sensorRecord
