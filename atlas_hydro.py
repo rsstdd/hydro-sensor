@@ -106,7 +106,6 @@ def read_sensors():
 						'sensor_type': sensor["sensor_type"],
 						'sensor_reading': sensor_reading
 					})
-	print readings
 
 	return readings
 
