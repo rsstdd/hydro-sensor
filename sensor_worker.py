@@ -40,7 +40,7 @@ def dispatch_sensor_data(dataPackage):
 		print e
 
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
-	jsonPackage['net_hostname'] = gethostname()
+	dataPackage['net_hostname'] = gethostname()
 	customerName = ''
 
 	if open_thoth == thoth2:
