@@ -14,63 +14,79 @@ def postAPI(url, payload):
 	try:
 		r = requests.post(url, data=payload)
 		assert r.status_code == 201, "%r %r != 201"%(r.url, r.status_code)
-		print "sent", r.url
+		print 'sent', r.url
 	except Exception as e:
-		print "sensor-worker.py FAILED to send to", e
+		print 'sensor-worker.py FAILED to send to', e
 		print ''
 
 
 def dispatch_sensor_data(dataPackage):
-	timestamp = datetime.datetime.utcnow()
-	thoth = "/var/local/thoth.id"
+	thoth2 = '/var/local/thoth2.id'
+	thoth = '/var/local/thoth.id'
+	deviceData = {}
+
+	if os.path.isfile(thoth2):
+		open_thoth = thoth2
+	elif os.path.isfile(thoth):
+		 open_thoth = thoth
+	else:
+		open_thoth = None
 
 	try:
-		with open(thoth, 'r') as file:
+		with open(open_thoth) as file:
 			deviceData = json.load(file)
 			file.close()
 	except Exception as e:
 		print e
 
-	# print deviceData
+	dataPackage['timestamp'] = datetime.datetime.utcnow()
+	customerName = ''
 
-	dataPackage['hostname'] = deviceData['device']['hostname']
-	dataPackage['room'] = deviceData['location']['room']
-	dataPackage['role'] = deviceData['device']['deviceRole']
-	sensor_type = deviceData['device']['deviceRole']
+	if open_thoth == thoth2:
+		customerName = deviceData['customer']['customerName']
+		sensor_type = deviceData['device']['role']
 
-	dataPackage['sensor_group'] = 'test'
-	dataPackage['sensor_version'] = '1.00'
-	dataPackage['timestamp'] = timestamp
+		dataPackage['hostname'] = deviceData['device']['hostname']
+		dataPackage['role'] = deviceData['device']['role']
+		dataPackage['room'] = deviceData['location']['room']
+		dataPackage['sensor_group'] = deviceData['device']['sensorGroup']
+		dataPackage['sensor_version'] = deviceData['device']['sensorVersion']
+	elif open_thoth == thoth:
+		sensor_type = deviceData['role']
 
-	sensorRecord = {}
-	sensorRecord = {'sensordata':dataPackage}
+		dataPackage['hostname'] = deviceData['hostname']
+		dataPackage['room'] = deviceData['room']
+		dataPackage['role'] = deviceData['role']
+		dataPackage['sensor_group'] = 'Production'
+		dataPackage['sensor_version'] = '1.00'
 
-	print dataPackage
+	sensorRecord = {'sensordata': dataPackage}
+	print sensorRecord
 	print ''
 
-	#  Heroku
-
-	# if Skagit
-	if deviceData['location']['room'] in ['0804', '0808']:
+	# Send to heroku
+	# Skagit?
+	if customerName.lower() == 'skagit' or 'room' in dataPackage and dataPackage['room'] in ['0804', '0808']:
+		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
 		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
 	else:
 		postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
 
-
-	#  Mongo
+	# Send to Mongo
 	try:
 		client = MongoClient('10.9.0.1')
 		db=client.solstice
 		collection = db[sensor_type]
+
 		record_id2 = db.sensordata.insert_one(sensorRecord)
 		client.close()
-		print "mongo sent"
+		print 'mongo sent'
 	except Exception as e:
-		print "sensor-worker.py FAILED to send to mongo", e
+		print 'sensor-worker.py FAILED to send to mongo', e
 
 		try:
-			with open('/home/pi/sensordata.txt','a') as outfile:
-				json.dump(jsonPackage, outfile)
+			with open('/home/pi/sensordata.txt', 'a') as outfile:
+				json.dump(dataPackage, outfile)
 		except:
 			pass
