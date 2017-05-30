@@ -52,7 +52,7 @@ def dispatch_sensor_data(dataPackage):
 		dataPackage['hostname'] = deviceData['device']['hostname']
 		dataPackage['sensor_version'] = deviceData['device']['sensorVersion']
 
-		jsonPackage['thoth2id'] = deviceData
+		datapackage['thoth2id'] = deviceData
 	else:
 		dataPackage['room'] = deviceData['room']
 		dataPackage['role'] = deviceData['role']
