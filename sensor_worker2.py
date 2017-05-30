@@ -63,10 +63,11 @@ def dispatch_sensor_data(dataPackage):
 	sensorRecord = {'sensordata': dataPackage}
 	print sensorRecord
 	print ''
+	print open_thoth
 
 	# Send to heroku
 	# Skagit
-	if customerName.lower() == 'skagit' or 'room' in jsonPackage and jsonPackage['room'] in ['0804', '0808']:
+	if customerName.lower() == 'skagit' or 'room' in dataPackage and dataPackage['room'] in ['0804', '0808']:
 		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
 	else:
 		postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
@@ -84,7 +85,7 @@ def dispatch_sensor_data(dataPackage):
 		print 'sensor-worker.py FAILED to send to mongo', e
 
 		try:
-			with open('/home/pi/sensordata.txt', 'a') as outfile:
+			with open('/home/thoth/sensordata.txt', 'a') as outfile:
 				json.dump(dataPackage, outfile)
 		except:
 			pass
