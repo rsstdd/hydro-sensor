@@ -68,7 +68,7 @@ def dispatch_sensor_data(dataPackage):
 	# Skagit
 	if customerName.lower() == 'skagit' or 'room' in jsonPackage and jsonPackage['room'] in ['0804', '0808']:
 		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
-	else open_thoth == thoth2 or open_thoth == thoth:
+	else:
 		postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
 
