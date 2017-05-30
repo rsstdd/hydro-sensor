@@ -51,8 +51,6 @@ def dispatch_sensor_data(dataPackage):
 		dataPackage['role'] = deviceData['device']['role']
 		dataPackage['hostname'] = deviceData['device']['hostname']
 		dataPackage['sensor_version'] = deviceData['device']['sensorVersion']
-
-		datapackage['thoth2id'] = deviceData
 	else:
 		dataPackage['room'] = deviceData['room']
 		dataPackage['role'] = deviceData['role']
