@@ -17,11 +17,11 @@ class DispatchSensorDataTest(unittest.TestCase):
 	"""Tests for dispatch_sensor_data"""
 
 	def dispatch_sensor_data_test(self):
-		"""Json_string should be valid"""
+		"""It should format the JSON appropriately"""
 		json_string = { "sensor_num":"DJ00RU96", "ppm":"618", "sensor_group":"Test", "role":"hydroTest", "type":"ppm", "ppm":"618" }
 		valid_json = "{'sensordata': {'sensor_num': 'DJ00RU96', 'room': u'Grow Room 1', 'sensor_version': u'1.00', 'timestamp': datetime.datetime(2017, 5, 29, 20, 23, 53, 238618), 'hostname': u'iunuTestPi', 'ppm': '618', 'sensor_group': u'Test', 'role': u'hydroTest', 'type': 'ppm'}}"
 
-		valid_post = dispatch_sensor_data(json_string)
+		result = dispatch_sensor_data(json_string)
 
 		print valid_post
 
