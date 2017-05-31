@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os, sys
-import unittest
+import nose
 # sys.path.append(os.path.join("..", "test")
 from sensor_worker2 import dispatch_sensor_data
 from jsonTest import json_string
@@ -24,10 +24,5 @@ class DispatchSensorDataTest(unittest.TestCase):
 
 		result = dispatch_sensor_data(json_string)
 
-		print valid_post
 
-		self.assertEqual(valid_post, valid_json)
-
-
-if __name__ == '__main__':
-	unittest.main()
+result = nose.main() 
