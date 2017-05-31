@@ -22,8 +22,8 @@ class DispatchSensorDataTest(unittest.TestCase):
 		json_string = {  "ppm":"618", "sensor_group":"Test", "role":"hydroTest", "type":"ppm", "ppm":"618" }
 		# "sensor_num":"DJ00RU96",
 		valid_json = "{'sensordata': {'sensor_num': 'DJ00RU96', 'room': u'Grow Room 1', 'sensor_version': u'1.00', 'timestamp': datetime.datetime(2017, 5, 29, 20, 23, 53, 238618), 'hostname': u'iunuTestPi', 'ppm': '618', 'sensor_group': u'Test', 'role': u'hydroTest', 'type': 'ppm'}}"
-
 		result = dispatch_sensor_data(json_string)
 
+		nose.tools.ok_(result, 201) 
 
 result = nose.main()
