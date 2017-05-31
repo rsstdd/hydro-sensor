@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import os, sys
 import nose
+import unittest
 # sys.path.append(os.path.join("..", "test")
 from sensor_worker2 import dispatch_sensor_data
 from jsonTest import json_string
@@ -25,4 +26,4 @@ class DispatchSensorDataTest(unittest.TestCase):
 		result = dispatch_sensor_data(json_string)
 
 
-result = nose.main() 
+result = nose.main()
