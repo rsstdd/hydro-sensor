@@ -1,17 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import os, sys
 import nose
 import unittest
-# sys.path.append(os.path.join("..", "test")
 from sensor_worker2 import dispatch_sensor_data
-from jsonTest import json_string
-
-from socket import gethostname
-import datetime
-import json
-import requests
-from pymongo import MongoClient
+from nose.tools import assert_equal
+from nose.tools import assert_not_equal
+from nose.tools import assert_raises
+from nose.tools import raises
 
 
 class DispatchSensorDataTest(unittest.TestCase):
@@ -24,6 +19,6 @@ class DispatchSensorDataTest(unittest.TestCase):
 		valid_json = "{'sensordata': {'sensor_num': 'DJ00RU96', 'room': u'Grow Room 1', 'sensor_version': u'1.00', 'timestamp': datetime.datetime(2017, 5, 29, 20, 23, 53, 238618), 'hostname': u'iunuTestPi', 'ppm': '618', 'sensor_group': u'Test', 'role': u'hydroTest', 'type': 'ppm'}}"
 		result = dispatch_sensor_data(json_string)
 
-		nose.tools.ok_(result, 201) 
+		nose.tools.ok_(result, 201)
 
 result = nose.main()
