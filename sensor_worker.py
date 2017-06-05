@@ -19,7 +19,7 @@ def postAPI(url, payload):
 		print 'sensor-worker.py FAILED to send to', e
 		print ''
 
-def send_to_mongo(payload):
+def send_to_mongo(payload, sensor_type):
 	try:
 		client = MongoClient('10.9.0.1')
 		db = client.solstice
@@ -58,6 +58,7 @@ def dispatch_sensor_data(dataPackage):
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
 	dataPackage['net_hostname'] = gethostname()
 	customerName = ''
+	sensor_type = dataPackage['type']
 
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
@@ -86,4 +87,4 @@ def dispatch_sensor_data(dataPackage):
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
 
 	#  Send to Mongo
-	send_to_mongo(dataPackage)
+	send_to_mongo(dataPackage, sensor_type)
