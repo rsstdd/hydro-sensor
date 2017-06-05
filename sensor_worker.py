@@ -60,6 +60,7 @@ def dispatch_sensor_data(dataPackage):
 	customerName = ''
 	sensor_type = dataPackage['type']
 
+
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
 		sensor_type = deviceData['device']['role']
@@ -76,7 +77,8 @@ def dispatch_sensor_data(dataPackage):
 		sensor_type = deviceData['role']
 
 	sensorRecord = {'sensordata': dataPackage}
-	print sensorRecord
+	# print sensorRecord
+	print dataPackage
 	print ''
 
 	# Send to heroku
