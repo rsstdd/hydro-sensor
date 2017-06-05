@@ -13,32 +13,14 @@ from pymongo import MongoClient
 def postAPI(url, payload):
 	try:
 		r = requests.post(url, data=payload)
-		assert r.status_code == 201, "%r %r != 201" % (r.url, r.status_code)
+		assert r.status_code == 201, "%r %r != 201"%(r.url, r.status_code)
 		print 'sent', r.url
 	except Exception as e:
 		print 'sensor-worker.py FAILED to send to', e
 		print ''
 
-def send_to_mongo(payload, sensor_type):
-	try:
-		client = MongoClient('10.9.0.1')
-		db = client.solstice
-		collection = db[sensor_type]
-		record_id2 = db.sensordata.insert_one(payload)
-		client.close()
-		print 'mongo sent'
-	except Exception as e:
-		print 'sensor-worker.py FAILED to send to mongo', e
 
-		try:
-			with open('/home/pi/sensordata.txt', 'a') as outfile:
-				json.dump(payload, outfile)
-		except:
-			pass
-
-
-def format_sensor_data(datapackage):
-	sensor_type = dataPackage['type']
+def dispatch_sensor_data(dataPackage):
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
 	deviceData = {}
@@ -46,7 +28,7 @@ def format_sensor_data(datapackage):
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
 	elif os.path.isfile(thoth):
-		open_thoth = thoth
+		 open_thoth = thoth
 	else:
 		open_thoth = None
 
@@ -58,40 +40,52 @@ def format_sensor_data(datapackage):
 		print e
 
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
-	dataPackage['net_hostname'] = gethostname()
 	customerName = ''
 
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
 		sensor_type = deviceData['device']['role']
 
-		dataPackage['room'] = deviceData['location']['room']
-		dataPackage['role'] = deviceData['device']['role']
 		dataPackage['hostname'] = deviceData['device']['hostname']
+		dataPackage['role'] = deviceData['device']['role']
+		dataPackage['room'] = deviceData['location']['room']
+		dataPackage['sensor_group'] = deviceData['device']['sensorGroup']
 		dataPackage['sensor_version'] = deviceData['device']['sensorVersion']
-	else:
-		dataPackage['room'] = deviceData['room']
-		dataPackage['role'] = deviceData['role']
-		dataPackage['hostname'] = deviceData['hostname']
-		dataPackage['sensor_group'] = 'Test'
+	elif open_thoth == thoth:
 		sensor_type = deviceData['role']
 
-	return datapackage
-
-
-def dispatch_sensor_data(dataPackage):
-	format_sensor_data(datapackage)
+		dataPackage['hostname'] = deviceData['hostname']
+		dataPackage['room'] = deviceData['room']
+		dataPackage['role'] = deviceData['role']
+		dataPackage['sensor_group'] = 'Production'
+		dataPackage['sensor_version'] = '1.00'
 
 	sensorRecord = {'sensordata': dataPackage}
-	print dataPackage
+	print sensorRecord
 	print ''
 
 	# Send to heroku
+	# Skagit?
 	if customerName.lower() == 'skagit' or 'room' in dataPackage and dataPackage['room'] in ['0804', '0808']:
 		postAPI('https://skagit-luna-api.herokuapp.com/sensordata', dataPackage)
 	else:
 		postAPI('https://luna-api.herokuapp.com/sensordata', dataPackage)
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
 
-	#  Send to Mongo
-	send_to_mongo(sensorRecord, sensor_type)
+	# Send to Mongo
+	try:
+		client = MongoClient('10.9.0.1')
+		db=client.solstice
+		collection = db[sensor_type]
+
+		record_id2 = db.sensordata.insert_one(sensorRecord)
+		client.close()
+		print 'mongo sent'
+	except Exception as e:
+		print 'sensor-worker.py FAILED to send to mongo', e
+
+		try:
+			with open('/home/thoth/sensordata.txt', 'a') as outfile:
+				json.dump(dataPackage, outfile)
+		except:
+			pass
