@@ -24,7 +24,7 @@ def send_to_mongo(payload, sensor_type):
 		client = MongoClient('10.9.0.1')
 		db = client.solstice
 		collection = db[sensor_type]
-		record_id2 = db.sensordata.insert_one(sensorRecord)
+		record_id2 = db.sensordata.insert_one(payload)
 		client.close()
 		print 'mongo sent'
 	except Exception as e:
@@ -32,7 +32,7 @@ def send_to_mongo(payload, sensor_type):
 
 		try:
 			with open('/home/pi/sensordata.txt', 'a') as outfile:
-				json.dump(dataPackage, outfile)
+				json.dump(payload, outfile)
 		except:
 			pass
 
@@ -89,4 +89,4 @@ def dispatch_sensor_data(dataPackage):
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
 
 	#  Send to Mongo
-	send_to_mongo(dataPackage, sensor_type)
+	send_to_mongo(sensorRecord, sensor_type)
