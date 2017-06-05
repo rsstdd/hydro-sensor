@@ -67,7 +67,7 @@ def format_sensor_data(dataPackage):
 	dataPackage['net_hostname'] = gethostname()
 
 	if open_thoth == thoth2:
-		customerName = deviceData['customer']['customerName']
+		dataPackage['customerName'] = deviceData['customer']['customerName']
 		sensor_type = deviceData['device']['role']
 
 		dataPackage['room'] = deviceData['location']['room']
@@ -86,7 +86,6 @@ def format_sensor_data(dataPackage):
 		dataPackage['hostname'] = hostname
 		dataPackage['sensor_group'] = 'Test'
 		dataPackage['sensor_type'] = sensor_type
-		dataPackage['customerName'] = customerName
 
 	return dataPackage
 
@@ -94,6 +93,9 @@ def format_sensor_data(dataPackage):
 def dispatch_sensor_data(dataPackage):
 	dataPackage = format_sensor_data(dataPackage)
 	sensor_type = dataPackage['type']
+
+	if not 'customerName' in dataPackage:
+		customerName = ''
 
 	print dataPackage
 	print ''
