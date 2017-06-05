@@ -46,7 +46,8 @@ def format_sensor_data(dataPackage):
 	room = ''
 	role = ''
 	hostname = ''
-	# sensor_type = ''
+	sensor_type = ''
+	customerName = ''
 
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
@@ -84,6 +85,8 @@ def format_sensor_data(dataPackage):
 		dataPackage['role'] = role
 		dataPackage['hostname'] = hostname
 		dataPackage['sensor_group'] = 'Test'
+		dataPackage['sensor_type'] = sensor_type
+		dataPackage['customerName'] = customerName
 
 	return dataPackage
 
