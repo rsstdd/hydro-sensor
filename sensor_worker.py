@@ -13,12 +13,28 @@ from pymongo import MongoClient
 def postAPI(url, payload):
 	try:
 		r = requests.post(url, data=payload)
-		assert r.status_code == 201, "%r %r != 201"%(r.url, r.status_code)
+		assert r.status_code == 201, "%r %r != 201" % (r.url, r.status_code)
 		print 'sent', r.url
 	except Exception as e:
 		print 'sensor-worker.py FAILED to send to', e
 		print ''
 
+def send_to_mongo(payload):
+	try:
+		client = MongoClient('10.9.0.1')
+		db = client.solstice
+		collection = db[sensor_type]
+		record_id2 = db.sensordata.insert_one(sensorRecord)
+		client.close()
+		print 'mongo sent'
+	except Exception as e:
+		print 'sensor-worker.py FAILED to send to mongo', e
+
+		try:
+			with open('/home/pi/sensordata.txt', 'a') as outfile:
+				json.dump(dataPackage, outfile)
+		except:
+			pass
 
 def dispatch_sensor_data(dataPackage):
 	thoth2 = '/var/local/thoth2.id'
@@ -70,18 +86,4 @@ def dispatch_sensor_data(dataPackage):
 		postAPI('https://luna-api-staging.herokuapp.com/sensordata', dataPackage)
 
 	#  Send to Mongo
-	try:
-		client = MongoClient('10.9.0.1')
-		db=client.solstice
-		collection = db[sensor_type]
-		record_id2 = db.sensordata.insert_one(sensorRecord)
-		client.close()
-		print 'mongo sent'
-	except Exception as e:
-		print 'sensor-worker.py FAILED to send to mongo', e
-
-		try:
-			with open('/home/pi/sensordata.txt', 'a') as outfile:
-				json.dump(dataPackage, outfile)
-		except:
-			pass
+	send_to_mongo(dataPackage)
