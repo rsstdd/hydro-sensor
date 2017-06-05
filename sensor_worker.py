@@ -9,6 +9,9 @@ import json
 import requests
 from pymongo import MongoClient
 
+thoth2 = '/var/local/thoth2.id'
+thoth = '/var/local/thoth.id'
+
 
 def postAPI(url, payload):
 	try:
@@ -39,9 +42,6 @@ def send_to_mongo(payload, sensor_type):
 
 
 def open_thoth_id():
-	thoth2 = '/var/local/thoth2.id'
-	thoth = '/var/local/thoth.id'
-
 	thoth_data = {}
 
 	if os.path.isfile(thoth2):
@@ -51,7 +51,7 @@ def open_thoth_id():
 	else:
 		open_thoth = None
 
-	thoth_data[open_thoth] = open_thoth
+	thoth_data['open_thoth'] = open_thoth
 
 	try:
 		with open(open_thoth) as file:
@@ -68,7 +68,7 @@ def format_sensor_data(dataPackage):
 	thoth_information = open_thoth_id()
 
 	deviceData = thoth_information['deviceData']
-	open_thoth = thoth_information['open_thoth']
+	thoth = thoth_information['open_thoth']
 
 	formatted_data_list = {}
 	room = ''
