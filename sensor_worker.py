@@ -79,7 +79,7 @@ def format_sensor_data(datapackage):
 	return datapackage
 
 
-def dispatch_sensor_data(dataPackage, customer_name):
+def dispatch_sensor_data(dataPackage):
 	format_sensor_data(datapackage)
 
 	sensorRecord = {'sensordata': dataPackage}
