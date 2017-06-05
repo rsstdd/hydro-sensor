@@ -13,6 +13,33 @@ thoth2 = '/var/local/thoth2.id'
 thoth = '/var/local/thoth.id'
 
 
+def open_thoth_id():
+	"""
+		Open Thoth/Thoth2.id & returns open_thoth variable and thoth/thoth2.id
+	"""
+
+	thoth_data = {}
+	open_thoth = ''
+
+	if os.path.isfile(thoth2):
+		open_thoth = thoth2
+	elif os.path.isfile(thoth):
+		open_thoth = thoth
+	else:
+		open_thoth = None
+
+	thoth_data['open_thoth'] = open_thoth
+
+	try:
+		with open(open_thoth) as file:
+			thoth_data['deviceData'] = json.load(file)
+			file.close()
+	except Exception as e:
+		print e
+
+	return thoth_data
+
+
 def postAPI(url, payload):
 	try:
 		r = requests.post(url, data=payload)
@@ -41,37 +68,18 @@ def send_to_mongo(payload, sensor_type):
 			pass
 
 
-def open_thoth_id():
-	thoth_data = {}
-	open_thoth = ''
-
-	if os.path.isfile(thoth2):
-		open_thoth = thoth2
-	elif os.path.isfile(thoth):
-		open_thoth = thoth
-	else:
-		open_thoth = None
-
-	thoth_data['open_thoth'] = open_thoth
-
-	try:
-		with open(open_thoth) as file:
-			thoth_data['deviceData'] = json.load(file)
-			file.close()
-	except Exception as e:
-		print e
-
-	return thoth_data
-
-
-
 def format_sensor_data(dataPackage):
+	"""
+		Wraps sensor data with device/thoth metadata;
+		Returns a dict of formatted data and the customerName
+	"""
+
 	thoth_information = open_thoth_id()
 
 	deviceData = thoth_information['deviceData']
 	open_thoth = thoth_information['open_thoth']
 
-	formatted_data_list = {}
+	formatted_sensor_data = {}
 	room = ''
 	role = ''
 	hostname = ''
@@ -82,7 +90,7 @@ def format_sensor_data(dataPackage):
 	dataPackage['net_hostname'] = gethostname()
 
 	if open_thoth == thoth2:
-		formatted_data_list['customerName'] = deviceData['customer']['customerName']
+		formatted_sensor_data['customerName'] = deviceData['customer']['customerName']
 		sensor_type = deviceData['device']['role']
 
 		dataPackage['room'] = deviceData['location']['room']
@@ -104,13 +112,17 @@ def format_sensor_data(dataPackage):
 		dataPackage['sensor_type'] = sensor_type
 		formatted_data_list['customerName'] = customerName
 
-	formatted_data_list['dataPackage'] = dataPackage
+	formatted_sensor_data['dataPackage'] = dataPackage
 
-	return formatted_data_list
+	return formatted_sensor_data
 
 
 def dispatch_sensor_data(dataPackage):
-	formatted_data_list = format_sensor_data(dataPackage)
+	"""
+		Determines where to send Sensor Data & posts to API and Mongo
+	"""
+
+	formatted_data_sensor = format_sensor_data(dataPackage)
 
 	dataPackage = formatted_data_list['dataPackage']
 	customerName = formatted_data_list['customerName']
