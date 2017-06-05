@@ -94,6 +94,8 @@ def format_sensor_data(dataPackage):
 
 
 def dispatch_sensor_data(dataPackage):
+	formatted_data_list = format_sensor_data(dataPackage)
+
 	dataPackage = formatted_data_list['dataPackage']
 	customerName = formatted_data_list['customerName']
 	sensor_type = dataPackage['type']
