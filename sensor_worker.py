@@ -68,7 +68,7 @@ def format_sensor_data(dataPackage):
 	thoth_information = open_thoth_id()
 
 	deviceData = thoth_information['deviceData']
-	open_thoth = thoth_information[open_thoth]
+	open_thoth = thoth_information['open_thoth']
 
 	formatted_data_list = {}
 	room = ''
