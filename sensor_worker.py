@@ -78,7 +78,7 @@ def format_sensor_data(dataPackage):
 		dataPackage['sensor_group'] = 'Test'
 		sensor_type = deviceData['role']
 
-	return datapackage
+	return dataPackage
 
 
 def dispatch_sensor_data(dataPackage):
