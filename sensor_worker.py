@@ -43,6 +43,7 @@ def send_to_mongo(payload, sensor_type):
 
 def open_thoth_id():
 	thoth_data = {}
+	open_thoth = ''
 
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
