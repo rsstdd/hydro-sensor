@@ -36,7 +36,9 @@ def send_to_mongo(payload, sensor_type):
 		except:
 			pass
 
-def dispatch_sensor_data(dataPackage):
+
+def format_sensor_data(datapackage):
+	sensor_type = dataPackage['type']
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
 	deviceData = {}
@@ -58,8 +60,6 @@ def dispatch_sensor_data(dataPackage):
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
 	dataPackage['net_hostname'] = gethostname()
 	customerName = ''
-	sensor_type = dataPackage['type']
-
 
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
@@ -76,8 +76,12 @@ def dispatch_sensor_data(dataPackage):
 		dataPackage['sensor_group'] = 'Test'
 		sensor_type = deviceData['role']
 
+	# send dataPackage
+	dispatch_sensor_data(dataPackage)
+
+
+def dispatch_sensor_data(dataPackage):
 	sensorRecord = {'sensordata': dataPackage}
-	# print sensorRecord
 	print dataPackage
 	print ''
 
