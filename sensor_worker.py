@@ -38,17 +38,9 @@ def send_to_mongo(payload, sensor_type):
 			pass
 
 
-def format_sensor_data(dataPackage):
+def open_thoth():
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
-	deviceData = {}
-	formatted_data_list = {}
-
-	room = ''
-	role = ''
-	hostname = ''
-	sensor_type = ''
-	customerName = ''
 
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
@@ -63,6 +55,22 @@ def format_sensor_data(dataPackage):
 			file.close()
 	except Exception as e:
 		print e
+
+	return deviceData
+
+
+
+def format_sensor_data(dataPackage):
+	# thoth2 = '/var/local/thoth2.id'
+	# thoth = '/var/local/thoth.id'
+	# deviceData = {}
+	deviceData = open_thoth()
+	formatted_data_list = {}
+	room = ''
+	role = ''
+	hostname = ''
+	sensor_type = ''
+	customerName = ''
 
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
 	dataPackage['net_hostname'] = gethostname()
