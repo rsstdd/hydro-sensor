@@ -43,6 +43,11 @@ def format_sensor_data(dataPackage):
 	thoth = '/var/local/thoth.id'
 	deviceData = {}
 
+	room = ''
+	role = ''
+	hostname = ''
+	# sensor_type = ''
+
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
 	elif os.path.isfile(thoth):
@@ -68,12 +73,17 @@ def format_sensor_data(dataPackage):
 		dataPackage['role'] = deviceData['device']['role']
 		dataPackage['hostname'] = deviceData['device']['hostname']
 		dataPackage['sensor_version'] = deviceData['device']['sensorVersion']
-	else:
+	elif open_thoth == thoth:
 		dataPackage['room'] = deviceData['room']
 		dataPackage['role'] = deviceData['role']
 		dataPackage['hostname'] = deviceData['hostname']
 		dataPackage['sensor_group'] = 'Test'
 		sensor_type = deviceData['role']
+	else:
+		dataPackage['room'] = room
+		dataPackage['role'] = role
+		dataPackage['hostname'] = hostname
+		dataPackage['sensor_group'] = 'Test'
 
 	return dataPackage
 
