@@ -38,9 +38,11 @@ def send_to_mongo(payload, sensor_type):
 			pass
 
 
-def open_thoth():
+def open_thoth_id():
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
+
+	thoth_data = {}
 
 	if os.path.isfile(thoth2):
 		open_thoth = thoth2
@@ -49,22 +51,25 @@ def open_thoth():
 	else:
 		open_thoth = None
 
+	thoth_data[open_thoth] = open_thoth
+
 	try:
 		with open(open_thoth) as file:
-			deviceData = json.load(file)
+			thoth_data['deviceData'] = json.load(file)
 			file.close()
 	except Exception as e:
 		print e
 
-	return deviceData
+	return thoth_data
 
 
 
 def format_sensor_data(dataPackage):
-	# thoth2 = '/var/local/thoth2.id'
-	# thoth = '/var/local/thoth.id'
-	# deviceData = {}
-	deviceData = open_thoth()
+	thoth_information = open_thoth_id()
+
+	deviceData = thoth_information['deviceData']
+	open_thoth = thoth_information[open_thoth]
+
 	formatted_data_list = {}
 	room = ''
 	role = ''
