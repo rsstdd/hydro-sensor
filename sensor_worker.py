@@ -90,7 +90,7 @@ def format_sensor_data(dataPackage):
 
 	formatted_data_list.append(dataPackage)
 
-	return formatted_data
+	return formatted_data_list
 
 
 def dispatch_sensor_data(dataPackage):
