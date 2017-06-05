@@ -9,6 +9,8 @@ import json
 import requests
 from pymongo import MongoClient
 
+customerName = ''
+
 
 def postAPI(url, payload):
 	try:
@@ -18,6 +20,7 @@ def postAPI(url, payload):
 	except Exception as e:
 		print 'sensor-worker.py FAILED to send to', e
 		print ''
+
 
 def send_to_mongo(payload, sensor_type):
 	try:
@@ -59,7 +62,6 @@ def format_sensor_data(datapackage):
 
 	dataPackage['timestamp'] = datetime.datetime.utcnow()
 	dataPackage['net_hostname'] = gethostname()
-	customerName = ''
 
 	if open_thoth == thoth2:
 		customerName = deviceData['customer']['customerName']
@@ -80,11 +82,12 @@ def format_sensor_data(datapackage):
 
 
 def dispatch_sensor_data(dataPackage):
-	format_sensor_data(datapackage)
+	dataPackage = format_sensor_data(datapackage)
 
-	sensorRecord = {'sensordata': dataPackage}
 	print dataPackage
 	print ''
+
+	sensorRecord = {'sensordata': dataPackage}
 
 	# Send to heroku
 	if customerName.lower() == 'skagit' or 'room' in dataPackage and dataPackage['room'] in ['0804', '0808']:
