@@ -9,8 +9,6 @@ import json
 import requests
 from pymongo import MongoClient
 
-customerName = ''
-
 
 def postAPI(url, payload):
 	try:
