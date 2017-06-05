@@ -42,7 +42,7 @@ def format_sensor_data(dataPackage):
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
 	deviceData = {}
-	formatted_data_list = []
+	formatted_data_list = {}
 
 	room = ''
 	role = ''
@@ -68,7 +68,7 @@ def format_sensor_data(dataPackage):
 	dataPackage['net_hostname'] = gethostname()
 
 	if open_thoth == thoth2:
-		formatted_data_list.append(deviceData['customer']['customerName'])
+		formatted_data_list['customerName']deviceData['customer']['customerName']
 		sensor_type = deviceData['device']['role']
 
 		dataPackage['room'] = deviceData['location']['room']
@@ -88,15 +88,14 @@ def format_sensor_data(dataPackage):
 		dataPackage['sensor_group'] = 'Test'
 		dataPackage['sensor_type'] = sensor_type
 
-	formatted_data_list.append(dataPackage)
+	formatted_data_list['dataPackage'] = dataPackage
 
 	return formatted_data_list
 
 
 def dispatch_sensor_data(dataPackage):
-	formatted_data = format_sensor_data(dataPackage)
-	customerName = formatted_data[0]
-	dataPackage = formatted_data[1]
+	dataPackage = formatted_data_list['dataPackage']
+	customerName = formatted_data_list['customerName']
 	sensor_type = dataPackage['type']
 
 	print dataPackage
