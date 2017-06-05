@@ -15,7 +15,7 @@ thoth = '/var/local/thoth.id'
 
 def open_thoth_id():
 	"""
-		Open Thoth/Thoth2.id & returns open_thoth variable and thoth/thoth2.id
+		Opens Thoth/Thoth2.id & returns open_thoth variable and thoth/thoth2
 	"""
 
 	thoth_data = {}

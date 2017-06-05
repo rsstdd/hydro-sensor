@@ -1,45 +1,101 @@
 #!/usr/bin/env python2.7
 
-from sensor_worker import dispatch_sensor_data
+from sensor_worker import *
 import datetime
 import unittest
 from unittest import TestCase
 from mock import MagicMock as Mock
 from mock import patch
 
-class TestDispatchSensorData(TestCase):
+input_json = {
+	"ppm": "618",
+	"sensor_group": "Test",
+	"role": "hydroTest",
+	"type": "ppm",
+	"ppm": "618"
+}
 
-	@patch('sensor_worker.dispatch_sensor_data')
-	def test_dispatch_sensor_data(self, MockResponse):
-		res = MockResponse()
-
-		res.dispatch_sensor_data.return_value = [
-			{
-				'sensor_num':'DJ00RU96',
-				'sensordata': {
-					'sensor_num': 'DJ00RU96',
-					'room': 'Grow Room 1',
-					'sensor_version': '1.00',
-					'timestamp': datetime.datetime(2017, 5, 29, 20, 23, 53, 238618),
-					'hostname': 'iunuTestPi',
-					'ppm': '618',
-					'sensor_group': 'Test',
-					'role': 'hydroTest',
-					'type': 'ppm'
-				}
+data = {
+	'open_thoth': {
+		"customer": {
+			"customerName": "Solstice",
+			"facility": "solstice"
+		},
+		"location": {
+			"room": "Grow Room 1",
+			"position": "{ x: '', y: ''}",
+			"coord": {
+			  "lat": "",
+			  "long": ""
 			}
-		]
-
-		input_json = {
-			"ppm": "618",
-			"sensor_group": "Test",
+		},
+		"device": {
+			"hostname": "iunuTestPi",
+			"sensorGroup": "Test",
+			"sensorVersion": "1.00",
+			"camtype": "",
+			"lenstype": "",
 			"role": "hydroTest",
-			"type": "ppm",
-			"ppm": "618"
+			"rotation": "",
+			"mount": ""
 		}
+	},
+	'deviceData': {
+		'sensor_num': 'DJ00RU96',
+		'room': 'Grow Room 1',
+		'sensor_version': '1.00',
+		'timestamp': datetime.datetime(2017, 6, 5, 21, 11, 13, 36125),
+		'hostname': u'iunuTestPi', 'hydro_ppm': '630',
+		'net_hostname': 'iunuTestPi', 'role': u'hydroTest',
+		'type': 'hydro_ppm'
+	}
+}
 
-		dispatch_sensor_data(input_json)
+# def return_data_package():
+# 	deviceData = {
+# 		'open_thoth': {
+# 			"customer": {
+# 				"customerName": "Solstice",
+# 				"facility": "solstice"
+# 			},
+# 			"location": {
+# 				"room": "Grow Room 1",
+# 				"position": "{ x: '', y: ''}",
+# 				"coord": {
+# 				  "lat": "",
+# 				  "long": ""
+# 				}
+# 			},
+# 			"device": {
+# 				"hostname": "iunuTestPi",
+# 				"sensorGroup": "Test",
+# 				"sensorVersion": "1.00",
+# 				"camtype": "",
+# 				"lenstype": "",
+# 				"role": "hydroTest",
+# 				"rotation": "",
+# 				"mount": ""
+# 			}
+# 		},
+# 		'deviceData': {
+# 			'sensor_num': 'DJ00RU96',
+# 			'room': u'Grow Room 1',
+# 			'sensor_version': '1.00',
+# 			'timestamp': datetime.datetime(2017, 6, 5, 21, 11, 13, 36125),
+# 			'hostname': u'iunuTestPi', 'hydro_ppm': '630',
+# 			'net_hostname': 'iunuTestPi', 'role': u'hydroTest',
+# 			'type': 'hydro_ppm'
+# 			}
+# 		}
+# 	return deviceData
 
-		assert result == valid_json
+class Test_sensor_worker(TestCase):
 
-		print result
+	@patch('sensor_worker.format_sensor_data', side_effect=return_data_package)
+	def test_format_sensor_data(self, format_sensor_data):
+		""" Test Format Sensor Data"""
+		print 'format_sensor_data', format_sensor_data
+		assert format_sensor_data(deviceData) === ''
+
+if __name__ == '__main__':
+	unittest.main()
