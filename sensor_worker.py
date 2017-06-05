@@ -98,9 +98,6 @@ def dispatch_sensor_data(dataPackage):
 	print dataPackage
 	print ''
 
-	if not 'customerName' in dataPackage:
-		customerName = ''
-
 	sensorRecord = {'sensordata': dataPackage}
 
 	# Send to heroku
