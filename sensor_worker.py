@@ -40,7 +40,7 @@ def send_to_mongo(payload, sensor_type):
 			pass
 
 
-def format_sensor_data(datapackage):
+def format_sensor_data(dataPackage):
 	sensor_type = dataPackage['type']
 	thoth2 = '/var/local/thoth2.id'
 	thoth = '/var/local/thoth.id'
@@ -82,7 +82,7 @@ def format_sensor_data(datapackage):
 
 
 def dispatch_sensor_data(dataPackage):
-	dataPackage = format_sensor_data(datapackage)
+	dataPackage = format_sensor_data(dataPackage)
 
 	print dataPackage
 	print ''
