@@ -4,16 +4,18 @@ from sensor_worker import *
 import datetime
 import unittest
 from unittest import TestCase
-from mock import MagicMock as Mock
+# from mock import MagicMock as Mock
 from mock import patch
+import nose
+from nose.tools import *
 
-input_json = {
-	"ppm": "618",
-	"sensor_group": "Test",
-	"role": "hydroTest",
-	"type": "ppm",
-	"ppm": "618"
-}
+# input_json = {
+# 	"ppm": "618",
+# 	"sensor_group": "Test",
+# 	"role": "hydroTest",
+# 	"type": "ppm",
+# 	"ppm": "618"
+# }
 
 data = {
 	'open_thoth': {
@@ -50,6 +52,27 @@ data = {
 		'type': 'hydro_ppm'
 	}
 }
+
+
+class Test_sensor_worker(TestCase):
+
+	# @patch('sensor_worker.format_sensor_data', side_effect=return_data_package)
+	@patch('sensor_worker.format_sensor_data')
+	def test_format_sensor_data(self, format_sensor_data):
+		""" Test Format Sensor Data"""
+		result = format_sensor_data(data)
+		assert format_sensor_data(data) == 
+
+
+if __name__ == '__main__':
+	unittest.main()
+
+
+
+
+
+
+
 
 # def return_data_package():
 # 	deviceData = {
@@ -88,14 +111,3 @@ data = {
 # 			}
 # 		}
 # 	return deviceData
-
-class Test_sensor_worker(TestCase):
-
-	@patch('sensor_worker.format_sensor_data', side_effect=return_data_package)
-	def test_format_sensor_data(self, format_sensor_data):
-		""" Test Format Sensor Data"""
-		print 'format_sensor_data', format_sensor_data
-		assert format_sensor_data(deviceData) === ''
-
-if __name__ == '__main__':
-	unittest.main()

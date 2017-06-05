@@ -114,6 +114,7 @@ def format_sensor_data(dataPackage):
 
 	formatted_sensor_data['dataPackage'] = dataPackage
 
+	print 'formatted_sensor_data: ', formatted_sensor_data
 	return formatted_sensor_data
 
 
