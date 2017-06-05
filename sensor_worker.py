@@ -103,14 +103,14 @@ def format_sensor_data(dataPackage):
 		dataPackage['hostname'] = deviceData['hostname']
 		dataPackage['sensor_group'] = 'Test'
 		sensor_type = deviceData['role']
-		formatted_sensor_data['customerName'] = customerName
+		formatted_data_list['customerName'] = customerName
 	else:
 		dataPackage['room'] = room
 		dataPackage['role'] = role
 		dataPackage['hostname'] = hostname
 		dataPackage['sensor_group'] = 'Test'
 		dataPackage['sensor_type'] = sensor_type
-		formatted_sensor_data['customerName'] = customerName
+		formatted_data_list['customerName'] = customerName
 
 	formatted_sensor_data['dataPackage'] = dataPackage
 
@@ -125,8 +125,8 @@ def dispatch_sensor_data(dataPackage):
 
 	formatted_data_sensor = format_sensor_data(dataPackage)
 
-	dataPackage = formatted_sensor_data['dataPackage']
-	customerName = formatted_sensor_data['customerName']
+	dataPackage = formatted_data_list['dataPackage']
+	customerName = formatted_data_list['customerName']
 	sensor_type = dataPackage['type']
 
 	print dataPackage
