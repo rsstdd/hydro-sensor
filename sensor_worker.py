@@ -26,7 +26,7 @@ def open_thoth_id():
 	elif os.path.isfile(thoth):
 		open_thoth = thoth
 	else:
-		open_thoth = None
+		open_thoth = ''
 
 	thoth_data['open_thoth'] = open_thoth
 
