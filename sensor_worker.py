@@ -123,10 +123,10 @@ def dispatch_sensor_data(dataPackage):
 		Determines where to send Sensor Data & posts to API and Mongo
 	"""
 
-	formatted_data_sensor = format_sensor_data(dataPackage)
+	formatted_data = format_sensor_data(dataPackage)
 
-	dataPackage = formatted_sensor_data['dataPackage']
-	customerName = formatted_sensor_data['customerName']
+	dataPackage = formatted_data['dataPackage']
+	customerName = formatted_data['customerName']
 	sensor_type = dataPackage['type']
 
 	print dataPackage
