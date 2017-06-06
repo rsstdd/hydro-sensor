@@ -103,18 +103,17 @@ def format_sensor_data(dataPackage):
 		dataPackage['hostname'] = deviceData['hostname']
 		dataPackage['sensor_group'] = 'Test'
 		sensor_type = deviceData['role']
-		formatted_data_list['customerName'] = customerName
+		formatted_sensor_data['customerName'] = customerName
 	else:
 		dataPackage['room'] = room
 		dataPackage['role'] = role
 		dataPackage['hostname'] = hostname
 		dataPackage['sensor_group'] = 'Test'
 		dataPackage['sensor_type'] = sensor_type
-		formatted_data_list['customerName'] = customerName
+		formatted_sensor_data['customerName'] = customerName
 
 	formatted_sensor_data['dataPackage'] = dataPackage
 
-	print 'formatted_sensor_data: ', formatted_sensor_data
 	return formatted_sensor_data
 
 

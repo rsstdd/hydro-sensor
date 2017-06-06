@@ -77,8 +77,8 @@ data = {
 
 class Test_Sensor_Worker(unittest.TestCase):
 
+	@patch('sensor_worker')
 	def test_format_sensor_data(thoth):
-		with mock.patch('sensor_worker.open_thoth'):
 			thoth_mock.return_value = thoth
 
 			assert format_sensor_data(data) == valid_format
