@@ -125,8 +125,8 @@ def dispatch_sensor_data(dataPackage):
 
 	formatted_data_sensor = format_sensor_data(dataPackage)
 
-	dataPackage = formatted_data_list['dataPackage']
-	customerName = formatted_data_list['customerName']
+	dataPackage = formatted_sensor_data['dataPackage']
+	customerName = formatted_sensor_data['customerName']
 	sensor_type = dataPackage['type']
 
 	print dataPackage
