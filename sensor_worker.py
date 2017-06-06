@@ -76,7 +76,9 @@ def format_sensor_data(dataPackage):
 
 	thoth_information = open_thoth_id()
 
-	deviceData = thoth_information['deviceData']
+	if 'deviceData' in thoth_information:
+		deviceData = thoth_information['deviceData']
+
 	open_thoth = thoth_information['open_thoth']
 
 	formatted_sensor_data = {}
